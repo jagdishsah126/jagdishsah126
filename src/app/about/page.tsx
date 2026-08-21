@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import SkillsGrid from '@/components/about/SkillsGrid';
 import Timeline from '@/components/about/Timeline';
-import { Database, LineChart, Code2, Sparkles } from 'lucide-react';
+import { Database, LineChart, Code2, Sparkles, User, Award, Rocket } from 'lucide-react';
 
 export default function AboutPage() {
   const interests = [
@@ -14,29 +14,35 @@ export default function AboutPage() {
   ];
 
   return (
-    <main className="min-h-screen py-24 px-4 max-w-6xl mx-auto">
+    <main className="min-h-screen py-20 px-4 max-w-6xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="mb-16 text-center"
       >
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">About Me</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        <span className="inline-block px-4 py-1.5 rounded-full glass-badge text-blue-600 dark:text-blue-400 text-xs font-bold mb-4 tracking-wider uppercase">
+          Profile & Philosophy
+        </span>
+        <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-4 tracking-tight">About Me</h1>
+        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           Full Stack Developer with AI Assistance & BCT Engineering Student at TU WRC College, Nepal
         </p>
       </motion.div>
 
+      {/* Main Bio Card */}
       <section className="mb-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="prose dark:prose-invert max-w-none text-lg text-gray-700 dark:text-gray-300 space-y-6 bg-white dark:bg-gray-800 p-8 sm:p-10 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm"
+          className="prose dark:prose-invert max-w-none text-base sm:text-lg text-gray-700 dark:text-gray-300 space-y-6 glass-panel p-8 sm:p-12 rounded-3xl border border-white/60 dark:border-white/10 shadow-xl"
         >
-          <blockquote className="border-l-4 border-blue-500 pl-4 italic text-xl text-blue-600 dark:text-blue-400 font-medium">
-            &ldquo;I am a traveller in this vast cosmos, travelling and exploring everything this universe can provide.&rdquo;
-          </blockquote>
+          <div className="p-4 sm:p-6 rounded-2xl bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 border border-blue-500/20">
+            <blockquote className="border-none p-0 m-0 italic text-lg sm:text-xl text-blue-600 dark:text-blue-400 font-semibold leading-relaxed">
+              ✨ &ldquo;I am a traveller in this vast cosmos, travelling and exploring everything this universe can provide.&rdquo;
+            </blockquote>
+          </div>
 
           <p>
             Hello! I am <strong>Jagdish Sah</strong>, currently pursuing my <strong>Bachelor in Computer Engineering (BCT)</strong> in the 2nd Semester at <strong>Tribhuvan University, Western Regional Campus (WRC)</strong> in Pokhara, Nepal.
@@ -51,23 +57,35 @@ export default function AboutPage() {
           </p>
 
           <p>
-            Beyond traditional web development, I am an active participant in Nepal&apos;s financial markets. Through projects like <strong><a href="https://github.com/DayaSah/My_Nepse_Diary" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline">My NEPSE Diary</a></strong>, I combine Python scripting, web scraping, and data visualization to log trades and dissect market movements on the Nepal Stock Exchange.
+            Beyond traditional web development, I am an active participant in Nepal&apos;s financial markets. Through projects like <strong><a href="https://github.com/DayaSah/My_Nepse_Diary" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline font-semibold">My NEPSE Diary</a></strong>, I combine Python scripting, web scraping, and data visualization to log trades and dissect market movements on the Nepal Stock Exchange.
           </p>
         </motion.div>
       </section>
 
+      {/* Skills Grid */}
       <section className="mb-20">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center">Technical Skills</h2>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-2">Technical Arsenal</h2>
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">Frameworks, languages, databases, and development tools I work with</p>
+        </div>
         <SkillsGrid />
       </section>
 
+      {/* Journey Timeline */}
       <section className="mb-20">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center">Academic & Project Journey</h2>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-2">Academic & Development Journey</h2>
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">Milestones from school education to engineering studies and open-source</p>
+        </div>
         <Timeline />
       </section>
 
+      {/* Interests */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center">Core Interests</h2>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-2">Areas of Interest</h2>
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">What drives my curiosity and passion beyond the terminal</p>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {interests.map((interest, idx) => {
             const Icon = interest.icon;
@@ -78,13 +96,13 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 text-center hover:-translate-y-2 transition-transform"
+                className="p-7 rounded-3xl glass-card text-center"
               >
-                <div className="w-12 h-12 mx-auto bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                <div className="w-14 h-14 mx-auto bg-gradient-to-tr from-blue-500/10 to-indigo-500/20 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-5 shadow-sm">
+                  <Icon className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{interest.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">{interest.desc}</p>
+                <h3 className="text-lg font-extrabold text-gray-900 dark:text-white mb-2">{interest.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm leading-relaxed">{interest.desc}</p>
               </motion.div>
             );
           })}

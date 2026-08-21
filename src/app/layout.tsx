@@ -28,14 +28,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen flex flex-col transition-colors`}>
+      <body className={`${inter.className} min-h-screen flex flex-col transition-colors relative selection:bg-blue-500/30`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
         >
+          {/* Ambient Cosmic Background Orbs for Glassmorphism Backlight */}
+          <div className="fixed inset-0 overflow-hidden pointer-events-none -z-20">
+            <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/20 dark:bg-blue-600/15 rounded-full blur-[120px] animate-pulse" />
+            <div className="absolute top-1/3 -right-40 w-96 h-96 bg-indigo-500/20 dark:bg-purple-600/15 rounded-full blur-[140px]" />
+            <div className="absolute -bottom-40 left-1/3 w-96 h-96 bg-cyan-500/20 dark:bg-indigo-600/15 rounded-full blur-[130px]" />
+          </div>
+
           <Navbar />
-          <main className="flex-grow">
+          <main className="flex-grow relative z-10">
             {children}
           </main>
           <Footer />

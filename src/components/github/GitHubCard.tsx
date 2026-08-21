@@ -1,14 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, ExternalLink, GitFork } from 'lucide-react';
 import { GithubIcon } from '@/components/icons/BrandIcons';
+import Image from 'next/image';
 
 interface Repo {
   name: string;
   description: string;
   language: string;
   url: string;
+  liveUrl?: string;
 }
 
 interface GitHubCardProps {
@@ -30,68 +32,69 @@ export default function GitHubCard({ profile, index }: GitHubCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden flex flex-col"
+      className="rounded-3xl glass-card overflow-hidden flex flex-col justify-between"
     >
-      <div className="p-6 border-b border-gray-100 dark:border-gray-700">
-        <div className="flex items-start justify-between mb-4">
+      <div className="p-6 sm:p-7 border-b border-black/5 dark:border-white/10">
+        <div className="flex items-start justify-between gap-4 mb-4">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
-              {/* Avatar placeholder */}
-              <div className="w-full h-full flex items-center justify-center text-gray-400">
-                <GithubIcon className="w-8 h-8" />
-              </div>
+            <div className="relative w-14 h-14 rounded-2xl overflow-hidden glass-panel border border-blue-500/30 shrink-0">
+              {profile.avatarUrl ? (
+                <Image
+                  src={profile.avatarUrl}
+                  alt={profile.displayName}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-blue-500">
+                  <GithubIcon className="w-7 h-7" />
+                </div>
+              )}
             </div>
             <div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white">{profile.displayName}</h3>
-              <a href={profile.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 text-sm hover:underline">
+              <h3 className="text-lg font-extrabold text-gray-900 dark:text-white leading-tight">{profile.displayName}</h3>
+              <a href={profile.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 text-xs font-semibold hover:underline flex items-center gap-1 mt-0.5">
                 @{profile.username}
+                <ExternalLink className="w-3 h-3" />
               </a>
             </div>
           </div>
-          <div className="flex flex-col items-end">
-            <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mb-2">
+          
+          <div className="flex flex-col items-end shrink-0">
+            <span className="glass-badge text-blue-600 dark:text-blue-400 text-xs font-bold px-3 py-1 rounded-full mb-2">
               {profile.repoCount} Repos
             </span>
-            <a
-              href={profile.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs flex items-center gap-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded transition-colors"
-            >
-              View Profile
-            </a>
           </div>
         </div>
-        <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{profile.bio}</p>
+        
+        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-2">{profile.bio}</p>
       </div>
 
-      <div className="p-6 flex-grow bg-gray-50/50 dark:bg-gray-800/50">
-        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-          <BookOpen size={16} /> Notable Repositories
+      <div className="p-6 sm:p-7 flex-grow bg-white/20 dark:bg-white/[0.02]">
+        <h4 className="text-xs font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-1.5 uppercase tracking-wider">
+          <BookOpen size={14} className="text-blue-500" /> Notable Repositories
         </h4>
-        <div className="space-y-3">
+        <div className="space-y-2.5">
           {profile.repos.map((repo) => (
             <a
               key={repo.name}
               href={repo.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="block group"
+              className="block p-3 rounded-2xl bg-white/40 dark:bg-white/[0.03] hover:bg-blue-50/60 dark:hover:bg-white/[0.08] border border-black/5 dark:border-white/5 transition-all group"
             >
-              <div className="flex items-start justify-between">
-                <div>
-                  <h5 className="text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:underline">
-                    {repo.name}
-                  </h5>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-1">
-                    {repo.description}
-                  </p>
-                </div>
+              <div className="flex items-center justify-between">
+                <h5 className="text-sm font-bold text-blue-600 dark:text-blue-400 group-hover:underline">
+                  {repo.name}
+                </h5>
+                <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                  {repo.language}
+                </span>
               </div>
-              <div className="flex items-center gap-1 mt-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
-                <span className="text-xs text-gray-500">{repo.language}</span>
-              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-1">
+                {repo.description}
+              </p>
             </a>
           ))}
         </div>

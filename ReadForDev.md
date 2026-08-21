@@ -6,35 +6,30 @@ Built with **Next.js 14+ (App Router) + TypeScript + Tailwind CSS + Framer Motio
 
 ---
 
-## 📋 Real Data Integration (Completed ✅)
+## 🎨 Glassmorphism Redesign (`Glass` Branch) (Completed ✅)
 
-- [x] **Profile Picture (`PP.jpg`)**:
-  - Successfully imported `/home/jagdish/Desktop/Files/My Profile/PP.jpg` into `public/images/profile.jpg` and `public/profile.jpg`.
-  - Integrated into `src/components/home/HeroSection.tsx` with dynamic glowing border and optimization.
+- [x] **Ambient Background Glow**:
+  - Added fixed ambient cosmic radial glow spheres (cyan, blue, indigo, purple) in `src/app/layout.tsx` to provide rich backlight behind all frosted glass elements.
 
-- [x] **Contact & Verified Social Details**:
-  - **Phone / WhatsApp**: `+977 9702406668` (`https://wa.me/9779702406668`)
-  - **Main Domain**: `https://jagdishsah.com.np`
-  - **Email**: `jagdishsah126@gmail.com`
-  - **Facebook**: `https://www.facebook.com/jagdish.sah.king`
-  - **Instagram**: `https://www.instagram.com/jagdish.sah.daya/`
-  - **LinkedIn**: `https://www.linkedin.com/in/jagdish-sah6347482ba/`
-  - **Location**: `Pokhara / Siraha, Nepal`
+- [x] **Glassmorphism CSS Engine (`src/styles/globals.css`)**:
+  - `.glass-panel` — Full frosted glass panel with backdrop blur (16px), translucent borders, and subtle glass shadows.
+  - `.glass-card` — Floating interactive cards with hover lift, dynamic glow borders, and light reflection highlights.
+  - `.glass-badge` — Translucent glass pill badges for categories, tags, and milestones.
 
-- [x] **Education History**:
-  1. 🏫 **Tribhuvan University, WRC College, Pokhara**: Bachelor in Computer Engineering (BCT) — 2nd Semester (2024 - Present)
-  2. 🏛️ **Prasadi Academy, Lalitpur**: +2 Science (Higher Secondary, 2022 - 2024)
-  3. 🏫 **Sagarmatha Higher Secondary School, Mirchaiya-6, Siraha**: Class 10 / SEE (Graduated 2022)
+- [x] **Navbar & Footer**:
+  - Floating pill navigation bar with active gradient pill and glass container.
+  - Sleek glassmorphism footer with social links, WhatsApp, and domain badge.
 
-- [x] **Flagship Project**:
-  - **My NEPSE Diary** (`https://github.com/DayaSah/My_Nepse_Diary`) integrated across projects, GitHub showcase, CV, and Readme.
+- [x] **Hero Section**:
+  - Glowing frosted halo surrounding profile photo.
+  - Glass-card quick stats container and glass CTA action buttons.
 
-- [x] **Cosmic Philosophy Quote**:
-  - *"I am a traveller in this vast cosmos, travelling and exploring everything this universe can provide."*
-
-- [x] **UI Enhancements**:
-  - Added dedicated SVG icons for Facebook and WhatsApp in `BrandIcons.tsx`.
-  - Updated Navbar, Footer, and Contact pages with social links.
+- [x] **Page Upgrades**:
+  - **About Me**: Glassmorphic bio quote card, frosted technical skills category cards, and glowing timeline nodes.
+  - **Portfolio**: Frosted glass project cards with abstract grid header and tag filtering.
+  - **GitHub Profiles**: Glass ecosystem banner and account cards.
+  - **CV / Resume**: Print-friendly frosted glass resume container.
+  - **Contact**: Glass contact details card and interactive glass message form.
 
 - [x] **Branching & Commits**:
-  - Created and committed to dedicated release branch: `Final1` with author `Your Zara`.
+  - Created and committed to dedicated release branch: `Glass` with commit author `Your Zara`.
