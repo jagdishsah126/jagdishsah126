@@ -4,25 +4,25 @@ import { motion } from 'framer-motion';
 
 const timelineData = [
   {
-    year: '2024 - Present',
+    year: '2025 - Present',
     title: 'Bachelor in Computer Engineering (BCT)',
     institution: 'Tribhuvan University, WRC College, Pokhara',
     description: 'Currently studying in 2nd Semester. Deepening core engineering fundamentals in Data Structures, Algorithms, C/C++, and building production-ready web apps with AI assistance.',
   },
   {
-    year: '2023 - Present',
+    year: '2025 - Present',
     title: 'NEPSE Quant & Full-Stack Projects',
     institution: 'Independent Research & Development',
     description: 'Built "My NEPSE Diary", automated scrapers, portfolio trackers, and responsive React/Next.js web applications across multiple specialized GitHub accounts.',
   },
   {
-    year: '2022 - 2024',
+    year: '2023 - 2024',
     title: '+2 Science (Higher Secondary)',
     institution: 'Prasadi Academy, Lalitpur, Nepal',
     description: 'Completed higher secondary education in Science with strong foundations in Mathematics, Physics, and programming basics.',
   },
   {
-    year: '2022',
+    year: '2023',
     title: 'Secondary Education (Class 10 / SEE)',
     institution: 'Sagarmatha Higher Secondary School, Mirchaiya-6, Siraha',
     description: 'Completed school level education with academic distinction and early exploration of computer technologies.',
