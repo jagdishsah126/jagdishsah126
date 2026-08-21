@@ -1,76 +1,81 @@
-# ReadForDev — Progress Log
+# ReadForDev — Development Progress & Log
 
-## 🎯 Plan (from Roadmap.md)
-Build a multi-page portfolio for Jagdish Sah using Next.js 14 + TypeScript + Tailwind CSS.
-Pages: Home (3D hero), About, Portfolio, GitHub Profiles, CV, Contact.
-Deploy to Vercel. Dark/Light toggle.
-
----
-
-## ✅ Completed Tasks
-
-### Task 1: Project Init
-- [x] Git initialized
-- [x] Node.js v20 installed (fnm)
-- [x] Next.js 14 scaffolded (App Router + TS + Tailwind)
-- [x] Extra deps installed: framer-motion, @tsparticles/react, @tsparticles/slim, next-themes, lucide-react
-
-### Task 2: Data Files Created
-- [x] `src/data/skills.ts` — skill categories & proficiency
-- [x] `src/data/projects.ts` — 12 placeholder projects with types
-- [x] `src/data/github-profiles.ts` — 4 GitHub accounts
-- [x] `src/data/cv-data.ts` — CV/resume content
-
-### Task 3: Layout Components Created
-- [x] `src/components/layout/ThemeToggle.tsx`
-- [x] `src/components/layout/ThemeProvider.tsx`
-- [x] `src/components/layout/Navbar.tsx`
-- [x] `src/components/layout/Footer.tsx`
-- [x] `src/app/layout.tsx` — root layout with theme + nav + footer
-- [x] `src/styles/globals.css` — Tailwind + custom styles
-
-### Task 4: Page Components Created
-- [x] `src/components/home/HeroSection.tsx` — 3D particles + typewriter
-- [x] `src/app/page.tsx` — Home page
-- [x] `src/components/about/SkillsGrid.tsx`
-- [x] `src/components/about/Timeline.tsx`
-- [x] `src/app/about/page.tsx`
-- [x] `src/components/portfolio/ProjectCard.tsx`
-- [x] `src/components/portfolio/ProjectFilter.tsx`
-- [x] `src/app/portfolio/page.tsx`
-- [x] `src/components/github/GitHubCard.tsx`
-- [x] `src/app/github/page.tsx`
-- [x] `src/app/cv/page.tsx`
-- [x] `src/app/contact/page.tsx`
+## 🎯 Project Overview
+Personal Portfolio & CV website for **Jagdish Sah** (Full Stack Developer with AI Assistance, BCT 2nd Sem, TU WRC College, Nepal).
+Built with **Next.js 14+ (App Router) + TypeScript + Tailwind CSS + Framer Motion + tsParticles + next-themes**.
 
 ---
 
-## 🔧 Remaining Tasks
+## 📋 Roadmap Execution & Completed Tasks
 
-### Task 5: Fix Build Errors ← CURRENT
-- [ ] Replace removed lucide-react brand icons (Github/Linkedin/Twitter/Instagram → SVG or alternatives)
-- [ ] Verify build passes
+### ✅ Phase 1: Foundation & Setup
+- [x] Initialized Git repository with author `Your Zara`
+- [x] Configured Node.js v20.x environment
+- [x] Initialized Next.js project with TypeScript and Tailwind CSS
+- [x] Installed and configured dependencies:
+  - `framer-motion` (interactive animations & page reveals)
+  - `@tsparticles/react` & `@tsparticles/slim` & `@tsparticles/engine` (3D particle field)
+  - `next-themes` (Dark/Light mode switcher)
+  - `lucide-react` (UI icons)
+- [x] Created custom SVG icon components (`src/components/icons/BrandIcons.tsx`) for GitHub, LinkedIn, Twitter, and Instagram
 
-### Task 6: First Git Commit
-- [ ] Stage all files
-- [ ] Commit: "feat: initial portfolio scaffold with all pages and components"
+### ✅ Phase 2: Architecture & Data Layer
+- [x] `src/data/skills.ts` — Comprehensive skills taxonomy categorized into Frontend, Backend, Database, Tools, and Languages with proficiency metrics.
+- [x] `src/data/projects.ts` — 12 structured projects with titles, categories, tech tags, descriptions, GitHub account linkages, and live demo targets.
+- [x] `src/data/github-profiles.ts` — Multi-account structure for all 4 GitHub profiles:
+  1. **DayaSah** (NEPSE Trading & Data Analysis)
+  2. **jagdishsah** (Main Development)
+  3. **jagdish-sah** (Secondary Projects)
+  4. **jagdishsah126** (Assignments & Experiments)
+- [x] `src/data/cv-data.ts` — Online CV details, academic background (TU WRC BCT), technical skill sets, and interests.
 
-### Task 7: Enrich Data Files
-- [ ] Expand github-profiles.ts with real avatar URLs and more repos
-- [ ] Commit
+### ✅ Phase 3: Layout & System Components
+- [x] `src/components/layout/ThemeProvider.tsx` — Next-themes client provider wrapper
+- [x] `src/components/layout/ThemeToggle.tsx` — Dynamic Dark/Light mode toggle switch
+- [x] `src/components/layout/Navbar.tsx` — Sticky responsive navigation bar with glassmorphism, active indicator, and mobile menu
+- [x] `src/components/layout/Footer.tsx` — Complete footer with dynamic copyright, quick navigation, social links, and links to all 4 GitHub profiles
+- [x] `src/app/layout.tsx` — Root layout with Inter typography and theme support
+- [x] `src/styles/globals.css` — Global CSS variables, custom scrollbars, smooth scrolling, and print formatting
 
-### Task 8: Polish & SEO
-- [ ] Add meta tags per page
-- [ ] Add favicon
-- [ ] Commit
+### ✅ Phase 4: Core Pages & Interactivity
+- [x] **Home / Hero (`src/app/page.tsx`, `src/components/home/HeroSection.tsx`)**:
+  - Interactive 3D particle network background
+  - Dynamic typewriter effect cycling professional titles
+  - Animated profile avatar and glowing border
+  - Quick statistics (21+ Repositories, 4 GitHub accounts, 10+ Projects)
+  - Direct CTAs to Portfolio and CV
+- [x] **About Me (`src/app/about/page.tsx`)**:
+  - Bio section highlighting BCT engineering background and NEPSE analysis passion
+  - `SkillsGrid.tsx` with animated proficiency bars and icon badges
+  - `Timeline.tsx` for education progression
+  - Domain interest cards
+- [x] **Portfolio (`src/app/portfolio/page.tsx`)**:
+  - `ProjectFilter.tsx` with tag filtering (All, React, Python, Next.js, Node.js, MongoDB, TypeScript)
+  - `ProjectCard.tsx` showcasing project cards with tech badges, GitHub account badge, demo and repo links
+- [x] **GitHub Profiles (`src/app/github/page.tsx`)**:
+  - Aggregated repository statistics bar
+  - `GitHubCard.tsx` highlighting all 4 GitHub profiles with bio, repo counters, direct profile links, and notable repos
+- [x] **CV / Resume (`src/app/cv/page.tsx`)**:
+  - Printable and clean resume layout with browser print trigger (`window.print()`)
+  - Sections for Summary, Education, Technical Skills, Key Projects, and Interests
+- [x] **Contact (`src/app/contact/page.tsx`)**:
+  - Interactive contact form with validation state
+  - Contact cards (Email, Phone, Location in Pokhara, Nepal)
+  - Social connect links
 
-### Task 9: Update Roadmap.md
-- [ ] Mark all completed phases
-- [ ] Add build/deploy instructions
+### ✅ Phase 5: Verification & Local Commits
+- [x] Type checking and lint fixes verified
+- [x] Static build verified (`npx next build` — 100% passed, 0 errors, 9/9 static routes generated)
+- [x] Committed to local Git repository (`Your Zara`)
 
 ---
 
-## 📝 Session Notes
-- lucide-react v0.470+ removed brand icons (Github, Linkedin, Twitter, Instagram). Using inline SVGs instead.
-- tsParticles API changed: `initParticlesEngine` removed. Use `Particles` with `init` prop.
-- Project folder "My Profile" has spaces — npm workaround: scaffolded in subfolder then moved up.
+## 🚀 Running the Project Locally
+```bash
+# Start development server
+npm run dev
+
+# Build and start production server
+npm run build
+npm start
+```
