@@ -4,6 +4,10 @@ export interface PersonalInfo {
   location: string;
   email: string;
   phone: string;
+  domain: string;
+  facebook: string;
+  instagram: string;
+  linkedin: string;
   summary: string;
 }
 
@@ -42,59 +46,66 @@ export interface CVData {
 export const cvData: CVData = {
   personalInfo: {
     name: 'Jagdish Sah',
-    title: 'Full Stack Developer',
-    location: 'Nepal',
-    email: 'contact@example.com',
-    phone: '+977-9800000000',
-    summary: 'I am a passionate BCT (Bachelor in Computer Engineering) 2nd Semester student at TU WRC College with a keen interest in full-stack web development. Combining my enthusiasm for coding with AI assistance, I build efficient and modern applications. I am also deeply interested in NEPSE trading and data analysis, constantly looking for ways to merge technology with financial insights.',
+    title: 'Full Stack Developer with AI Assistance | NEPSE Analyst',
+    location: 'Siraha / Pokhara, Nepal',
+    email: 'jagdishsah126@gmail.com',
+    phone: '+977 9702406668',
+    domain: 'https://jagdishsah.com.np',
+    facebook: 'https://www.facebook.com/jagdish.sah.king',
+    instagram: 'https://www.instagram.com/jagdish.sah.daya/',
+    linkedin: 'https://www.linkedin.com/in/jagdish-sah6347482ba/',
+    summary: 'A passionate Computer Engineering (BCT) 2nd Semester student at TU WRC College with strong expertise in full-stack web development, AI-assisted engineering workflows, and financial data analysis. Active in NEPSE market research and algorithmic trade tracking. In my own words: "I am a traveller in this vast cosmos, travelling and exploring everything this universe can provide."',
   },
   education: [
     {
       id: '1',
-      institution: 'TU WRC College',
-      degree: 'Bachelor in Computer Engineering (BCT)',
+      institution: 'Tribhuvan University, Western Regional Campus (WRC)',
+      degree: 'Bachelor in Computer Engineering (BCT) - 2nd Semester',
       year: '2024 - Present',
-      description: 'Currently in 2nd semester, focusing on core computer engineering subjects and practical programming skills. Active in tech clubs and development activities.',
+      description: 'Focusing on core Computer Science, Algorithms, Data Structures, OOP (C/C++), and modern web engineering.',
+    },
+    {
+      id: '2',
+      institution: 'Prasadi Academy, Lalitpur',
+      degree: '+2 Science (Higher Secondary)',
+      year: '2022 - 2024',
+      description: 'Completed higher secondary education in Science stream with deep focus on Physics, Mathematics, and Computer Science.',
+    },
+    {
+      id: '3',
+      institution: 'Sagarmatha Higher Secondary School, Mirchaiya-6, Siraha',
+      degree: 'Secondary Education (SEE / Class 10)',
+      year: '2022',
+      description: 'Graduated secondary school with academic distinction and early passion for computer technology.',
     }
   ],
   experience: [
     {
       id: '1',
-      role: 'Full Stack Developer (Personal Projects)',
-      company: 'Self-Employed',
+      role: 'Full Stack Developer & Quantitative Analyst',
+      company: 'Personal Projects & Independent Research',
       duration: '2023 - Present',
-      description: 'Developed and maintained various web applications and tools, integrating AI for enhanced productivity and robust code quality.',
+      description: 'Built multiple production-grade web applications, NEPSE trading utilities, and data pipelines leveraging AI tooling for maximum efficiency.',
       achievements: [
-        'Built a comprehensive NEPSE Portfolio Tracker using Next.js and Python.',
-        'Developed an AI-assisted code generation CLI tool.',
-        'Created multiple modern UI/UX web projects utilizing Tailwind CSS and Framer Motion.',
+        'Developed "My NEPSE Diary" (https://github.com/DayaSah/My_Nepse_Diary) for logging trades, technical analysis, and tracking Nepal Stock Exchange performance.',
+        'Engineered an interactive multi-page Next.js 14 Portfolio & CV hub with 3D particle physics and theme switching.',
+        'Created Python-based web scrapers and data tools for automated financial analysis.',
       ],
     },
-    {
-      id: '2',
-      role: 'Data Analysis Enthusiast',
-      company: 'Independent Research',
-      duration: '2023 - Present',
-      description: 'Conducted independent research and data analysis on NEPSE market trends.',
-      achievements: [
-        'Collected and cleaned large datasets of historical stock market data.',
-        'Developed scripts using Python and Pandas for identifying trading patterns.',
-        'Built predictive models for short-term price forecasting.',
-      ],
-    }
   ],
   certifications: [
     {
       id: '1',
-      name: 'Full Stack Web Development Certification',
-      issuer: 'Placeholder Institution',
-      year: '2023',
+      name: 'Full Stack Web Development & AI Tools Proficiency',
+      issuer: 'Self-Directed & Project Portfolio',
+      year: '2023 - 2024',
     }
   ],
   interests: [
-    'NEPSE Trading',
-    'Data Analysis',
-    'AI-Assisted Development',
-    'Open Source',
+    'NEPSE Trading & Market Analysis',
+    'Data Scraping & Machine Learning',
+    'AI-Assisted Software Development',
+    'Astrophysics & Cosmic Exploration',
+    'Open Source Software',
   ],
 };
