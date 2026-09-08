@@ -12,10 +12,10 @@ export default function HeroSection() {
   const [textIndex, setTextIndex] = useState(0);
 
   const texts = [
-    'Full Stack Developer',
-    'NEPSE & Data Analyst',
-    'BCT Student @ TU WRC',
-    'Cosmic Explorer',
+    '[Data to be Inserted: Role 1]',
+    '[Data to be Inserted: Role 2]',
+    '[Data to be Inserted: Role 3]',
+    '[Data to be Inserted: Role 4]',
   ];
 
   useEffect(() => {
@@ -117,7 +117,7 @@ export default function HeroSection() {
           <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full border-4 border-blue-500 overflow-hidden shadow-[0_0_25px_rgba(59,130,246,0.6)] ring-4 ring-blue-500/30">
             <Image
               src="/images/profile.jpg"
-              alt="Jagdish Sah"
+              alt="[Data to be Inserted: Profile Name]"
               fill
               className="object-cover"
               priority
@@ -130,7 +130,7 @@ export default function HeroSection() {
         <motion.h1 variants={itemVariants} className="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-4 tracking-tight">
           Hi, I&apos;m{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500">
-            Jagdish Sah
+            [Data to be Inserted: Full Name]
           </span>
         </motion.h1>
 
@@ -149,9 +149,9 @@ export default function HeroSection() {
           </motion.span>
         </motion.div>
 
-        {/* Cosmic Philosophy Quote */}
+        {/* Philosophy Quote */}
         <motion.p variants={itemVariants} className="text-sm sm:text-base text-gray-600 dark:text-gray-400 italic max-w-2xl mx-auto mb-8">
-          &ldquo;I am a traveller in this vast cosmos, travelling and exploring everything this universe can provide.&rdquo;
+          &ldquo;[Data to be Inserted: Your Personal Tagline or Philosophy Quote]&rdquo;
         </motion.p>
 
         {/* CTA Buttons */}

@@ -7,10 +7,10 @@ import { Database, LineChart, Code2, Sparkles } from 'lucide-react';
 
 export default function AboutPage() {
   const interests = [
-    { title: 'NEPSE Trading', icon: LineChart, desc: 'Analyzing Nepal Stock Exchange trends, market depth, and quantitative metrics.' },
-    { title: 'Data Scraping & Analysis', icon: Database, desc: 'Automating pipelines with Python & Pandas to extract actionable market intelligence.' },
-    { title: 'AI-Assisted Engineering', icon: Code2, desc: 'Accelerating modern full-stack development with state-of-the-art AI pair programming.' },
-    { title: 'Cosmic Exploration', icon: Sparkles, desc: 'Exploring science, astronomy, and technology with an infinite mindset.' },
+    { title: '[Data to be Inserted: Interest 1]', icon: LineChart, desc: '[Data to be Inserted: Description of interest 1]' },
+    { title: '[Data to be Inserted: Interest 2]', icon: Database, desc: '[Data to be Inserted: Description of interest 2]' },
+    { title: '[Data to be Inserted: Interest 3]', icon: Code2, desc: '[Data to be Inserted: Description of interest 3]' },
+    { title: '[Data to be Inserted: Interest 4]', icon: Sparkles, desc: '[Data to be Inserted: Description of interest 4]' },
   ];
 
   return (
@@ -23,7 +23,7 @@ export default function AboutPage() {
       >
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">About Me</h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Full Stack Developer with AI Assistance & BCT Engineering Student at TU WRC College, Nepal
+          [Data to be Inserted: Professional Subtitle / Headline]
         </p>
       </motion.div>
 
@@ -35,23 +35,23 @@ export default function AboutPage() {
           className="prose dark:prose-invert max-w-none text-lg text-gray-700 dark:text-gray-300 space-y-6 bg-white dark:bg-gray-800 p-8 sm:p-10 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm"
         >
           <blockquote className="border-l-4 border-blue-500 pl-4 italic text-xl text-blue-600 dark:text-blue-400 font-medium">
-            &ldquo;I am a traveller in this vast cosmos, travelling and exploring everything this universe can provide.&rdquo;
+            &ldquo;[Data to be Inserted: Your Personal Quote or Philosophy]&rdquo;
           </blockquote>
 
           <p>
-            Hello! I am <strong>Jagdish Sah</strong>, currently pursuing my <strong>Bachelor in Computer Engineering (BCT)</strong> in the 2nd Semester at <strong>Tribhuvan University, Western Regional Campus (WRC)</strong> in Pokhara, Nepal.
+            [Data to be Inserted: Introduction paragraph about yourself, who you are, what you are currently studying or working on, and your key technical focus areas.]
           </p>
 
           <p>
-            My academic journey started at <strong>Sagarmatha Higher Secondary School</strong> in Mirchaiya-6, Siraha, followed by higher secondary (+2 Science) studies at <strong>Prasadi Academy</strong>, Lalitpur. These experiences cultivated my disciplined problem-solving mindset and deep fascination with computer systems.
+            [Data to be Inserted: Background and educational foundation, key experiences, and how they shaped your problem-solving mindset.]
           </p>
 
           <p>
-            As a developer, I specialize in crafting clean, scalable web applications with <strong>Next.js 14</strong>, <strong>React</strong>, <strong>TypeScript</strong>, <strong>Tailwind CSS</strong>, and <strong>Python</strong>. By adopting AI-assisted workflows, I bridge the gap between complex ideas and fast, robust code execution.
+            [Data to be Inserted: Technologies, frameworks, and modern tools you specialize in, and your development methodologies.]
           </p>
 
           <p>
-            Beyond traditional web development, I am an active participant in Nepal&apos;s financial markets. Through projects like <strong><a href="https://github.com/DayaSah/My_Nepse_Diary" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline">My NEPSE Diary</a></strong>, I combine Python scripting, web scraping, and data visualization to log trades and dissect market movements on the Nepal Stock Exchange.
+            [Data to be Inserted: Key projects, passions outside work, and personal aspirations for the future.]
           </p>
         </motion.div>
       </section>

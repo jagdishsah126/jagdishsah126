@@ -4,29 +4,23 @@ import { motion } from 'framer-motion';
 
 const timelineData = [
   {
-    year: '2025 - Present',
-    title: 'Bachelor in Computer Engineering (BCT)',
-    institution: 'Tribhuvan University, WRC College, Pokhara',
-    description: 'Currently studying in 2nd Semester. Deepening core engineering fundamentals in Data Structures, Algorithms, C/C++, and building production-ready web apps with AI assistance.',
+    year: '[Data to be Inserted: Year Range]',
+    title: '[Data to be Inserted: Education / Role Title 1]',
+    institution: '[Data to be Inserted: Institution / Organization Name]',
+    description: '[Data to be Inserted: Detailed description of coursework, responsibilities, and achievements.]',
   },
   {
-    year: '2025 - Present',
-    title: 'NEPSE Quant & Full-Stack Projects',
-    institution: 'Independent Research & Development',
-    description: 'Built "My NEPSE Diary", automated scrapers, portfolio trackers, and responsive React/Next.js web applications across multiple specialized GitHub accounts.',
+    year: '[Data to be Inserted: Year Range]',
+    title: '[Data to be Inserted: Project / Experience Title 2]',
+    institution: '[Data to be Inserted: Organization / Independent]',
+    description: '[Data to be Inserted: Overview of accomplishments and technologies used.]',
   },
   {
-    year: '2023 - 2024',
-    title: '+2 Science (Higher Secondary)',
-    institution: 'Prasadi Academy, Lalitpur, Nepal',
-    description: 'Completed higher secondary education in Science with strong foundations in Mathematics, Physics, and programming basics.',
+    year: '[Data to be Inserted: Year Range]',
+    title: '[Data to be Inserted: Milestone Title 3]',
+    institution: '[Data to be Inserted: Institution Name]',
+    description: '[Data to be Inserted: Key focus areas and results achieved.]',
   },
-  {
-    year: '2023',
-    title: 'Secondary Education (Class 10 / SEE)',
-    institution: 'Sagarmatha Higher Secondary School, Mirchaiya-6, Siraha',
-    description: 'Completed school level education with academic distinction and early exploration of computer technologies.',
-  }
 ];
 
 export default function Timeline() {

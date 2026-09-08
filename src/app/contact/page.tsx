@@ -4,13 +4,14 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Globe } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, FacebookIcon, InstagramIcon, WhatsAppIcon } from '@/components/icons/BrandIcons';
 import { useState } from 'react';
+import { cvData } from '@/data/cv-data';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const mailtoUrl = `mailto:jagdishsah126@gmail.com?subject=${encodeURIComponent(formData.subject || 'Portfolio Contact')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+    const mailtoUrl = `mailto:${cvData.personalInfo.email}?subject=${encodeURIComponent(formData.subject || 'Portfolio Contact')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
     window.open(mailtoUrl, '_blank');
     alert('Thank you, ' + formData.name + '! Your message draft has been prepared.');
     setFormData({ name: '', email: '', subject: '', message: '' });
@@ -42,8 +43,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h4 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Email</h4>
-                  <a href="mailto:jagdishsah126@gmail.com" className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors break-all">
-                    jagdishsah126@gmail.com
+                  <a href={`mailto:${cvData.personalInfo.email}`} className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors break-all">
+                    {cvData.personalInfo.email}
                   </a>
                 </div>
               </div>
@@ -53,13 +54,10 @@ export default function ContactPage() {
                   <Phone size={24} />
                 </div>
                 <div>
-                  <h4 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Phone / WhatsApp</h4>
-                  <a href="tel:+9779702406668" className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">
-                    +977 9702406668
-                  </a>
-                  <a href="https://wa.me/9779702406668" target="_blank" rel="noopener noreferrer" className="text-xs text-green-600 dark:text-green-400 hover:underline flex items-center gap-1 mt-0.5">
-                    <WhatsAppIcon className="w-3.5 h-3.5" /> Chat on WhatsApp
-                  </a>
+                  <h4 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Phone</h4>
+                  <p className="text-gray-900 dark:text-white font-medium">
+                    {cvData.personalInfo.phone}
+                  </p>
                 </div>
               </div>
 
@@ -70,7 +68,7 @@ export default function ContactPage() {
                 <div>
                   <h4 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Location</h4>
                   <p className="text-gray-900 dark:text-white font-medium">
-                    Pokhara / Siraha, Nepal
+                    {cvData.personalInfo.location}
                   </p>
                 </div>
               </div>
@@ -80,10 +78,10 @@ export default function ContactPage() {
                   <Globe size={24} />
                 </div>
                 <div>
-                  <h4 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Website Domain</h4>
-                  <a href="https://jagdishsah.com.np" target="_blank" rel="noopener noreferrer" className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                    jagdishsah.com.np
-                  </a>
+                  <h4 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Website</h4>
+                  <p className="text-gray-900 dark:text-white font-medium">
+                    {cvData.personalInfo.website}
+                  </p>
                 </div>
               </div>
             </div>
