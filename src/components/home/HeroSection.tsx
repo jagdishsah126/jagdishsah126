@@ -181,15 +181,15 @@ export default function HeroSection() {
             className="px-7 py-3.5 glass-panel text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-semibold rounded-2xl transition-all active:scale-95 flex items-center gap-2"
           >
             <GithubIcon className="w-4 h-4" />
-            GitHub Hub (4)
+            GitHub Hub (5)
           </Link>
         </motion.div>
 
         {/* Glass Stats Grid */}
         <motion.div variants={itemVariants} className="grid grid-cols-3 gap-4 sm:gap-6 max-w-xl mx-auto p-4 sm:p-6 rounded-3xl glass-panel shadow-lg border border-white/60 dark:border-white/10">
           {[
-            { value: '21+', label: 'Repositories' },
-            { value: '4', label: 'GitHub Accounts' },
+            { value: '25+', label: 'Repositories' },
+            { value: '5', label: 'GitHub Profiles' },
             { value: '12+', label: 'Featured Apps' },
           ].map((stat) => (
             <div key={stat.label} className="text-center p-2 rounded-2xl hover:bg-white/40 dark:hover:bg-white/5 transition-colors">

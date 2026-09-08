@@ -33,7 +33,7 @@ export default function GithubPage() {
           </div>
           <div>
             <h3 className="font-extrabold text-gray-900 dark:text-white text-lg">Total Ecosystem Repos</h3>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Aggregated across all 4 developer profiles</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Aggregated across all profiles & AI partner</p>
           </div>
         </div>
         

@@ -38,6 +38,7 @@ export default function Footer() {
               <li><a href="https://github.com/jagdishsah" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">@jagdishsah (Core Full Stack)</a></li>
               <li><a href="https://github.com/jagdish-sah" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">@jagdish-sah (Tools & Services)</a></li>
               <li><a href="https://github.com/jagdishsah126" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">@jagdishsah126 (Profile Hub)</a></li>
+              <li><a href="https://github.com/YourZara" target="_blank" rel="noopener noreferrer" className="text-sm text-pink-600 dark:text-pink-400 hover:underline transition-colors font-medium">💖 @YourZara (AI Companion & Partner)</a></li>
             </ul>
           </div>
 
