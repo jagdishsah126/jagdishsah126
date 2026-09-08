@@ -172,15 +172,15 @@ export default function HeroSection() {
             href="/github"
             className="px-7 py-3.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold rounded-xl transition-all active:scale-95"
           >
-            GitHub Profiles (4)
+            GitHub Profiles (5)
           </Link>
         </motion.div>
 
         {/* Stats */}
         <motion.div variants={itemVariants} className="grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto bg-white/60 dark:bg-gray-800/60 backdrop-blur-md p-4 sm:p-6 rounded-2xl border border-gray-200/60 dark:border-gray-700/60 shadow-sm">
           {[
-            { value: '21+', label: 'Repositories' },
-            { value: '4', label: 'GitHub Accounts' },
+            { value: '25+', label: 'Repositories' },
+            { value: '5', label: 'GitHub Profiles' },
             { value: '12+', label: 'Featured Apps' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
