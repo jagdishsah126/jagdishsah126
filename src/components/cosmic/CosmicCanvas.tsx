@@ -514,32 +514,110 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing z-10"
       />
 
-      {/* Center Avatar Overlay positioned at canvas center */}
-      <div className="absolute z-20 pointer-events-none flex flex-col items-center justify-center">
-        <div className="relative w-24 h-24 md:w-28 md:h-28 flex items-center justify-center">
-          {/* Pulsing Accretion Glow */}
-          <div className="absolute -inset-4 rounded-full border border-cyan-400/30 animate-spin [animation-duration:20s]" />
-          <div className="absolute -inset-2 rounded-full border border-violet-500/40 animate-spin [animation-duration:12s] [animation-direction:reverse]" />
-          <div className="absolute -inset-6 rounded-full bg-gradient-to-r from-cyan-500/20 via-violet-600/20 to-emerald-500/10 blur-xl animate-pulse" />
+      {/* Center 3D Dual-Sided Celestial Medallion (Option 1 + Option 2) */}
+      {(() => {
+        // Calculate 3D orientation angles
+        const yawDeg = (rotY * 180) / Math.PI;
+        const pitchDeg = (rotX * 180) / Math.PI - 55; // Tilt relative to orbital plane
+        const isFacingBack = Math.cos(rotY) < 0;
 
-          {/* Central Avatar Portrait */}
-          <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-cyan-300 shadow-[0_0_25px_rgba(56,189,248,0.5)]">
-            <Image
-              src={PORTFOLIO_DATA.personal.avatarImg}
-              alt="Jagdish Sah Avatar"
-              fill
-              className="object-cover"
-              priority
-            />
+        return (
+          <div className="absolute z-20 pointer-events-none flex flex-col items-center justify-center">
+            {/* 3D Perspective Wrapper */}
+            <div
+              className="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center"
+              style={{ perspective: "1000px" }}
+            >
+              {/* Outer 3D Cosmic Accretion Rings */}
+              <div
+                className="absolute -inset-5 rounded-full border border-cyan-400/30 animate-spin [animation-duration:24s] pointer-events-none"
+                style={{
+                  transform: `rotateX(${pitchDeg * 0.7}deg) rotateZ(15deg)`,
+                  transformStyle: "preserve-3d",
+                }}
+              />
+              <div
+                className="absolute -inset-3 rounded-full border border-violet-500/40 animate-spin [animation-duration:14s] [animation-direction:reverse] pointer-events-none"
+                style={{
+                  transform: `rotateX(${pitchDeg * 0.7}deg) rotateZ(-25deg)`,
+                  transformStyle: "preserve-3d",
+                }}
+              />
+              <div
+                className={`absolute -inset-7 rounded-full blur-2xl transition-colors duration-500 ${
+                  isFacingBack
+                    ? "bg-gradient-to-r from-violet-600/30 via-amber-500/20 to-purple-600/20"
+                    : "bg-gradient-to-r from-cyan-500/30 via-emerald-500/20 to-blue-600/20"
+                } animate-pulse`}
+              />
+
+              {/* The Rotating 3D Dual-Sided Medallion */}
+              <div
+                className="relative w-full h-full rounded-full transition-transform duration-75"
+                style={{
+                  transformStyle: "preserve-3d",
+                  transform: `rotateX(${pitchDeg * 0.4}deg) rotateY(${yawDeg}deg)`,
+                }}
+              >
+                {/* SIDE A: Creative / Builder Avatar (Front Face) */}
+                <div
+                  className="absolute inset-0 rounded-full overflow-hidden border-2 border-cyan-300 shadow-[0_0_30px_rgba(56,189,248,0.6)] bg-space-void"
+                  style={{
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
+                  }}
+                >
+                  <Image
+                    src={PORTFOLIO_DATA.personal.avatarImg}
+                    alt="Jagdish Sah Creative Avatar"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  {/* Subtle Glass Surface Glint */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none" />
+                </div>
+
+                {/* SIDE B: Executive / Formal Portrait (Back Face) */}
+                <div
+                  className="absolute inset-0 rounded-full overflow-hidden border-2 border-violet-300 shadow-[0_0_30px_rgba(139,92,246,0.6)] bg-space-void"
+                  style={{
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
+                    transform: "rotateY(180deg)",
+                  }}
+                >
+                  <Image
+                    src={PORTFOLIO_DATA.personal.formalPhoto}
+                    alt="Jagdish Sah Executive Portrait"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  {/* Subtle Amber Glass Glint */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-amber-300/15 to-transparent pointer-events-none" />
+                </div>
+              </div>
+            </div>
+
+            {/* Dynamic Dimensional Identity Badge */}
+            <div className="mt-3 text-center transition-all duration-300">
+              <span
+                className={`text-[11px] font-mono tracking-widest px-3 py-1 rounded-full backdrop-blur-md border shadow-lg transition-colors duration-300 ${
+                  isFacingBack
+                    ? "text-violet-200 border-violet-400/40 bg-violet-950/80 shadow-[0_0_20px_rgba(139,92,246,0.35)]"
+                    : "text-cyan-200 border-cyan-400/40 bg-cyan-950/80 shadow-[0_0_20px_rgba(56,189,248,0.35)]"
+                }`}
+              >
+                {isFacingBack ? "✦ PROFESSIONAL CITADEL ✦" : "✦ CREATIVE HORIZON ✦"}
+              </span>
+              <span className="block text-[9px] font-mono text-slate-400 mt-1 opacity-75">
+                {isFacingBack ? "Executive Profile & NEPSE Analyst" : "Creative Builder & Autonomous Systems"}
+              </span>
+            </div>
           </div>
-        </div>
-
-        <div className="mt-2 text-center">
-          <span className="text-xs font-mono tracking-widest text-cyan-300 bg-space-card/90 border border-white/10 px-2.5 py-1 rounded-full backdrop-blur-md">
-            JAGDISH CORE ✦
-          </span>
-        </div>
-      </div>
+        );
+      })()}
 
       {/* Stable, Zero-Flicker Planetary Inspection Card */}
       {activeDisplayPlanet && (
