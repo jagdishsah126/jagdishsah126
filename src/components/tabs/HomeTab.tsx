@@ -34,7 +34,7 @@ export default function HomeTab({ onSelectProject, onSelectTab }: HomeTabProps) 
         {/* Origin & Location Tag */}
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-space-card border border-white/10 text-xs font-mono text-cyan-300 mb-4 shadow-sm backdrop-blur-md">
           <MapPin className="w-3.5 h-3.5 text-cyan-400" />
-          <span>Roots in Mirchaiya, Siraha • Studying in Pokhara, Nepal</span>
+          <span>Roots in Bishnupur, Siraha • Studying in Pokhara, Nepal</span>
         </div>
 
         {/* Name Title */}

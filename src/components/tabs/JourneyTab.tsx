@@ -28,7 +28,7 @@ export default function JourneyTab() {
           Roots, Curiosity & <span className="cosmic-gradient-text">Journey</span>
         </h2>
         <p className="text-sm md:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          From the southern plains of Siraha and the forests of Bardiya to the academic corridors of
+          From my family home in Bishnupur, Siraha and the forests of Bardiya to the academic corridors of
           Kathmandu and the engineering labs of Pokhara.
         </p>
       </div>

@@ -4,12 +4,12 @@ export const PORTFOLIO_DATA = {
   personal: {
     name: "Jagdish Sah",
     preferredName: "Jagdish",
-    tagline: "Computer Engineering Student, Creative Builder & NEPSE Analyst | Siraha, Nepal",
+    tagline: "Computer Engineering Student, Creative Builder & NEPSE Analyst | Bishnupur, Siraha, Nepal",
     motto: "An explorer navigating the frontiers of a boundless universe. In a cosmos with no limits or boundaries, I build with creative intent, observe the patterns, and discover what is possible.",
     email: "jagdishsah126@gmail.com",
     phone: "+977 9702406668",
-    location: "Pokhara / Siraha, Nepal",
-    hometown: "Mirchaiya, Siraha, Nepal",
+    location: "Pokhara / Bishnupur, Siraha, Nepal",
+    hometown: "Bishnupur, Siraha, Nepal",
     domain: "jagdishsah.com.np",
     githubMain: "https://github.com/jagdishsah126",
     avatarImg: "/avatar.png",
@@ -20,10 +20,10 @@ export const PORTFOLIO_DATA = {
       exploring: "Agentic AI Orchestration & Distributed Pipelines",
       trading: "Short-term swing positioning in NEPSE momentum stocks",
     },
-    bio: "Born in Siraha, Nepal and raised across Bardiya and Mirchaiya, I grew up under the guidance of my father—a dedicated Government Science Teacher who taught me to see the world through the lens of scientific curiosity, logic, and relentless exploration. Today, I study Computer Engineering at IOE Western Regional Campus (WRC) in Pokhara, building autonomous data pipelines, offline-first web applications, and disciplined analytical tools for financial markets.",
+    bio: "My family home and cultural roots are in Bishnupur, Siraha, Nepal. I spent early childhood in Bardiya where my father was stationed as a Government Science Teacher, then completed my schooling at Sagarmatha HSS in Mirchaiya, Siraha before pursuing +2 Science at Prasadi Academy and engineering at IOE WRC in Pokhara. Under my father's guidance, I learned to see the world through the lens of scientific curiosity, logic, and relentless exploration.",
     fatherTribute: {
       title: "My Father — The Science Teacher & My Greatest Role Model",
-      description: "My father is a Government Science Teacher whose dedication shaped my foundational curiosity. From my early days in Bardiya where he was stationed, to our home in Mirchaiya, Siraha, he demonstrated that knowledge is something you uncover through discipline, experiment, and truth. He is my best person, my mentor, and the bedrock of my character.",
+      description: "My father is a Government Science Teacher whose dedication shaped my foundational curiosity. From my early days in Bardiya where he was stationed, to our family home in Bishnupur, Siraha, he demonstrated that knowledge is something you uncover through discipline, experiment, and truth. He is my best person, my mentor, and the bedrock of my character.",
     },
     aiPhilosophy: {
       title: "The Human-AI Symbiosis: AI as Creative Friends",
@@ -307,12 +307,12 @@ export const PORTFOLIO_DATA = {
   // Journey Milestones
   journey: [
     {
-      period: "Roots & Birthplace",
-      location: "Siraha, Madhesh Province, Nepal",
-      title: "Origins in Siraha",
-      badge: "Hometown",
-      description: "Born in Siraha, where my roots, family culture, and mother tongue (Maithili) originate. The humble surroundings and rich community fostered an enduring appreciation for patience and hard work.",
-      learnings: ["Grounded cultural identity", "Maithili language heritage", "Resilience and community values"],
+      period: "Roots & Family Home",
+      location: "Bishnupur, Siraha, Nepal",
+      title: "Origins & Home in Bishnupur, Siraha",
+      badge: "Ancestral Home",
+      description: "My family home and roots are in Bishnupur, Siraha, where my culture, values, and mother tongue (Maithili) originate. The humble surroundings and close-knit community instilled an enduring reverence for patience, discipline, and hard work.",
+      learnings: ["Grounded cultural identity", "Maithili language heritage", "Family roots in Bishnupur"],
     },
     {
       period: "Early Childhood",
@@ -329,8 +329,8 @@ export const PORTFOLIO_DATA = {
       institution: "Sagarmatha Higher Secondary School",
       score: "3.65 GPA",
       badge: "SEE Distinction",
-      description: "Returned home to Mirchaiya to complete formal schooling from primary through Grade 10. Graduated Secondary Education Examination (SEE) with an outstanding 3.65 GPA, winning top marks in mathematics and computer science.",
-      learnings: ["Strong foundation in mathematics", "First hands-on experience with coding logic", "SEE 3.65 GPA"],
+      description: "Traveled from our home in Bishnupur to complete formal schooling at Sagarmatha Higher Secondary School in nearby Mirchaiya. Graduated Secondary Education Examination (SEE) with an outstanding 3.65 GPA, excelling in mathematics and science.",
+      learnings: ["Strong foundation in mathematics", "First hands-on experience with coding logic", "SEE 3.65 GPA (Mirchaiya School, Bishnupur Home)"],
     },
     {
       period: "+2 Science (2022 – 2024)",

@@ -1,35 +1,17 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Fira_Code, Caveat } from "next/font/google";
 import "./globals.css";
 import Starfield from "../components/cosmic/Starfield";
 import AuroraGlow from "../components/cosmic/AuroraGlow";
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-jakarta",
-  display: "swap",
-});
-
-const fira = Fira_Code({
-  subsets: ["latin"],
-  variable: "--font-fira",
-  display: "swap",
-});
-
-const caveat = Caveat({
-  subsets: ["latin"],
-  variable: "--font-caveat",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://jagdishsah.com.np"),
-  title: "Jagdish Sah — Computer Engineering Student, Creative Builder & NEPSE Analyst | Siraha, Nepal",
+  title: "Jagdish Sah — Computer Engineering Student, Creative Builder & NEPSE Analyst | Bishnupur, Siraha, Nepal",
   description:
-    "Official personal hub of Jagdish Sah from Siraha, Nepal. Computer Engineering student at TU IOE WRC Pokhara, creator of autonomous data pipelines, active NEPSE market analyst, and builder of modern digital experiences.",
+    "Official personal hub of Jagdish Sah from Bishnupur, Siraha, Nepal. Computer Engineering student at TU IOE WRC Pokhara, creator of autonomous data pipelines, active NEPSE market analyst, and builder of modern digital experiences.",
   keywords: [
     "Jagdish Sah",
     "Jagdish",
+    "Bishnupur",
     "Siraha",
     "Mirchaiya",
     "Nepse Analyst",
@@ -48,7 +30,7 @@ export const metadata: Metadata = {
     canonical: "https://jagdishsah.com.np",
   },
   openGraph: {
-    title: "Jagdish Sah — Computer Engineering Student & NEPSE Analyst | Siraha, Nepal",
+    title: "Jagdish Sah — Computer Engineering Student & NEPSE Analyst | Bishnupur, Siraha, Nepal",
     description:
       "Explore the digital universe of Jagdish Sah: autonomous data pipelines, 8 planetary projects, NEPSE market analysis, and professional CV.",
     url: "https://jagdishsah.com.np",
@@ -66,8 +48,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jagdish Sah — Computer Engineering Student & NEPSE Analyst",
-    description: "Personal hub of Jagdish Sah from Siraha, Nepal. Projects, NEPSE research, and official CV.",
+    title: "Jagdish Sah — Computer Engineering Student & NEPSE Analyst | Bishnupur, Siraha",
+    description: "Personal hub of Jagdish Sah from Bishnupur, Siraha, Nepal. Projects, NEPSE research, and official CV.",
     images: ["/ProfilePicFormal.jpg"],
   },
   robots: {
@@ -95,11 +77,11 @@ const jsonLd = {
       "nationality": "Nepalese",
       "birthPlace": {
         "@type": "Place",
-        "name": "Siraha, Nepal",
+        "name": "Bishnupur, Siraha, Nepal",
       },
       "homeLocation": {
         "@type": "Place",
-        "name": "Mirchaiya, Siraha, Nepal",
+        "name": "Bishnupur, Siraha, Nepal",
       },
       "workLocation": {
         "@type": "Place",
@@ -160,8 +142,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${fira.variable} ${caveat.variable}`}>
+    <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+          rel="stylesheet"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
