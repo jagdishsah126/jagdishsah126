@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-space: #03050c;
+  --bg-space-dark: #010206;
+  --bg-surface: rgba(14, 18, 38, 0.65);
+  --bg-surface-hover: rgba(22, 28, 58, 0.85);
+  --bg-glass: rgba(18, 24, 52, 0.55);
+
+  --accent-cyan: #38bdf8;
+  --accent-cyan-glow: rgba(56, 189, 248, 0.4);
+  --accent-violet: #8b5cf6;
+  --accent-violet-glow: rgba(139, 92, 246, 0.4);
+  --accent-emerald: #10b981;
+  --accent-emerald-glow: rgba(16, 185, 129, 0.35);
+  --accent-amber: #fbbf24;
+  --accent-amber-glow: rgba(251, 191, 36, 0.35);
+  --accent-rose: #f43f5e;
+  --accent-rose-glow: rgba(244, 63, 94, 0.35);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-glow-cyan: rgba(56, 189, 248, 0.3);
+  --border-glow-violet: rgba(139, 92, 246, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-space);
+  color: #f1f5f9;
+}
+
+body {
+  background-color: var(--bg-space);
+  color: #f1f5f9;
+  font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #03050c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.55);
+}
+
+/* Cosmic Glass Utilities */
+.cosmic-glass {
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cosmic-glass:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+.cosmic-gradient-text {
+  background: linear-gradient(135deg, #ffffff 30%, #c7d2fe 70%, var(--accent-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.aurora-gradient-text {
+  background: linear-gradient(135deg, #ffffff 20%, #6ee7b7 60%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.fire-gradient-text {
+  background: linear-gradient(135deg, #ffffff 20%, #fde047 60%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* PRINT STYLES FOR CV */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  .no-print,
+  nav,
+  button,
+  .dock-container,
+  .starfield-canvas,
+  .aurora-lights,
+  .hyperspace-warp {
+    display: none !important;
+  }
+
+  .cv-printable-area {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 15mm !important;
+    background: #ffffff !important;
+    color: #111827 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .cv-printable-area * {
+    color: #111827 !important;
+    border-color: #e5e7eb !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+  }
+
+  .cv-card {
+    background: #ffffff !important;
+    border: 1px solid #d1d5db !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+
+  .cv-badge {
+    border: 1px solid #9ca3af !important;
+    color: #374151 !important;
+    background: #f3f4f6 !important;
+  }
+
+  a {
+    text-decoration: underline !important;
+    color: #1d4ed8 !important;
+  }
+}
