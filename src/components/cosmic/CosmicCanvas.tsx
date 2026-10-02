@@ -93,6 +93,51 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
     setPinnedPlanet(null);
   };
 
+  // Distinct 3D Keplerian Elliptical Orbital Parameters for all 8 Planets
+  const keplerParamsRef = useRef<
+    { eccentricity: number; inclination: number; node: number }[]
+  >([
+    { eccentricity: 0.24, inclination: 0.24, node: 0.5 },  // Mercury / Floorsheet Archive
+    { eccentricity: 0.15, inclination: -0.18, node: 1.3 }, // Venus / Canteen
+    { eccentricity: 0.17, inclination: 0.08, node: 2.2 },  // Earth / MD Reader
+    { eccentricity: 0.27, inclination: -0.28, node: 3.1 }, // Mars / Insta Analyzer
+    { eccentricity: 0.18, inclination: 0.32, node: 4.0 },  // Jupiter / Nepse Data
+    { eccentricity: 0.22, inclination: -0.25, node: 4.8 }, // Saturn / Nepse Diary
+    { eccentricity: 0.21, inclination: 0.35, node: 5.6 },  // Uranus / Mobile Store
+    { eccentricity: 0.25, inclination: -0.32, node: 0.2 }, // Neptune / Ask Her
+  ]);
+
+  // Compute 3D coordinate on an inclined Keplerian ellipse (Sun at one focus)
+  const getKeplerPoint = useCallback(
+    (
+      radius: number,
+      theta: number,
+      params: { eccentricity: number; inclination: number; node: number }
+    ) => {
+      const e = params.eccentricity;
+      const a = radius;
+      const b = a * Math.sqrt(Math.max(0.1, 1 - e * e));
+      const c = a * e; // Focal distance: Sun is at (0, 0, 0)
+
+      // Point in planet's orbital plane
+      const xLoc = a * Math.cos(theta) - c;
+      const zLoc = b * Math.sin(theta);
+
+      // Rotate in 3D by inclination (tilt) and node (orbital orientation)
+      const cosInc = Math.cos(params.inclination);
+      const sinInc = Math.sin(params.inclination);
+      const cosNode = Math.cos(params.node);
+      const sinNode = Math.sin(params.node);
+
+      const xOrb = xLoc * cosNode - zLoc * sinNode * cosInc;
+      const yOrb = zLoc * sinInc;
+      const zOrb = xLoc * sinNode + zLoc * cosNode * cosInc;
+
+      return { x: xOrb, y: yOrb, z: zOrb };
+    },
+    []
+  );
+
   // 3D Point Rotation & Perspective Projection
   const project3D = useCallback(
     (x: number, y: number, z: number, cx: number, cy: number, baseScale: number) => {
@@ -168,19 +213,20 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
       const availableRadius = Math.min(width, height) / 2 - 30;
       const baseScale = Math.max(0.48, Math.min(1.0, availableRadius / baseMaxRadius));
 
-      // 1. Draw 3D Orbit Trails
-      PORTFOLIO_DATA.planets.forEach((planet) => {
-        const isHovered = (hoveredPlanet?.id === planet.id) || (pinnedPlanet?.id === planet.id);
+      // 1. Draw 3D Inclined Keplerian Elliptical Orbit Trails
+      PORTFOLIO_DATA.planets.forEach((planet, index) => {
+        const isHovered =
+          hoveredPlanet?.id === planet.id || pinnedPlanet?.id === planet.id;
         const radius = planet.orbitRadius;
+        const kParams = keplerParamsRef.current[index];
         const segments = 64;
 
         ctx.beginPath();
         for (let i = 0; i <= segments; i++) {
           const theta = (i / segments) * Math.PI * 2;
-          const ox = Math.cos(theta) * radius;
-          const oz = Math.sin(theta) * radius;
+          const pt = getKeplerPoint(radius, theta, kParams);
+          const proj = project3D(pt.x, pt.y, pt.z, cx, cy, baseScale);
 
-          const proj = project3D(ox, 0, oz, cx, cy, baseScale);
           if (i === 0) {
             ctx.moveTo(proj.px, proj.py);
           } else {
@@ -189,7 +235,7 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         }
 
         ctx.strokeStyle = isHovered
-          ? "rgba(56, 189, 248, 0.55)"
+          ? "rgba(56, 189, 248, 0.65)"
           : "rgba(255, 255, 255, 0.08)";
         ctx.lineWidth = isHovered ? 2 : 1;
         ctx.setLineDash(isHovered ? [] : [4, 6]);
@@ -212,7 +258,7 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         alpha: 1,
       });
 
-      // Update angles & add planets
+      // Update angles & add planets on their Keplerian ellipses
       PORTFOLIO_DATA.planets.forEach((planet, index) => {
         const isHovered = hoveredRef.current === planet.id;
 
@@ -223,10 +269,10 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
 
         const angle = anglesRef.current[index];
         const radius = planet.orbitRadius;
-        const ox = Math.cos(angle) * radius;
-        const oz = Math.sin(angle) * radius;
+        const kParams = keplerParamsRef.current[index];
+        const pt = getKeplerPoint(radius, angle, kParams);
 
-        const proj = project3D(ox, 0, oz, cx, cy, baseScale);
+        const proj = project3D(pt.x, pt.y, pt.z, cx, cy, baseScale);
         const depthFactor = (proj.pz + 450) / 900;
         const alpha = Math.max(0.4, Math.min(1.0, 0.5 + depthFactor * 0.5));
 
@@ -404,10 +450,10 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
     PORTFOLIO_DATA.planets.forEach((planet, index) => {
       const angle = anglesRef.current[index];
       const radius = planet.orbitRadius;
-      const ox = Math.cos(angle) * radius;
-      const oz = Math.sin(angle) * radius;
+      const kParams = keplerParamsRef.current[index];
+      const pt = getKeplerPoint(radius, angle, kParams);
 
-      const proj = project3D(ox, 0, oz, cx, cy, baseScale);
+      const proj = project3D(pt.x, pt.y, pt.z, cx, cy, baseScale);
       const dist = Math.hypot(mouseX - proj.px, mouseY - proj.py);
       const hitRadius = Math.max(planet.size * proj.scale + 16, 26);
 
