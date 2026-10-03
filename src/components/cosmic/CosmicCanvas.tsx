@@ -817,16 +817,25 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
       // Render sorted bodies
       bodies.forEach((body) => {
         if (body.type === "sun") {
-          // Central Star Singularity Core Ring
-          ctx.save();
-          ctx.beginPath();
-          ctx.arc(body.x, body.y, body.size, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(14, 18, 38, 0.9)";
-          ctx.strokeStyle = "rgba(56, 189, 248, 0.75)";
-          ctx.lineWidth = 2;
-          ctx.fill();
-          ctx.stroke();
-          ctx.restore();
+          // Sun body exists in bodies[] purely for depth sorting.
+          // The HTML medallion div is the visual center — we only draw a very
+          // faint pulsing glow ring here so there is NO opaque fill covering the photo.
+          if (medallionBehindRef.current) {
+            // When photo is behind planets, draw a subtle placeholder glow
+            ctx.save();
+            const glowGrad = ctx.createRadialGradient(
+              body.x, body.y, 0,
+              body.x, body.y, body.size * 1.2
+            );
+            glowGrad.addColorStop(0, "rgba(56, 189, 248, 0.18)");
+            glowGrad.addColorStop(1, "transparent");
+            ctx.beginPath();
+            ctx.arc(body.x, body.y, body.size * 1.2, 0, Math.PI * 2);
+            ctx.fillStyle = glowGrad;
+            ctx.fill();
+            ctx.restore();
+          }
+          // When photo is on top (default), draw nothing — photo covers this area
         } else if (body.planet) {
           const planet = body.planet;
           const isHovered =
