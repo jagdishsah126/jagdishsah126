@@ -16,6 +16,8 @@ import {
   ZoomOut,
   Layers,
   X,
+  Maximize2,
+  Minimize2,
 } from "lucide-react";
 
 interface CosmicCanvasProps {
@@ -111,6 +113,10 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
   const [isFacingBackState, setIsFacingBackState] = useState<boolean>(false);
   // Tracks whether any planet is in front of the central sun (medallion should go behind)
   const [medallionBehind, setMedallionBehind] = useState<boolean>(false);
+  // Fullscreen / Planetarium mode state
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+  const isFullscreenRef = useRef<boolean>(false);
+  isFullscreenRef.current = isFullscreen;
 
   // Mutable refs for 60fps animations with smooth inertia damping (Project-Zara style)
   const rotXRef = useRef<number>(0.95);
@@ -392,6 +398,39 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
     setPinnedPlanet(null);
   };
 
+  const toggleFullscreen = () => {
+    playClickSound();
+    setIsFullscreen((prev) => !prev);
+  };
+
+  // Keyboard Escape listener & body scroll lock for Fullscreen mode
+  useEffect(() => {
+    if (!isFullscreen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsFullscreen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isFullscreen]);
+
+  // Trigger resize event when toggling fullscreen so canvas recalculates immediately
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("resize"));
+    }, 60);
+    return () => clearTimeout(timer);
+  }, [isFullscreen]);
+
   // Main Canvas Render Loop (60fps with pure 3D volumetric depth)
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -450,10 +489,11 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
 
       ctx.clearRect(0, 0, width, height);
 
-      // Base responsive scale factor
+      // Base responsive scale factor (allows expansion in fullscreen for immersive view)
       const baseMaxRadius = 450;
       const availableRadius = Math.min(width, height) / 2 - 30;
-      const baseScale = Math.max(0.48, Math.min(1.0, availableRadius / baseMaxRadius));
+      const maxScaleLimit = isFullscreenRef.current ? 1.25 : 1.05;
+      const baseScale = Math.max(0.48, Math.min(maxScaleLimit, availableRadius / baseMaxRadius));
 
       // ----------------------------------------------------------------------
       // PASS A: 3D Volumetric Background Stars (Twinkling & 3D Drag Rotation)
@@ -1068,8 +1108,42 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[650px] md:h-[750px] flex items-center justify-center overflow-hidden select-none"
+      className={`select-none transition-all duration-300 ${
+        isFullscreen
+          ? "fixed inset-0 z-50 w-screen h-screen bg-[#02040a] flex items-center justify-center overflow-hidden"
+          : "relative w-full h-[680px] md:h-[780px] lg:h-[840px] flex items-center justify-center overflow-hidden"
+      }`}
     >
+      {/* Edge gradient blending masks (active in embedded mode so stars seamlessly melt into dark space) */}
+      {!isFullscreen && (
+        <>
+          <div className="absolute top-0 inset-x-0 h-20 bg-gradient-to-b from-space-void via-space-void/60 to-transparent pointer-events-none z-10" />
+          <div className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-space-void via-space-void/60 to-transparent pointer-events-none z-10" />
+        </>
+      )}
+
+      {/* Fullscreen Mode Top HUD */}
+      {isFullscreen && (
+        <>
+          <div className="absolute top-5 left-5 z-30 flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-space-card/90 border border-cyan-400/30 text-xs font-mono text-cyan-300 backdrop-blur-md shadow-xl animate-in fade-in duration-200">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+            <Sparkles className="w-4 h-4 text-cyan-400" />
+            <span className="hidden sm:inline font-semibold">COSMIC OBSERVATORY</span>
+            <span className="text-slate-400">• 8 Keplerian Systems</span>
+          </div>
+
+          <button
+            onClick={toggleFullscreen}
+            className="absolute top-5 right-5 z-30 flex items-center gap-2 px-3.5 py-2 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/50 text-xs font-mono font-semibold text-cyan-200 backdrop-blur-md transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)] group animate-in fade-in duration-200"
+            title="Exit Fullscreen (Esc)"
+          >
+            <Minimize2 className="w-4 h-4 group-hover:scale-110 transition-transform" />
+            <span>Exit Fullscreen</span>
+            <kbd className="hidden sm:inline-block px-1.5 py-0.5 rounded bg-black/40 text-[10px] text-cyan-300 font-mono">ESC</kbd>
+          </button>
+        </>
+      )}
+
       {/* 3D Cosmic Canvas */}
       <canvas
         ref={canvasRef}
@@ -1202,7 +1276,7 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
               setHoveredPlanet(null);
             }
           }}
-          className="absolute z-30 top-6 right-6 w-80 p-5 cosmic-glass shadow-2xl border-cyan-400/40 backdrop-blur-xl animate-in fade-in zoom-in-95 duration-150"
+          className={`absolute z-30 ${isFullscreen ? "top-20" : "top-6"} right-6 w-80 p-5 cosmic-glass shadow-2xl border-cyan-400/40 backdrop-blur-xl animate-in fade-in zoom-in-95 duration-150`}
         >
           {/* Card Header */}
           <div className="flex items-center justify-between gap-2 mb-2">
@@ -1322,6 +1396,29 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         >
           <RotateCcw className="w-3.5 h-3.5" />
           <span>Reset 3D</span>
+        </button>
+
+        {/* Fullscreen Planetarium Mode Toggle */}
+        <button
+          onClick={toggleFullscreen}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border backdrop-blur-md transition-all shadow-md text-xs font-mono ${
+            isFullscreen
+              ? "bg-cyan-500/25 border-cyan-400/60 text-cyan-200 shadow-[0_0_12px_rgba(56,189,248,0.3)]"
+              : "bg-space-card/90 hover:bg-space-card-hover border-white/10 text-slate-300 hover:text-cyan-300"
+          }`}
+          title={isFullscreen ? "Exit Fullscreen (Esc)" : "Expand to Fullscreen"}
+        >
+          {isFullscreen ? (
+            <>
+              <Minimize2 className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Exit</span>
+            </>
+          ) : (
+            <>
+              <Maximize2 className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Expand ⛶</span>
+            </>
+          )}
         </button>
       </div>
 

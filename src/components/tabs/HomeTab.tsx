@@ -107,8 +107,8 @@ export default function HomeTab({ onSelectProject, onSelectTab }: HomeTabProps) 
         </div>
       </section>
 
-      {/* The 8-Planet Project Solar System Canvas */}
-      <section className="w-full relative max-w-6xl my-2">
+      {/* The 8-Planet Project Solar System Canvas (Full-Bleed Across Viewport) */}
+      <section className="w-full relative my-3">
         <div className="text-center mb-1">
           <span className="text-[11px] font-mono tracking-widest text-slate-400 uppercase">
             ✦ Interactive Planetary Orbital Canvas • Hover to inspect or click to view ✦
