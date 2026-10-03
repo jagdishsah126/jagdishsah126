@@ -109,6 +109,8 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
   const [pinnedPlanet, setPinnedPlanet] = useState<ProjectPlanet | null>(null);
   const [isFacingBackState, setIsFacingBackState] = useState<boolean>(false);
+  // Tracks whether any planet is in front of the central sun (medallion should go behind)
+  const [medallionBehind, setMedallionBehind] = useState<boolean>(false);
 
   // Mutable refs for 60fps animations with smooth inertia damping (Project-Zara style)
   const rotXRef = useRef<number>(0.95);
@@ -122,6 +124,9 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
   const lastMousePosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const hoveredRef = useRef<string | null>(null);
   const isOverTooltipRef = useRef<boolean>(false);
+  // Throttle depth-check state updates — only set state every N frames
+  const depthCheckCounterRef = useRef<number>(0);
+  const medallionBehindRef = useRef<boolean>(false);
 
   // 3D Background Celestial Elements
   const starsRef = useRef<VolumetricStar[]>([]);
@@ -793,6 +798,22 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
       // Sort bodies from back (lowest z) to front (highest z)
       bodies.sort((a, b) => a.z - b.z);
 
+      // Determine if any planet is in front of the sun (higher pz = closer to camera)
+      // Throttled: only evaluate every 6 frames to avoid hammering React state
+      depthCheckCounterRef.current += 1;
+      if (depthCheckCounterRef.current >= 6) {
+        depthCheckCounterRef.current = 0;
+        const sunBody = bodies.find((b) => b.type === "sun");
+        const sunPz = sunBody ? sunBody.z : 0;
+        const anyPlanetInFront = bodies.some(
+          (b) => b.type === "planet" && b.z > sunPz
+        );
+        if (anyPlanetInFront !== medallionBehindRef.current) {
+          medallionBehindRef.current = anyPlanetInFront;
+          setMedallionBehind(anyPlanetInFront);
+        }
+      }
+
       // Render sorted bodies
       bodies.forEach((body) => {
         if (body.type === "sun") {
@@ -877,7 +898,7 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animId);
     };
-  }, [project3D, isPaused, hoveredPlanet, pinnedPlanet, isFacingBackState]);
+  }, [project3D, isPaused, hoveredPlanet, pinnedPlanet]);
 
   // Mouse wheel Zoom event listener (with passive: false to prevent outer page scroll)
   useEffect(() => {
@@ -1060,7 +1081,7 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         const isFacingBack = Math.cos(rotY) < 0;
 
         return (
-          <div className="absolute z-20 pointer-events-none flex flex-col items-center justify-center">
+          <div className={`absolute pointer-events-none flex flex-col items-center justify-center transition-[z-index] ${medallionBehind ? "z-[5]" : "z-20"}`}>
             {/* 3D Perspective Wrapper */}
             <div
               className="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center"
