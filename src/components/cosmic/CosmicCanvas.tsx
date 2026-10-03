@@ -14,13 +14,72 @@ import {
   RotateCcw,
   ZoomIn,
   ZoomOut,
-  Maximize2,
   Layers,
   X,
 } from "lucide-react";
 
 interface CosmicCanvasProps {
   onSelectProject: (project: ProjectPlanet) => void;
+}
+
+// 3D Background Celestial Interfaces (Zara Cosmic Engine)
+interface VolumetricStar {
+  x: number;
+  y: number;
+  z: number;
+  baseSize: number;
+  color: string;
+  alpha: number;
+  twinkleSpeed: number;
+  twinklePhase: number;
+}
+
+interface CosmicDust {
+  x: number;
+  y: number;
+  z: number;
+  size: number;
+  color: string;
+  alpha: number;
+  pulsePhase: number;
+}
+
+interface BackgroundPlanet {
+  name: string;
+  baseX: number;
+  baseY: number;
+  baseZ: number;
+  radius: number;
+  color: string;
+  glowColor: string;
+  hasRing?: boolean;
+  ringColor?: string;
+  driftSpeed: number;
+  angle: number;
+}
+
+interface CosmicComet {
+  x: number;
+  y: number;
+  z: number;
+  vx: number;
+  vy: number;
+  vz: number;
+  trail: { x: number; y: number; z: number }[];
+  color: string;
+  glowColor: string;
+  size: number;
+  active: boolean;
+  spawnTimer: number;
+}
+
+interface CosmicHeart {
+  baseX: number;
+  baseY: number;
+  baseZ: number;
+  emoji: string;
+  phase: number;
+  speed: number;
 }
 
 interface ProjectedBody {
@@ -37,6 +96,9 @@ interface ProjectedBody {
 export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const medallionWrapperRef = useRef<HTMLDivElement | null>(null);
+  const ring1Ref = useRef<HTMLDivElement | null>(null);
+  const ring2Ref = useRef<HTMLDivElement | null>(null);
 
   // 3D Orbit Camera State
   const [rotX, setRotX] = useState<number>(0.95); // Pitch angle (tilt)
@@ -46,52 +108,32 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
   const [hoveredPlanet, setHoveredPlanet] = useState<ProjectPlanet | null>(null);
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
   const [pinnedPlanet, setPinnedPlanet] = useState<ProjectPlanet | null>(null);
+  const [isFacingBackState, setIsFacingBackState] = useState<boolean>(false);
 
-  // Mutable refs for 60fps animations
+  // Mutable refs for 60fps animations with smooth inertia damping (Project-Zara style)
   const rotXRef = useRef<number>(0.95);
   const rotYRef = useRef<number>(0.25);
+  const targetRotXRef = useRef<number>(0.95);
+  const targetRotYRef = useRef<number>(0.25);
   const zoomRef = useRef<number>(1.0);
+  const targetZoomRef = useRef<number>(1.0);
+
   const isDraggingRef = useRef<boolean>(false);
   const lastMousePosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const hoveredRef = useRef<string | null>(null);
   const isOverTooltipRef = useRef<boolean>(false);
 
-  // Initial angles of 8 planets spaced around the circle
+  // 3D Background Celestial Elements
+  const starsRef = useRef<VolumetricStar[]>([]);
+  const dustRef = useRef<CosmicDust[]>([]);
+  const bgPlanetsRef = useRef<BackgroundPlanet[]>([]);
+  const cometsRef = useRef<CosmicComet[]>([]);
+  const heartsRef = useRef<CosmicHeart[]>([]);
+
+  // Initial angles of 8 planets spaced around the ellipse
   const anglesRef = useRef<number[]>(
     PORTFOLIO_DATA.planets.map((_, i) => (i * (Math.PI * 2)) / 8)
   );
-
-  // Synchronize state with refs
-  useEffect(() => {
-    rotXRef.current = rotX;
-  }, [rotX]);
-  useEffect(() => {
-    rotYRef.current = rotY;
-  }, [rotY]);
-  useEffect(() => {
-    zoomRef.current = zoomLevel;
-  }, [zoomLevel]);
-
-  // Zoom helpers
-  const handleZoomIn = () => {
-    playClickSound();
-    setZoomLevel((prev) => Math.min(2.2, prev + 0.2));
-  };
-
-  const handleZoomOut = () => {
-    playClickSound();
-    setZoomLevel((prev) => Math.max(0.45, prev - 0.2));
-  };
-
-  const handleResetView = () => {
-    playClickSound();
-    setRotX(0.95);
-    setRotY(0.25);
-    setZoomLevel(1.0);
-    anglesRef.current = PORTFOLIO_DATA.planets.map((_, i) => (i * (Math.PI * 2)) / 8);
-    setHoveredPlanet(null);
-    setPinnedPlanet(null);
-  };
 
   // Distinct 3D Keplerian Elliptical Orbital Parameters for all 8 Planets
   const keplerParamsRef = useRef<
@@ -161,9 +203,10 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
 
       // 3. Perspective Projection
       const cameraDistance = 900;
-      const depth = cameraDistance - z2;
-      const perspective = Math.max(0.2, cameraDistance / Math.max(depth, 100));
+      const depth = (cameraDistance / zoom) - z2;
+      if (depth <= 20) return null; // Behind camera clipping
 
+      const perspective = Math.max(0.15, cameraDistance / depth);
       const finalScale = perspective * zoom * baseScale;
       const px = cx + x2 * finalScale;
       const py = cy + y2 * finalScale;
@@ -179,7 +222,172 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
     []
   );
 
-  // Main Canvas Render Loop
+  // Initialize 3D Volumetric Background Bodies (Stars, Dust, Comets, Planets, Hearts)
+  useEffect(() => {
+    // 1. Volumetric Stars (550 stars across spherical 3D space, Project-Zara palette)
+    const starColors = [
+      "#ffffff", "#e0e7ff", "#c7d2fe",
+      "#38bdf8", "#818cf8", "#c084fc",
+      "#f43f5e", "#fbbf24", "#10b981",
+    ];
+    const newStars: VolumetricStar[] = [];
+    const maxRadius = 1400;
+
+    for (let i = 0; i < 550; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(Math.random() * 2 - 1);
+      const r = Math.cbrt(Math.random()) * maxRadius + 180;
+
+      newStars.push({
+        x: r * Math.sin(phi) * Math.cos(theta),
+        y: r * Math.sin(phi) * Math.sin(theta),
+        z: r * Math.cos(phi),
+        baseSize: Math.random() * 1.8 + 0.6,
+        color: starColors[Math.floor(Math.random() * starColors.length)],
+        alpha: Math.random() * 0.75 + 0.25,
+        twinkleSpeed: Math.random() * 0.03 + 0.01,
+        twinklePhase: Math.random() * Math.PI * 2,
+      });
+    }
+    starsRef.current = newStars;
+
+    // 2. Cosmic Dust Micro-Dots (250 shimmering particles around the orbital disc)
+    const dustColors = ["#38bdf8", "#c084fc", "#fbbf24", "#f43f5e", "#34d399"];
+    const newDust: CosmicDust[] = [];
+    for (let i = 0; i < 250; i++) {
+      const r = Math.random() * 950 + 200;
+      const theta = Math.random() * Math.PI * 2;
+      const ySpread = (Math.random() - 0.5) * 450;
+      newDust.push({
+        x: r * Math.cos(theta),
+        y: ySpread,
+        z: r * Math.sin(theta),
+        size: Math.random() * 1.3 + 0.4,
+        color: dustColors[Math.floor(Math.random() * dustColors.length)],
+        alpha: Math.random() * 0.55 + 0.15,
+        pulsePhase: Math.random() * Math.PI * 2,
+      });
+    }
+    dustRef.current = newDust;
+
+    // 3. Distant Background Planets (4 subtle celestial bodies in deep 3D space)
+    bgPlanetsRef.current = [
+      {
+        name: "Zara Prime",
+        baseX: -640,
+        baseY: -220,
+        baseZ: -520,
+        radius: 26,
+        color: "#c084fc",
+        glowColor: "rgba(192, 132, 252, 0.45)",
+        hasRing: true,
+        ringColor: "rgba(236, 72, 153, 0.5)",
+        driftSpeed: 0.14,
+        angle: 0.5,
+      },
+      {
+        name: "Celestia",
+        baseX: 580,
+        baseY: 280,
+        baseZ: -440,
+        radius: 20,
+        color: "#38bdf8",
+        glowColor: "rgba(56, 189, 248, 0.4)",
+        hasRing: false,
+        driftSpeed: -0.12,
+        angle: 2.2,
+      },
+      {
+        name: "Ember Core",
+        baseX: 640,
+        baseY: -260,
+        baseZ: -580,
+        radius: 17,
+        color: "#fbbf24",
+        glowColor: "rgba(251, 191, 36, 0.4)",
+        hasRing: false,
+        driftSpeed: 0.18,
+        angle: 4.1,
+      },
+      {
+        name: "Verdant Pearl",
+        baseX: -500,
+        baseY: 340,
+        baseZ: -460,
+        radius: 14,
+        color: "#10b981",
+        glowColor: "rgba(16, 185, 129, 0.35)",
+        hasRing: true,
+        ringColor: "rgba(52, 211, 153, 0.4)",
+        driftSpeed: -0.2,
+        angle: 5.4,
+      },
+    ];
+
+    // 4. 3D Comets / Shooting Stars (3 dynamic celestial comets with 3D trajectories)
+    const cometColors = ["#38bdf8", "#fbbf24", "#f43f5e", "#e0e7ff"];
+    const newComets: CosmicComet[] = [];
+    for (let i = 0; i < 3; i++) {
+      newComets.push({
+        x: -900 + Math.random() * 1800,
+        y: -750 - Math.random() * 300,
+        z: (Math.random() - 0.5) * 1000,
+        vx: (Math.random() * 10 + 12) * (Math.random() > 0.5 ? 1 : -1),
+        vy: Math.random() * 12 + 14,
+        vz: (Math.random() - 0.5) * 8,
+        trail: [],
+        color: cometColors[i % cometColors.length],
+        glowColor: cometColors[i % cometColors.length],
+        size: Math.random() * 2.2 + 2.0,
+        active: i === 0, // First active immediately, others delayed
+        spawnTimer: i * 140,
+      });
+    }
+    cometsRef.current = newComets;
+
+    // 5. Small 3D Floating Heart Emojis (💖, ✨, 💕, 🤍, 🌸)
+    const heartEmojis = ["💖", "✨", "💕", "🤍", "🌸", "💖", "✨", "💕"];
+    const newHearts: CosmicHeart[] = [];
+    for (let i = 0; i < 24; i++) {
+      newHearts.push({
+        baseX: (Math.random() - 0.5) * 1100,
+        baseY: (Math.random() - 0.5) * 850,
+        baseZ: (Math.random() - 0.5) * 900,
+        emoji: heartEmojis[i % heartEmojis.length],
+        phase: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.0015 + 0.0008,
+      });
+    }
+    heartsRef.current = newHearts;
+  }, []);
+
+  // Zoom helpers
+  const handleZoomIn = () => {
+    playClickSound();
+    targetZoomRef.current = Math.min(2.5, targetZoomRef.current + 0.25);
+    setZoomLevel(targetZoomRef.current);
+  };
+
+  const handleZoomOut = () => {
+    playClickSound();
+    targetZoomRef.current = Math.max(0.45, targetZoomRef.current - 0.25);
+    setZoomLevel(targetZoomRef.current);
+  };
+
+  const handleResetView = () => {
+    playClickSound();
+    targetRotXRef.current = 0.95;
+    targetRotYRef.current = 0.25;
+    targetZoomRef.current = 1.0;
+    setRotX(0.95);
+    setRotY(0.25);
+    setZoomLevel(1.0);
+    anglesRef.current = PORTFOLIO_DATA.planets.map((_, i) => (i * (Math.PI * 2)) / 8);
+    setHoveredPlanet(null);
+    setPinnedPlanet(null);
+  };
+
+  // Main Canvas Render Loop (60fps with pure 3D volumetric depth)
   useEffect(() => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
@@ -201,10 +409,39 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
     window.addEventListener("resize", handleResize);
 
     const render = () => {
+      const time = performance.now();
       const width = canvas.width / (window.devicePixelRatio || 1);
       const height = canvas.height / (window.devicePixelRatio || 1);
       const cx = width / 2;
       const cy = height / 2;
+
+      // 1. Smooth Camera Inertia Damping & Gentle Passive Orbital Drift
+      rotXRef.current += (targetRotXRef.current - rotXRef.current) * 0.1;
+      rotYRef.current += (targetRotYRef.current - rotYRef.current) * 0.1;
+      zoomRef.current += (targetZoomRef.current - zoomRef.current) * 0.1;
+
+      if (!isDraggingRef.current && !isPaused) {
+        targetRotYRef.current += 0.0006;
+      }
+
+      // Synchronize central medallion rotation in real-time
+      if (medallionWrapperRef.current) {
+        const yawDeg = (rotYRef.current * 180) / Math.PI;
+        const pitchDeg = (rotXRef.current * 180) / Math.PI - 55;
+        medallionWrapperRef.current.style.transform = `rotateX(${pitchDeg * 0.4}deg) rotateY(${yawDeg}deg)`;
+
+        if (ring1Ref.current) {
+          ring1Ref.current.style.transform = `rotateX(${pitchDeg * 0.7}deg) rotateZ(15deg)`;
+        }
+        if (ring2Ref.current) {
+          ring2Ref.current.style.transform = `rotateX(${pitchDeg * 0.7}deg) rotateZ(-25deg)`;
+        }
+
+        const isBack = Math.cos(rotYRef.current) < 0;
+        if (isBack !== isFacingBackState) {
+          setIsFacingBackState(isBack);
+        }
+      }
 
       ctx.clearRect(0, 0, width, height);
 
@@ -213,7 +450,266 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
       const availableRadius = Math.min(width, height) / 2 - 30;
       const baseScale = Math.max(0.48, Math.min(1.0, availableRadius / baseMaxRadius));
 
-      // 1. Draw 3D Inclined Keplerian Elliptical Orbit Trails
+      // ----------------------------------------------------------------------
+      // PASS A: 3D Volumetric Background Stars (Twinkling & 3D Drag Rotation)
+      // ----------------------------------------------------------------------
+      starsRef.current.forEach((star) => {
+        star.twinklePhase += star.twinkleSpeed;
+        const proj = project3D(star.x, star.y, star.z, cx, cy, baseScale);
+        if (!proj) return;
+
+        const twinkle = 0.65 + 0.35 * Math.sin(star.twinklePhase);
+        const starSize = Math.max(0.5, star.baseSize * proj.scale);
+        const starAlpha = Math.min(1.0, Math.max(0.12, star.alpha * twinkle * Math.min(1.4, proj.scale * 1.5)));
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(proj.px, proj.py, starSize, 0, Math.PI * 2);
+        ctx.fillStyle = star.color;
+        ctx.globalAlpha = starAlpha;
+        ctx.shadowBlur = starSize > 1.2 ? starSize * 3 : 0;
+        ctx.shadowColor = star.color;
+        ctx.fill();
+        ctx.restore();
+      });
+
+      // ----------------------------------------------------------------------
+      // PASS B: 3D Cosmic Dust Micro-Dots (Ambient Shimmer Cloud)
+      // ----------------------------------------------------------------------
+      dustRef.current.forEach((dot) => {
+        dot.pulsePhase += 0.02;
+        const proj = project3D(dot.x, dot.y, dot.z, cx, cy, baseScale);
+        if (!proj) return;
+
+        const pulse = 0.5 + 0.5 * Math.sin(dot.pulsePhase);
+        const dustSize = Math.max(0.4, dot.size * proj.scale);
+        const dustAlpha = Math.max(0.1, Math.min(0.8, dot.alpha * pulse * proj.scale));
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(proj.px, proj.py, dustSize, 0, Math.PI * 2);
+        ctx.fillStyle = dot.color;
+        ctx.globalAlpha = dustAlpha;
+        ctx.fill();
+        ctx.restore();
+      });
+
+      // ----------------------------------------------------------------------
+      // PASS C: 3D Comets / Shooting Stars (Dynamic Luminous Trails & Heads)
+      // ----------------------------------------------------------------------
+      const cometColors = ["#38bdf8", "#fbbf24", "#f43f5e", "#e0e7ff"];
+      cometsRef.current.forEach((comet, idx) => {
+        if (!comet.active) {
+          comet.spawnTimer -= 1;
+          if (comet.spawnTimer <= 0) {
+            comet.x = (Math.random() - 0.5) * 1600;
+            comet.y = -700 - Math.random() * 300;
+            comet.z = (Math.random() - 0.5) * 1100;
+            const speed = Math.random() * 12 + 16;
+            const angleXY = Math.PI / 4 + (Math.random() - 0.5) * 0.4;
+            comet.vx = Math.cos(angleXY) * speed * (Math.random() > 0.5 ? 1 : -1);
+            comet.vy = Math.sin(angleXY) * speed;
+            comet.vz = (Math.random() - 0.5) * speed * 0.6;
+            comet.trail = [];
+            comet.size = Math.random() * 2.2 + 2.0;
+            comet.color = cometColors[idx % cometColors.length];
+            comet.glowColor = comet.color;
+            comet.active = true;
+          }
+          return;
+        }
+
+        // Advance comet
+        comet.x += comet.vx;
+        comet.y += comet.vy;
+        comet.z += comet.vz;
+
+        comet.trail.push({ x: comet.x, y: comet.y, z: comet.z });
+        if (comet.trail.length > 16) {
+          comet.trail.shift();
+        }
+
+        // Project and render trail in 3D
+        if (comet.trail.length > 1) {
+          ctx.save();
+          for (let t = 0; t < comet.trail.length - 1; t++) {
+            const p1 = project3D(comet.trail[t].x, comet.trail[t].y, comet.trail[t].z, cx, cy, baseScale);
+            const p2 = project3D(comet.trail[t + 1].x, comet.trail[t + 1].y, comet.trail[t + 1].z, cx, cy, baseScale);
+            if (!p1 || !p2) continue;
+
+            const tProgress = (t + 1) / comet.trail.length;
+            ctx.beginPath();
+            ctx.moveTo(p1.px, p1.py);
+            ctx.lineTo(p2.px, p2.py);
+            ctx.strokeStyle = comet.color;
+            ctx.lineWidth = comet.size * tProgress * p2.scale;
+            ctx.globalAlpha = Math.min(0.9, tProgress * 0.7);
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = comet.glowColor;
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+
+        // Head nucleus
+        const headProj = project3D(comet.x, comet.y, comet.z, cx, cy, baseScale);
+        if (headProj) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(headProj.px, headProj.py, comet.size * 1.8 * headProj.scale, 0, Math.PI * 2);
+          ctx.fillStyle = "#ffffff";
+          ctx.shadowBlur = 18;
+          ctx.shadowColor = comet.glowColor;
+          ctx.globalAlpha = 0.95;
+          ctx.fill();
+          ctx.restore();
+        }
+
+        // Reset if past screen bounds
+        if (comet.y > 900 || Math.hypot(comet.x, comet.y, comet.z) > 2000) {
+          comet.active = false;
+          comet.spawnTimer = Math.random() * 160 + 90;
+        }
+      });
+
+      // ----------------------------------------------------------------------
+      // PASS D: 3D Distant Background Planets (4 Ethereal Worlds)
+      // ----------------------------------------------------------------------
+      bgPlanetsRef.current.forEach((bg) => {
+        bg.angle += bg.driftSpeed * 0.0003;
+        const currentX = bg.baseX * Math.cos(bg.angle) - bg.baseZ * Math.sin(bg.angle);
+        const currentZ = bg.baseX * Math.sin(bg.angle) + bg.baseZ * Math.cos(bg.angle);
+        const currentY = bg.baseY;
+
+        const proj = project3D(currentX, currentY, currentZ, cx, cy, baseScale);
+        if (!proj) return;
+
+        const radius = bg.radius * proj.scale;
+
+        ctx.save();
+        // Atmospheric outer glow
+        ctx.beginPath();
+        ctx.arc(proj.px, proj.py, radius * 2.2, 0, Math.PI * 2);
+        const auraGrad = ctx.createRadialGradient(proj.px, proj.py, radius * 0.8, proj.px, proj.py, radius * 2.2);
+        auraGrad.addColorStop(0, bg.glowColor);
+        auraGrad.addColorStop(1, "transparent");
+        ctx.fillStyle = auraGrad;
+        ctx.globalAlpha = 0.55;
+        ctx.fill();
+
+        // Planet Body
+        ctx.beginPath();
+        ctx.arc(proj.px, proj.py, radius, 0, Math.PI * 2);
+        const sphereGrad = ctx.createRadialGradient(
+          proj.px - radius * 0.35,
+          proj.py - radius * 0.35,
+          1,
+          proj.px,
+          proj.py,
+          radius
+        );
+        sphereGrad.addColorStop(0, "#ffffff");
+        sphereGrad.addColorStop(0.35, bg.color);
+        sphereGrad.addColorStop(1, "#030712");
+        ctx.fillStyle = sphereGrad;
+        ctx.globalAlpha = 0.85;
+        ctx.fill();
+
+        // Planetary Ring if present
+        if (bg.hasRing) {
+          ctx.beginPath();
+          ctx.ellipse(proj.px, proj.py, radius * 2.4, radius * 0.7, rotXRef.current * 0.35, 0, Math.PI * 2);
+          ctx.strokeStyle = bg.ringColor || "rgba(255, 255, 255, 0.35)";
+          ctx.lineWidth = 1.6 * proj.scale;
+          ctx.globalAlpha = 0.5;
+          ctx.stroke();
+        }
+
+        // Faint mysterious name label
+        ctx.font = `500 ${Math.max(8, Math.round(9 * proj.scale))}px 'Fira Code', monospace`;
+        ctx.fillStyle = "rgba(226, 232, 240, 0.4)";
+        ctx.textAlign = "center";
+        ctx.fillText(bg.name, proj.px, proj.py + radius + 11 * proj.scale);
+        ctx.restore();
+      });
+
+      // ----------------------------------------------------------------------
+      // PASS E: 3D Floating Heart Emojis (💖, ✨, 💕, 🤍, 🌸 With 3D Drag Motion)
+      // ----------------------------------------------------------------------
+      heartsRef.current.forEach((heart) => {
+        const hx = heart.baseX + Math.sin(time * heart.speed + heart.phase) * 22;
+        const hy = heart.baseY + Math.cos(time * heart.speed * 1.2 + heart.phase) * 18;
+        const hz = heart.baseZ + Math.sin(time * heart.speed * 0.8 + heart.phase) * 26;
+
+        const proj = project3D(hx, hy, hz, cx, cy, baseScale);
+        if (!proj) return;
+
+        const pulse = 0.5 + 0.4 * Math.sin(time * 0.002 + heart.phase);
+        const fontSize = Math.max(9, Math.round(14 * proj.scale));
+
+        ctx.save();
+        ctx.font = `${fontSize}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.globalAlpha = Math.max(0.2, Math.min(0.85, pulse * Math.min(1.2, proj.scale * 1.4)));
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = "rgba(244, 63, 94, 0.7)";
+        ctx.fillText(heart.emoji, proj.px, proj.py);
+        ctx.restore();
+      });
+
+      // ----------------------------------------------------------------------
+      // PASS F: Deep Solar Radiance & 3D Rotating Solar Flare Rays
+      // ----------------------------------------------------------------------
+      const sunProj = project3D(0, 0, 0, cx, cy, baseScale);
+      if (sunProj) {
+        ctx.save();
+        const baseSunSize = 32 * sunProj.scale;
+        const coronaPulse = 1 + 0.08 * Math.sin(time * 0.0016);
+        const coronaRadius = baseSunSize * 3.8 * coronaPulse;
+
+        // Radiant multi-stop solar corona
+        const coronaGrad = ctx.createRadialGradient(
+          sunProj.px,
+          sunProj.py,
+          baseSunSize * 0.6,
+          sunProj.px,
+          sunProj.py,
+          coronaRadius
+        );
+        coronaGrad.addColorStop(0, "rgba(255, 255, 255, 0.75)");
+        coronaGrad.addColorStop(0.25, "rgba(56, 189, 248, 0.5)");
+        coronaGrad.addColorStop(0.55, "rgba(139, 92, 246, 0.25)");
+        coronaGrad.addColorStop(0.8, "rgba(244, 63, 94, 0.12)");
+        coronaGrad.addColorStop(1, "transparent");
+
+        ctx.beginPath();
+        ctx.arc(sunProj.px, sunProj.py, coronaRadius, 0, Math.PI * 2);
+        ctx.fillStyle = coronaGrad;
+        ctx.globalAlpha = 0.85;
+        ctx.fill();
+
+        // 12 3D Solar Flare Rays rotating with camera perspective
+        const rayCount = 12;
+        ctx.lineWidth = 1.4 * sunProj.scale;
+        for (let r = 0; r < rayCount; r++) {
+          const rayAngle = (r / rayCount) * Math.PI * 2 + time * 0.0004 + rotYRef.current * 0.3;
+          const rayLength = baseSunSize * (2.4 + 0.8 * Math.sin(time * 0.002 + r * 1.4));
+          const rx2 = sunProj.px + Math.cos(rayAngle) * rayLength;
+          const ry2 = sunProj.py + Math.sin(rayAngle) * rayLength * Math.cos(rotXRef.current * 0.5);
+
+          ctx.beginPath();
+          ctx.moveTo(sunProj.px, sunProj.py);
+          ctx.lineTo(rx2, ry2);
+          ctx.strokeStyle = r % 2 === 0 ? "rgba(56, 189, 248, 0.22)" : "rgba(251, 191, 36, 0.22)";
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      // ----------------------------------------------------------------------
+      // PASS G: 3D Inclined Keplerian Elliptical Orbit Trails (8 Planets)
+      // ----------------------------------------------------------------------
       PORTFOLIO_DATA.planets.forEach((planet, index) => {
         const isHovered =
           hoveredPlanet?.id === planet.id || pinnedPlanet?.id === planet.id;
@@ -226,6 +722,7 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
           const theta = (i / segments) * Math.PI * 2;
           const pt = getKeplerPoint(radius, theta, kParams);
           const proj = project3D(pt.x, pt.y, pt.z, cx, cy, baseScale);
+          if (!proj) continue;
 
           if (i === 0) {
             ctx.moveTo(proj.px, proj.py);
@@ -235,28 +732,31 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         }
 
         ctx.strokeStyle = isHovered
-          ? "rgba(56, 189, 248, 0.65)"
-          : "rgba(255, 255, 255, 0.08)";
-        ctx.lineWidth = isHovered ? 2 : 1;
+          ? "rgba(56, 189, 248, 0.75)"
+          : "rgba(255, 255, 255, 0.09)";
+        ctx.lineWidth = isHovered ? 2.2 : 1;
         ctx.setLineDash(isHovered ? [] : [4, 6]);
         ctx.stroke();
         ctx.setLineDash([]);
       });
 
-      // 2. Prepare Bodies for 3D Depth Sorting
+      // ----------------------------------------------------------------------
+      // PASS H: 3D Foreground Solar System Project Planets (Sorted by Depth)
+      // ----------------------------------------------------------------------
       const bodies: ProjectedBody[] = [];
 
-      // Add Central Sun / Singularity Core
-      const sunProj = project3D(0, 0, 0, cx, cy, baseScale);
-      bodies.push({
-        type: "sun",
-        x: sunProj.px,
-        y: sunProj.py,
-        z: sunProj.pz,
-        size: 28 * sunProj.scale,
-        scale: sunProj.scale,
-        alpha: 1,
-      });
+      // Add Central Sun
+      if (sunProj) {
+        bodies.push({
+          type: "sun",
+          x: sunProj.px,
+          y: sunProj.py,
+          z: sunProj.pz,
+          size: 28 * sunProj.scale,
+          scale: sunProj.scale,
+          alpha: 1,
+        });
+      }
 
       // Update angles & add planets on their Keplerian ellipses
       PORTFOLIO_DATA.planets.forEach((planet, index) => {
@@ -273,6 +773,8 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         const pt = getKeplerPoint(radius, angle, kParams);
 
         const proj = project3D(pt.x, pt.y, pt.z, cx, cy, baseScale);
+        if (!proj) return;
+
         const depthFactor = (proj.pz + 450) / 900;
         const alpha = Math.max(0.4, Math.min(1.0, 0.5 + depthFactor * 0.5));
 
@@ -288,35 +790,18 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         });
       });
 
-      // 3. Sort bodies from back (lowest z) to front (highest z)
+      // Sort bodies from back (lowest z) to front (highest z)
       bodies.sort((a, b) => a.z - b.z);
 
-      // 4. Render sorted 3D bodies with perspective depth
+      // Render sorted bodies
       bodies.forEach((body) => {
         if (body.type === "sun") {
-          // Central Star Singularity Halo
+          // Central Star Singularity Core Ring
           ctx.save();
-          ctx.beginPath();
-          ctx.arc(body.x, body.y, body.size * 1.8, 0, Math.PI * 2);
-          const sunGlow = ctx.createRadialGradient(
-            body.x,
-            body.y,
-            2,
-            body.x,
-            body.y,
-            body.size * 1.8
-          );
-          sunGlow.addColorStop(0, "rgba(56, 189, 248, 0.4)");
-          sunGlow.addColorStop(0.5, "rgba(139, 92, 246, 0.2)");
-          sunGlow.addColorStop(1, "transparent");
-          ctx.fillStyle = sunGlow;
-          ctx.fill();
-
-          // Central Star Core
           ctx.beginPath();
           ctx.arc(body.x, body.y, body.size, 0, Math.PI * 2);
           ctx.fillStyle = "rgba(14, 18, 38, 0.9)";
-          ctx.strokeStyle = "rgba(56, 189, 248, 0.7)";
+          ctx.strokeStyle = "rgba(56, 189, 248, 0.75)";
           ctx.lineWidth = 2;
           ctx.fill();
           ctx.stroke();
@@ -333,12 +818,12 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
           ctx.beginPath();
           ctx.arc(body.x, body.y, radius * 1.9, 0, Math.PI * 2);
           ctx.fillStyle = planet.color;
-          ctx.shadowBlur = isHovered ? 30 : 14;
+          ctx.shadowBlur = isHovered ? 32 : 14;
           ctx.shadowColor = planet.glowColor;
           ctx.globalAlpha = isHovered ? 0.95 : body.alpha * 0.75;
           ctx.fill();
 
-          // Planet Sphere
+          // Planet Sphere Gradient (Day/Night 3D Lighting)
           ctx.beginPath();
           ctx.arc(body.x, body.y, radius, 0, Math.PI * 2);
           const grad = ctx.createRadialGradient(
@@ -368,7 +853,7 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
               0,
               Math.PI * 2
             );
-            ctx.strokeStyle = "rgba(226, 232, 240, 0.6)";
+            ctx.strokeStyle = "rgba(226, 232, 240, 0.65)";
             ctx.lineWidth = 2 * body.scale;
             ctx.stroke();
           }
@@ -392,7 +877,7 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animId);
     };
-  }, [project3D, isPaused, hoveredPlanet, pinnedPlanet]);
+  }, [project3D, isPaused, hoveredPlanet, pinnedPlanet, isFacingBackState]);
 
   // Mouse wheel Zoom event listener (with passive: false to prevent outer page scroll)
   useEffect(() => {
@@ -402,7 +887,8 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       const zoomDelta = -e.deltaY * 0.0015;
-      setZoomLevel((prev) => Math.max(0.45, Math.min(2.5, prev + zoomDelta)));
+      targetZoomRef.current = Math.max(0.45, Math.min(2.5, targetZoomRef.current + zoomDelta));
+      setZoomLevel(targetZoomRef.current);
     };
 
     canvas.addEventListener("wheel", handleWheel, { passive: false });
@@ -424,14 +910,16 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    // Handle 3D rotation if dragging
+    // Handle 3D rotation if dragging with smooth target refs
     if (isDraggingRef.current) {
       const deltaX = e.clientX - lastMousePosRef.current.x;
       const deltaY = e.clientY - lastMousePosRef.current.y;
       lastMousePosRef.current = { x: e.clientX, y: e.clientY };
 
-      setRotY((prev) => prev + deltaX * 0.006);
-      setRotX((prev) => Math.max(-0.2, Math.min(1.4, prev + deltaY * 0.006)));
+      targetRotYRef.current += deltaX * 0.006;
+      targetRotXRef.current = Math.max(-0.2, Math.min(1.4, targetRotXRef.current + deltaY * 0.006));
+      setRotY(targetRotYRef.current);
+      setRotX(targetRotXRef.current);
       return;
     }
 
@@ -454,6 +942,8 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
       const pt = getKeplerPoint(radius, angle, kParams);
 
       const proj = project3D(pt.x, pt.y, pt.z, cx, cy, baseScale);
+      if (!proj) return;
+
       const dist = Math.hypot(mouseX - proj.px, mouseY - proj.py);
       const hitRadius = Math.max(planet.size * proj.scale + 16, 26);
 
@@ -519,8 +1009,10 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
       const deltaY = e.touches[0].clientY - touchStartRef.current.y;
       touchStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
 
-      setRotY((prev) => prev + deltaX * 0.007);
-      setRotX((prev) => Math.max(-0.2, Math.min(1.4, prev + deltaY * 0.007)));
+      targetRotYRef.current += deltaX * 0.007;
+      targetRotXRef.current = Math.max(-0.2, Math.min(1.4, targetRotXRef.current + deltaY * 0.007));
+      setRotY(targetRotYRef.current);
+      setRotX(targetRotXRef.current);
     } else if (e.touches.length === 2 && touchStartRef.current.dist) {
       const newDist = Math.hypot(
         e.touches[0].clientX - e.touches[1].clientX,
@@ -528,7 +1020,8 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
       );
       const scaleDelta = (newDist - touchStartRef.current.dist) * 0.004;
       touchStartRef.current.dist = newDist;
-      setZoomLevel((prev) => Math.max(0.45, Math.min(2.5, prev + scaleDelta)));
+      targetZoomRef.current = Math.max(0.45, Math.min(2.5, targetZoomRef.current + scaleDelta));
+      setZoomLevel(targetZoomRef.current);
     }
   };
 
@@ -560,11 +1053,10 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing z-10"
       />
 
-      {/* Center 3D Dual-Sided Celestial Medallion (Option 1 + Option 2) */}
+      {/* Center 3D Dual-Sided Celestial Medallion */}
       {(() => {
-        // Calculate 3D orientation angles
         const yawDeg = (rotY * 180) / Math.PI;
-        const pitchDeg = (rotX * 180) / Math.PI - 55; // Tilt relative to orbital plane
+        const pitchDeg = (rotX * 180) / Math.PI - 55;
         const isFacingBack = Math.cos(rotY) < 0;
 
         return (
@@ -576,6 +1068,7 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
             >
               {/* Outer 3D Cosmic Accretion Rings */}
               <div
+                ref={ring1Ref}
                 className="absolute -inset-5 rounded-full border border-cyan-400/30 animate-spin [animation-duration:24s] pointer-events-none"
                 style={{
                   transform: `rotateX(${pitchDeg * 0.7}deg) rotateZ(15deg)`,
@@ -583,6 +1076,7 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
                 }}
               />
               <div
+                ref={ring2Ref}
                 className="absolute -inset-3 rounded-full border border-violet-500/40 animate-spin [animation-duration:14s] [animation-direction:reverse] pointer-events-none"
                 style={{
                   transform: `rotateX(${pitchDeg * 0.7}deg) rotateZ(-25deg)`,
@@ -599,6 +1093,7 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
 
               {/* The Rotating 3D Dual-Sided Medallion */}
               <div
+                ref={medallionWrapperRef}
                 className="relative w-full h-full rounded-full transition-transform duration-75"
                 style={{
                   transformStyle: "preserve-3d",
