@@ -101,6 +101,10 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
   const medallionWrapperRef = useRef<HTMLDivElement | null>(null);
   const ring1Ref = useRef<HTMLDivElement | null>(null);
   const ring2Ref = useRef<HTMLDivElement | null>(null);
+  // 2.5D Identity Core dynamic specular and rim lighting refs
+  const frontGlintRef = useRef<HTMLDivElement | null>(null);
+  const backGlintRef = useRef<HTMLDivElement | null>(null);
+  const coreMouseDownPosRef = useRef<{ x: number; y: number } | null>(null);
 
   // 3D Orbit Camera State
   const [rotX, setRotX] = useState<number>(0.95); // Pitch angle (tilt)
@@ -468,7 +472,7 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         targetRotYRef.current += 0.0006;
       }
 
-      // Synchronize central medallion rotation in real-time
+      // Synchronize central medallion rotation & 2.5D optical parallax in real-time
       if (medallionWrapperRef.current) {
         const yawDeg = (rotYRef.current * 180) / Math.PI;
         const pitchDeg = (rotXRef.current * 180) / Math.PI - 55;
@@ -479,6 +483,16 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         }
         if (ring2Ref.current) {
           ring2Ref.current.style.transform = `rotateX(${pitchDeg * 0.7}deg) rotateZ(-25deg)`;
+        }
+
+        // 2.5D Optical Glint Parallax — shifts specular lens reflections opposite camera angle
+        const glintX = -Math.sin(rotYRef.current) * 12;
+        const glintY = -Math.sin(rotXRef.current - 0.95) * 10;
+        if (frontGlintRef.current) {
+          frontGlintRef.current.style.transform = `translate3d(${glintX}px, ${glintY}px, 18px)`;
+        }
+        if (backGlintRef.current) {
+          backGlintRef.current.style.transform = `translate3d(${-glintX}px, ${glintY}px, 18px)`;
         }
 
         const isBack = Math.cos(rotYRef.current) < 0;
@@ -967,6 +981,50 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
     };
   }, []);
 
+  // 2.5D Identity Core Interactive Handlers (Open GitHub on Click, Rotate on Drag)
+  const handleCoreMouseDown = (e: React.MouseEvent) => {
+    coreMouseDownPosRef.current = { x: e.clientX, y: e.clientY };
+    isDraggingRef.current = true;
+    lastMousePosRef.current = { x: e.clientX, y: e.clientY };
+  };
+
+  const handleCoreClick = (e: React.MouseEvent) => {
+    if (coreMouseDownPosRef.current) {
+      const dist = Math.hypot(
+        e.clientX - coreMouseDownPosRef.current.x,
+        e.clientY - coreMouseDownPosRef.current.y
+      );
+      if (dist < 6) {
+        e.stopPropagation();
+        playClickSound();
+        window.open("https://github.com/jagdishsah126/jagdishsah126", "_blank", "noopener,noreferrer");
+      }
+    }
+  };
+
+  const handleCoreTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      coreMouseDownPosRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      isDraggingRef.current = true;
+      lastMousePosRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+  };
+
+  const handleCoreTouchEnd = (e: React.TouchEvent) => {
+    if (coreMouseDownPosRef.current && e.changedTouches.length > 0) {
+      const dist = Math.hypot(
+        e.changedTouches[0].clientX - coreMouseDownPosRef.current.x,
+        e.changedTouches[0].clientY - coreMouseDownPosRef.current.y
+      );
+      if (dist < 8) {
+        e.stopPropagation();
+        playClickSound();
+        window.open("https://github.com/jagdishsah126/jagdishsah126", "_blank", "noopener,noreferrer");
+      }
+    }
+    isDraggingRef.current = false;
+  };
+
   // 3D Drag Rotation Handlers
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     isDraggingRef.current = true;
@@ -1164,102 +1222,239 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         const isFacingBack = Math.cos(rotY) < 0;
 
         return (
-          <div className={`absolute pointer-events-none flex flex-col items-center justify-center transition-[z-index] ${medallionBehind ? "z-[5]" : "z-20"}`}>
-            {/* 3D Perspective Wrapper */}
+          <div
+            className={`absolute flex flex-col items-center justify-center transition-[z-index] ${
+              medallionBehind ? "z-[5]" : "z-20"
+            }`}
+          >
+            {/* 3D Perspective Anchor Wrapper */}
             <div
               className="relative w-28 h-28 md:w-32 md:h-32 flex items-center justify-center"
               style={{ perspective: "1000px" }}
             >
-              {/* Outer 3D Cosmic Accretion Rings */}
+              {/* Outer 3D Cosmic Accretion Rings with Energy Pulse Nodes */}
               <div
                 ref={ring1Ref}
-                className="absolute -inset-5 rounded-full border border-cyan-400/30 animate-spin [animation-duration:24s] pointer-events-none"
+                className="absolute -inset-5 rounded-full border border-cyan-400/35 animate-spin [animation-duration:26s] pointer-events-none"
                 style={{
                   transform: `rotateX(${pitchDeg * 0.7}deg) rotateZ(15deg)`,
                   transformStyle: "preserve-3d",
                 }}
-              />
+              >
+                {/* Luminous orbital energy node */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-cyan-300 shadow-[0_0_8px_#38bdf8,0_0_14px_#38bdf8]" />
+              </div>
+
               <div
                 ref={ring2Ref}
-                className="absolute -inset-3 rounded-full border border-violet-500/40 animate-spin [animation-duration:14s] [animation-direction:reverse] pointer-events-none"
+                className="absolute -inset-3 rounded-full border border-violet-500/40 animate-spin [animation-duration:16s] [animation-direction:reverse] pointer-events-none"
                 style={{
                   transform: `rotateX(${pitchDeg * 0.7}deg) rotateZ(-25deg)`,
                   transformStyle: "preserve-3d",
                 }}
-              />
+              >
+                {/* Counter-orbital energy node */}
+                <div className="absolute bottom-0 right-1/4 w-1.5 h-1.5 rounded-full bg-violet-300 shadow-[0_0_8px_#a855f7,0_0_14px_#a855f7]" />
+              </div>
+
+              {/* Atmospheric Coronal Resonance Glow */}
               <div
-                className={`absolute -inset-7 rounded-full blur-2xl transition-colors duration-500 ${
+                className={`absolute -inset-7 rounded-full blur-2xl transition-all duration-700 pointer-events-none ${
                   isFacingBack
-                    ? "bg-gradient-to-r from-violet-600/30 via-amber-500/20 to-purple-600/20"
-                    : "bg-gradient-to-r from-cyan-500/30 via-emerald-500/20 to-blue-600/20"
+                    ? "bg-gradient-to-r from-violet-600/35 via-amber-500/25 to-purple-600/25"
+                    : "bg-gradient-to-r from-cyan-500/35 via-emerald-500/25 to-blue-600/25"
                 } animate-pulse`}
               />
 
-              {/* The Rotating 3D Dual-Sided Medallion */}
+              {/* The Rotating 2.5D Dual-Sided Identity Core */}
               <div
                 ref={medallionWrapperRef}
-                className="relative w-full h-full rounded-full transition-transform duration-75"
+                onMouseDown={handleCoreMouseDown}
+                onClick={handleCoreClick}
+                onTouchStart={handleCoreTouchStart}
+                onTouchEnd={handleCoreTouchEnd}
+                className="relative w-full h-full rounded-full transition-transform duration-75 cursor-pointer select-none group/core"
                 style={{
                   transformStyle: "preserve-3d",
                   transform: `rotateX(${pitchDeg * 0.4}deg) rotateY(${yawDeg}deg)`,
                 }}
+                title="Click to open GitHub Master Hub: jagdishsah126"
               >
-                {/* SIDE A: Creative / Builder Avatar (Front Face) */}
+                {/* Interactive Core Hover Floating Pill */}
+                <div className="absolute -top-7 left-1/2 -translate-x-1/2 opacity-0 group-hover/core:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-30">
+                  <span className="text-[10px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-black/85 border border-cyan-400/50 text-cyan-300 shadow-[0_0_12px_rgba(56,189,248,0.4)] flex items-center gap-1">
+                    <span>github.com/jagdishsah126</span>
+                    <ExternalLink className="w-2.5 h-2.5" />
+                  </span>
+                </div>
+
+                {/* SIDE A: Creative Horizon / Builder Avatar (Front Face) */}
                 <div
-                  className="absolute inset-0 rounded-full overflow-hidden border-2 border-cyan-300 shadow-[0_0_30px_rgba(56,189,248,0.6)] bg-space-void"
+                  className="absolute inset-0 rounded-full select-none"
                   style={{
                     backfaceVisibility: "hidden",
                     WebkitBackfaceVisibility: "hidden",
+                    transformStyle: "preserve-3d",
                   }}
                 >
-                  <Image
-                    src={PORTFOLIO_DATA.personal.avatarImg}
-                    alt="Jagdish Sah Creative Avatar"
-                    fill
-                    className="object-cover"
-                    priority
+                  {/* Layer 1: Deep Cosmic Nebula & Celestial Ring Backing (translateZ: -10px) */}
+                  <div
+                    className="absolute -inset-1 rounded-full bg-gradient-to-br from-cyan-950 via-space-void to-black shadow-[0_0_24px_rgba(56,189,248,0.4)] pointer-events-none"
+                    style={{
+                      transform: "translateZ(-10px)",
+                      backfaceVisibility: "hidden",
+                    }}
                   />
-                  {/* Subtle Glass Surface Glint */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none" />
+
+                  {/* Layer 2: Preserved Portrait Image with Ambient Depth Vignette (translateZ: 0px) */}
+                  <div
+                    className="absolute inset-0 rounded-full overflow-hidden border-2 border-cyan-400/80 shadow-[0_0_25px_rgba(56,189,248,0.5)] bg-space-void pointer-events-none"
+                    style={{
+                      transform: "translateZ(0px)",
+                      backfaceVisibility: "hidden",
+                    }}
+                  >
+                    <Image
+                      src={PORTFOLIO_DATA.personal.avatarImg}
+                      alt="Jagdish Sah Creative Avatar"
+                      fill
+                      className="object-cover group-hover/core:scale-105 transition-transform duration-500"
+                      priority
+                    />
+                    {/* Inner Ambient Occlusion Vignette (makes subject pop forward in 2.5D) */}
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background:
+                          "radial-gradient(circle at 50% 50%, transparent 55%, rgba(2, 6, 23, 0.55) 100%)",
+                      }}
+                    />
+                  </div>
+
+                  {/* Layer 3: Atmospheric Fresnel Rim Light & Chromatic Edge (translateZ: 8px) */}
+                  <div
+                    className="absolute inset-0 rounded-full pointer-events-none"
+                    style={{
+                      transform: "translateZ(8px)",
+                      backfaceVisibility: "hidden",
+                      boxShadow:
+                        "inset 0 0 16px rgba(56, 189, 248, 0.45), 0 0 16px rgba(56, 189, 248, 0.35)",
+                      border: "1px solid rgba(224, 242, 254, 0.4)",
+                    }}
+                  />
+
+                  {/* Layer 4: Spherical Convex Lens & Dynamic Specular Glint (translateZ: 18px) */}
+                  <div
+                    ref={frontGlintRef}
+                    className="absolute inset-0 rounded-full pointer-events-none transition-transform duration-75"
+                    style={{
+                      transform: "translateZ(18px)",
+                      backfaceVisibility: "hidden",
+                      background:
+                        "radial-gradient(ellipse 65% 40% at 36% 28%, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.08) 45%, transparent 75%)",
+                    }}
+                  />
                 </div>
 
-                {/* SIDE B: Executive / Formal Portrait (Back Face) */}
+                {/* SIDE B: Professional Citadel / Formal Portrait (Back Face) */}
                 <div
-                  className="absolute inset-0 rounded-full overflow-hidden border-2 border-violet-300 shadow-[0_0_30px_rgba(139,92,246,0.6)] bg-space-void"
+                  className="absolute inset-0 rounded-full select-none"
                   style={{
                     backfaceVisibility: "hidden",
                     WebkitBackfaceVisibility: "hidden",
                     transform: "rotateY(180deg)",
+                    transformStyle: "preserve-3d",
                   }}
                 >
-                  <Image
-                    src={PORTFOLIO_DATA.personal.formalPhoto}
-                    alt="Jagdish Sah Executive Portrait"
-                    fill
-                    className="object-cover"
-                    priority
+                  {/* Layer 1: Deep Cosmic Nebula & Celestial Ring Backing (translateZ: -10px) */}
+                  <div
+                    className="absolute -inset-1 rounded-full bg-gradient-to-br from-violet-950 via-space-void to-black shadow-[0_0_24px_rgba(139,92,246,0.4)] pointer-events-none"
+                    style={{
+                      transform: "translateZ(-10px)",
+                      backfaceVisibility: "hidden",
+                    }}
                   />
-                  {/* Subtle Amber Glass Glint */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-amber-300/15 to-transparent pointer-events-none" />
+
+                  {/* Layer 2: Preserved Portrait Image with Ambient Depth Vignette (translateZ: 0px) */}
+                  <div
+                    className="absolute inset-0 rounded-full overflow-hidden border-2 border-violet-400/80 shadow-[0_0_25px_rgba(139,92,246,0.5)] bg-space-void pointer-events-none"
+                    style={{
+                      transform: "translateZ(0px)",
+                      backfaceVisibility: "hidden",
+                    }}
+                  >
+                    <Image
+                      src={PORTFOLIO_DATA.personal.formalPhoto}
+                      alt="Jagdish Sah Executive Portrait"
+                      fill
+                      className="object-cover group-hover/core:scale-105 transition-transform duration-500"
+                      priority
+                    />
+                    {/* Inner Ambient Occlusion Vignette (makes subject pop forward in 2.5D) */}
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background:
+                          "radial-gradient(circle at 50% 50%, transparent 55%, rgba(2, 6, 23, 0.55) 100%)",
+                      }}
+                    />
+                  </div>
+
+                  {/* Layer 3: Atmospheric Fresnel Rim Light & Chromatic Edge (translateZ: 8px) */}
+                  <div
+                    className="absolute inset-0 rounded-full pointer-events-none"
+                    style={{
+                      transform: "translateZ(8px)",
+                      backfaceVisibility: "hidden",
+                      boxShadow:
+                        "inset 0 0 16px rgba(168, 85, 247, 0.45), 0 0 16px rgba(168, 85, 247, 0.35)",
+                      border: "1px solid rgba(243, 232, 255, 0.4)",
+                    }}
+                  />
+
+                  {/* Layer 4: Spherical Convex Lens & Dynamic Specular Glint (translateZ: 18px) */}
+                  <div
+                    ref={backGlintRef}
+                    className="absolute inset-0 rounded-full pointer-events-none transition-transform duration-75"
+                    style={{
+                      transform: "translateZ(18px)",
+                      backfaceVisibility: "hidden",
+                      background:
+                        "radial-gradient(ellipse 65% 40% at 36% 28%, rgba(254, 243, 199, 0.35) 0%, rgba(254, 243, 199, 0.08) 45%, transparent 75%)",
+                    }}
+                  />
                 </div>
               </div>
             </div>
 
-            {/* Dynamic Dimensional Identity Badge */}
-            <div className="mt-3 text-center transition-all duration-300">
+            {/* Dynamic Dimensional Identity Badge & Interactive GitHub Master Hub Link */}
+            <a
+              href="https://github.com/jagdishsah126/jagdishsah126"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.stopPropagation();
+                playClickSound();
+              }}
+              className="mt-3 text-center transition-all duration-300 pointer-events-auto group/badge inline-block"
+              title="Open GitHub Master Hub: jagdishsah126"
+            >
               <span
-                className={`text-[11px] font-mono tracking-widest px-3 py-1 rounded-full backdrop-blur-md border shadow-lg transition-colors duration-300 ${
+                className={`text-[11px] font-mono tracking-widest px-3 py-1 rounded-full backdrop-blur-md border shadow-lg transition-all duration-300 inline-flex items-center gap-1.5 ${
                   isFacingBack
-                    ? "text-violet-200 border-violet-400/40 bg-violet-950/80 shadow-[0_0_20px_rgba(139,92,246,0.35)]"
-                    : "text-cyan-200 border-cyan-400/40 bg-cyan-950/80 shadow-[0_0_20px_rgba(56,189,248,0.35)]"
+                    ? "text-violet-200 border-violet-400/40 bg-violet-950/80 group-hover/badge:border-violet-300 group-hover/badge:bg-violet-900/90 shadow-[0_0_20px_rgba(139,92,246,0.35)]"
+                    : "text-cyan-200 border-cyan-400/40 bg-cyan-950/80 group-hover/badge:border-cyan-300 group-hover/badge:bg-cyan-900/90 shadow-[0_0_20px_rgba(56,189,248,0.35)]"
                 }`}
               >
-                {isFacingBack ? "✦ PROFESSIONAL CITADEL ✦" : "✦ CREATIVE HORIZON ✦"}
+                <span>{isFacingBack ? "✦ PROFESSIONAL CITADEL ✦" : "✦ CREATIVE HORIZON ✦"}</span>
+                <ExternalLink className="w-3 h-3 opacity-60 group-hover/badge:opacity-100 group-hover/badge:translate-x-0.5 transition-all" />
               </span>
-              <span className="block text-[9px] font-mono text-slate-400 mt-1 opacity-75">
-                {isFacingBack ? "Executive Profile & NEPSE Analyst" : "Creative Builder & Autonomous Systems"}
+              <span className="block text-[9px] font-mono text-slate-400 mt-1 opacity-75 group-hover/badge:opacity-100 transition-opacity">
+                {isFacingBack
+                  ? "Executive Profile & NEPSE Analyst • Click to View GitHub"
+                  : "Creative Builder & Autonomous Systems • Click to View GitHub"}
               </span>
-            </div>
+            </a>
           </div>
         );
       })()}
