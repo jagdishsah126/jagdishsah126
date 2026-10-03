@@ -22,6 +22,7 @@ import {
 
 interface CosmicCanvasProps {
   onSelectProject: (project: ProjectPlanet) => void;
+  isAlwaysFullscreen?: boolean;
 }
 
 // 3D Background Celestial Interfaces (Zara Cosmic Engine)
@@ -95,7 +96,10 @@ interface ProjectedBody {
   alpha: number;
 }
 
-export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
+export default function CosmicCanvas({
+  onSelectProject,
+  isAlwaysFullscreen = false,
+}: CosmicCanvasProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const medallionWrapperRef = useRef<HTMLDivElement | null>(null);
@@ -118,8 +122,8 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
   // Tracks whether any planet is in front of the central sun (medallion should go behind)
   const [medallionBehind, setMedallionBehind] = useState<boolean>(false);
   // Fullscreen / Planetarium mode state
-  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
-  const isFullscreenRef = useRef<boolean>(false);
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(isAlwaysFullscreen);
+  const isFullscreenRef = useRef<boolean>(isAlwaysFullscreen);
   isFullscreenRef.current = isFullscreen;
 
   // Mutable refs for 60fps animations with smooth inertia damping (Project-Zara style)
@@ -994,7 +998,8 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         e.clientX - coreMouseDownPosRef.current.x,
         e.clientY - coreMouseDownPosRef.current.y
       );
-      if (dist < 6) {
+      coreMouseDownPosRef.current = null;
+      if (dist <= 10) {
         e.stopPropagation();
         playClickSound();
         window.open("https://github.com/jagdishsah126/jagdishsah126", "_blank", "noopener,noreferrer");
@@ -1016,7 +1021,8 @@ export default function CosmicCanvas({ onSelectProject }: CosmicCanvasProps) {
         e.changedTouches[0].clientX - coreMouseDownPosRef.current.x,
         e.changedTouches[0].clientY - coreMouseDownPosRef.current.y
       );
-      if (dist < 8) {
+      coreMouseDownPosRef.current = null;
+      if (dist <= 14) {
         e.stopPropagation();
         playClickSound();
         window.open("https://github.com/jagdishsah126/jagdishsah126", "_blank", "noopener,noreferrer");

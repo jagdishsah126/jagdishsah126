@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { TabType, ProjectPlanet } from "../types";
 import { PORTFOLIO_DATA } from "../data/portfolioData";
@@ -22,13 +22,41 @@ import { FileText, Compass, Sparkles } from "lucide-react";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabType>("home");
-  const [isWarping, setIsWarping] = useState<boolean>(false);
+  const [isWarping, setIsWarping] = useState<boolean>(true);
+  const [warpLabel, setWarpLabel] = useState<string>("WARPING INTO JAGDISH UNIVERSE");
+  const [isInitialEntrance, setIsInitialEntrance] = useState<boolean>(true);
   const [selectedProject, setSelectedProject] = useState<ProjectPlanet | null>(null);
+
+  // Initial Entrance Hyperspace Sequence on First Load
+  useEffect(() => {
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      setIsWarping(false);
+      setIsInitialEntrance(false);
+      setWarpLabel("");
+      return;
+    }
+
+    playWarpSound();
+
+    const timer = setTimeout(() => {
+      setIsWarping(false);
+      setIsInitialEntrance(false);
+      setWarpLabel("");
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleTabChange = (newTab: TabType) => {
     if (newTab === activeTab) return;
 
-    // Trigger Hyperspace Warp Sequence
+    // Trigger Hyperspace Warp Sequence with destination label
+    setIsInitialEntrance(false);
+    setWarpLabel(`WARPING TO ${newTab.toUpperCase()}`);
     setIsWarping(true);
     playWarpSound();
 
@@ -51,7 +79,11 @@ export default function Home() {
   return (
     <>
       {/* Hyperspace Warp Light Speed Streak Overlay */}
-      <HyperspaceWarp isWarping={isWarping} />
+      <HyperspaceWarp
+        isWarping={isWarping}
+        label={warpLabel}
+        isInitialEntrance={isInitialEntrance}
+      />
 
       {/* Top Floating Glass Command Bar */}
       <header className="sticky top-0 z-30 w-full px-4 py-3 backdrop-blur-md bg-space-void/40 border-b border-white/5">
