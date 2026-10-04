@@ -2,11 +2,14 @@
 
 import { Printer, Mail, MapPin, Globe } from 'lucide-react';
 import { GithubIcon } from '@/components/icons/BrandIcons';
+import { cvData } from '@/data/cv-data';
 
 export default function CVPage() {
   const handlePrint = () => {
     window.print();
   };
+
+  const { personalInfo, education, skills, projects, interests, aiUsage, careerDirection } = cvData;
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 print:py-0 print:bg-white print:text-black">
@@ -24,14 +27,14 @@ export default function CVPage() {
         <div className="bg-white dark:bg-gray-800 shadow-xl print:shadow-none rounded-2xl print:rounded-none overflow-hidden border border-gray-200 dark:border-gray-700 print:border-none">
           {/* Header */}
           <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white p-8 sm:p-10 print:bg-white print:text-black print:border-b-2 print:border-gray-300">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-2 tracking-tight">Jagdish Sah</h1>
-            <h2 className="text-lg sm:text-xl text-blue-400 print:text-gray-600 mb-6 font-medium">Full Stack Developer with AI Assistance | BCT Student @ TU WRC</h2>
-            
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-2 tracking-tight">{personalInfo.name}</h1>
+            <h2 className="text-lg sm:text-xl text-blue-400 print:text-gray-600 mb-6 font-medium">{personalInfo.title}</h2>
+
             <div className="flex flex-wrap gap-4 text-xs sm:text-sm text-gray-300 print:text-gray-600">
-              <a href="mailto:jagdishsah126@gmail.com" className="flex items-center gap-1.5 hover:text-white"><Mail size={16} /> jagdishsah126@gmail.com</a>
-              <div className="flex items-center gap-1.5"><MapPin size={16} /> Siraha / Pokhara, Nepal</div>
-              <a href="https://github.com/jagdishsah126" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-white"><GithubIcon className="w-4 h-4" /> @jagdishsah126</a>
-              <a href="https://github.com/DayaSah/My_Nepse_Diary" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-white"><Globe size={16} /> My NEPSE Diary</a>
+              <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-1.5 hover:text-white"><Mail size={16} /> {personalInfo.email}</a>
+              <div className="flex items-center gap-1.5"><MapPin size={16} /> {personalInfo.location}</div>
+              <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-white"><GithubIcon className="w-4 h-4" /> @Jagdishsah126</a>
+              <a href={personalInfo.domain} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-white"><Globe size={16} /> jagdishsah.com.np</a>
             </div>
           </div>
 
@@ -40,7 +43,7 @@ export default function CVPage() {
             <section>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-3 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Professional Summary</h3>
               <p className="text-gray-700 dark:text-gray-300 print:text-black leading-relaxed text-sm sm:text-base">
-                Passionate Computer Engineering (BCT) 2nd Semester student at TU WRC College with practical expertise in full-stack web development (Next.js 14, React, TypeScript, Python) and AI-assisted workflows. Active trader and data analyst specializing in automated data scraping and quantitative trend tracking for the Nepal Stock Exchange (NEPSE). Driven by continuous learning and cosmic curiosity.
+                {personalInfo.summary}
               </p>
             </section>
 
@@ -48,29 +51,16 @@ export default function CVPage() {
             <section>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-4 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Education History</h3>
               <div className="space-y-6">
-                <div>
-                  <div className="flex flex-col sm:flex-row justify-between sm:items-baseline mb-1">
-                    <h4 className="font-bold text-base sm:text-lg text-gray-900 dark:text-white print:text-black">Bachelor in Computer Engineering (BCT)</h4>
-                    <span className="text-blue-600 dark:text-blue-400 print:text-gray-600 font-semibold text-sm">2024 - Present (2nd Sem)</span>
+                {education.map((edu) => (
+                  <div key={edu.id}>
+                    <div className="flex flex-col sm:flex-row justify-between sm:items-baseline mb-1">
+                      <h4 className="font-bold text-base sm:text-lg text-gray-900 dark:text-white print:text-black">{edu.degree}</h4>
+                      <span className="text-blue-600 dark:text-blue-400 print:text-gray-600 font-semibold text-sm">{edu.year}</span>
+                    </div>
+                    <div className="text-gray-600 dark:text-gray-400 print:text-gray-800 text-sm">{edu.institution}</div>
+                    <p className="text-gray-600 dark:text-gray-400 print:text-gray-800 text-sm mt-1">{edu.description}</p>
                   </div>
-                  <div className="text-gray-600 dark:text-gray-400 print:text-gray-800 text-sm">Tribhuvan University, Western Regional Campus (WRC), Pokhara, Nepal</div>
-                </div>
-
-                <div>
-                  <div className="flex flex-col sm:flex-row justify-between sm:items-baseline mb-1">
-                    <h4 className="font-bold text-base sm:text-lg text-gray-900 dark:text-white print:text-black">+2 Science (Higher Secondary)</h4>
-                    <span className="text-blue-600 dark:text-blue-400 print:text-gray-600 font-semibold text-sm">2022 - 2024</span>
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-400 print:text-gray-800 text-sm">Prasadi Academy, Lalitpur, Nepal</div>
-                </div>
-
-                <div>
-                  <div className="flex flex-col sm:flex-row justify-between sm:items-baseline mb-1">
-                    <h4 className="font-bold text-base sm:text-lg text-gray-900 dark:text-white print:text-black">Secondary Education (Class 10 / SEE)</h4>
-                    <span className="text-blue-600 dark:text-blue-400 print:text-gray-600 font-semibold text-sm">Graduated 2022</span>
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-400 print:text-gray-800 text-sm">Sagarmatha Higher Secondary School, Mirchaiya-6, Siraha</div>
-                </div>
+                ))}
               </div>
             </section>
 
@@ -78,22 +68,12 @@ export default function CVPage() {
             <section>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-4 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Technical Skills</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                <div className="bg-gray-50 dark:bg-gray-800/60 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
-                  <h4 className="font-bold text-gray-900 dark:text-white print:text-black mb-1">Frontend Engineering</h4>
-                  <p className="text-gray-700 dark:text-gray-300 print:text-black">Next.js 14, React, TypeScript, Tailwind CSS, Framer Motion, HTML5/CSS3</p>
-                </div>
-                <div className="bg-gray-50 dark:bg-gray-800/60 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
-                  <h4 className="font-bold text-gray-900 dark:text-white print:text-black mb-1">Backend & Databases</h4>
-                  <p className="text-gray-700 dark:text-gray-300 print:text-black">Node.js, Express, Python (Flask / Django), MongoDB, PostgreSQL, MySQL</p>
-                </div>
-                <div className="bg-gray-50 dark:bg-gray-800/60 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
-                  <h4 className="font-bold text-gray-900 dark:text-white print:text-black mb-1">Languages & Tools</h4>
-                  <p className="text-gray-700 dark:text-gray-300 print:text-black">C, C++, Java, Python, Git, GitHub, Docker, VS Code, Vercel</p>
-                </div>
-                <div className="bg-gray-50 dark:bg-gray-800/60 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
-                  <h4 className="font-bold text-gray-900 dark:text-white print:text-black mb-1">Financial & Data Analysis</h4>
-                  <p className="text-gray-700 dark:text-gray-300 print:text-black">Web Scraping (BeautifulSoup), Pandas, NEPSE Market Analytics, AI Pair Programming</p>
-                </div>
+                {skills.map((cat) => (
+                  <div key={cat.category} className="bg-gray-50 dark:bg-gray-800/60 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
+                    <h4 className="font-bold text-gray-900 dark:text-white print:text-black mb-1">{cat.category}</h4>
+                    <p className="text-gray-700 dark:text-gray-300 print:text-black">{cat.items.join(', ')}</p>
+                  </div>
+                ))}
               </div>
             </section>
 
@@ -101,34 +81,43 @@ export default function CVPage() {
             <section>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-4 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Featured Projects</h3>
               <div className="space-y-4 text-sm">
-                <div>
-                  <div className="flex justify-between items-baseline mb-1">
-                    <h4 className="font-bold text-gray-900 dark:text-white print:text-black">My NEPSE Diary</h4>
-                    <span className="text-blue-600 dark:text-blue-400 font-medium">Python, Pandas, Jupyter</span>
+                {projects.map((proj) => (
+                  <div key={proj.name}>
+                    <div className="flex justify-between items-baseline mb-1">
+                      <h4 className="font-bold text-gray-900 dark:text-white print:text-black">{proj.name}</h4>
+                      <span className="text-blue-600 dark:text-blue-400 font-medium">{proj.tech}</span>
+                    </div>
+                    <p className="text-gray-700 dark:text-gray-300 print:text-black">
+                      {proj.description}{' '}
+                      <a href={proj.url} className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">{proj.url.replace('https://', '')}</a>
+                    </p>
                   </div>
-                  <p className="text-gray-700 dark:text-gray-300 print:text-black">
-                    Automated trading journal and data analysis suite tracking daily Nepal Stock Exchange market sentiment, entry/exit prices, and historical trends (<a href="https://github.com/DayaSah/My_Nepse_Diary" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">github.com/DayaSah/My_Nepse_Diary</a>).
-                  </p>
-                </div>
-
-                <div>
-                  <div className="flex justify-between items-baseline mb-1">
-                    <h4 className="font-bold text-gray-900 dark:text-white print:text-black">Personal Portfolio & CV Hub</h4>
-                    <span className="text-blue-600 dark:text-blue-400 font-medium">Next.js 14, TypeScript, Tailwind</span>
-                  </div>
-                  <p className="text-gray-700 dark:text-gray-300 print:text-black">
-                    Interactive multi-page web application featuring 3D particle physics, dynamic theme switcher, printable CV, and 4-account GitHub showcase.
-                  </p>
-                </div>
+                ))}
               </div>
             </section>
-            
-            {/* Interests & Philosophy */}
+
+            {/* Interests */}
             <section>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-3 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Interests & Philosophy</h3>
               <p className="text-gray-700 dark:text-gray-300 print:text-black text-sm leading-relaxed">
-                NEPSE Trading & Quantitative Scraping, AI-Assisted Software Engineering, Cosmic & Space Science Exploration, Open Source Collaboration.
+                {interests.join(', ')}.
               </p>
+            </section>
+
+            {/* AI Usage */}
+            <section>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-3 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">AI Usage</h3>
+              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 print:text-black text-sm space-y-1">
+                {aiUsage.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </section>
+
+            {/* Career Direction */}
+            <section>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-3 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Career Direction</h3>
+              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 print:text-black text-sm space-y-1">
+                {careerDirection.map((item) => <li key={item}>{item}</li>)}
+              </ul>
             </section>
           </div>
         </div>

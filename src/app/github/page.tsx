@@ -6,8 +6,6 @@ import { githubProfiles } from '@/data/github-profiles';
 import { GithubIcon } from '@/components/icons/BrandIcons';
 
 export default function GithubPage() {
-  const totalRepos = githubProfiles.reduce((acc, curr) => acc + curr.repoCount, 0);
-
   return (
     <main className="min-h-screen py-24 px-4 max-w-7xl mx-auto">
       <div className="text-center mb-12">
@@ -24,7 +22,7 @@ export default function GithubPage() {
       >
         <GithubIcon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
         <div className="text-lg text-gray-700 dark:text-gray-300">
-          Total Repositories across ecosystem & AI partner: <span className="font-bold text-2xl text-blue-600 dark:text-blue-400 ml-2">{totalRepos}</span>
+          Showcasing my <span className="font-bold text-blue-600 dark:text-blue-400">{githubProfiles.length}</span> GitHub accounts across my developer ecosystem
         </div>
       </motion.div>
 

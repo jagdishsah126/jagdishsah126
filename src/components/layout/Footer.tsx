@@ -66,7 +66,7 @@ export default function Footer() {
             &copy; {currentYear} Jagdish Sah. All rights reserved.
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            Built with Next.js 14, Tailwind CSS & Framer Motion
+            Built with Next.js, Tailwind CSS & Framer Motion
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
 # 🚀 Portfolio Website Roadmap — Jagdish Sah
 
-> **Full Stack Developer with AI Assistance** | BCT 2nd Sem, TU WRC College, Nepal
+> **Full Stack Developer with AI Assistance** | BCT 3rd Sem, TU WRC College, Nepal
 
 ---
 
@@ -10,7 +10,7 @@
 |---|---|
 | **Name** | Jagdish Sah |
 | **Title** | Full Stack Developer with AI Assistance |
-| **College** | BCT 2nd Semester, TU WRC College, Nepal |
+| **College** | BCT 3rd Semester, TU WRC College, Nepal |
 | **Interests** | NEPSE Trading, Data Analysis, Web App Development |
 | **GitHub Accounts** | 4 (DayaSah, jagdishsah, jagdish-sah, jagdishsah126) |
 | **Total Public Repos** | ~21+ across all accounts |
@@ -22,11 +22,11 @@
 ## 🛠️ Tech Stack Decision
 
 > [!IMPORTANT]
-> I'm choosing **Next.js 14 (App Router) + Tailwind CSS + TypeScript** — here's why:
+> I'm choosing **Next.js 16 (App Router) + Tailwind CSS + TypeScript** — here's why:
 
 | Technology | Purpose | Why This Choice |
 |---|---|---|
-| **Next.js 14** | Framework | Multi-page routing, SSG for speed, Image optimization, perfect Vercel deploy |
+| **Next.js 16** | Framework | Multi-page routing, SSG for speed, Image optimization, perfect Vercel deploy |
 | **TypeScript** | Language | Type safety, better DX, industry standard |
 | **Tailwind CSS** | Styling | Rapid UI development, dark/light mode built-in, responsive by default |
 | **Framer Motion** | Animations | Smooth page transitions, scroll animations, hero effects |
@@ -140,7 +140,7 @@ My Profile/
   - Tools: Git, GitHub, Docker
   - Languages: Java, C, C++
 - **Education timeline**:
-  - BCT 2nd Semester → TU WRC College, Nepal
+  - BCT 3rd Semester → TU WRC College, Nepal
 - **Interests section**: NEPSE Trading, Data Analysis, AI-assisted development
 
 ### 3️⃣ Portfolio Page
@@ -274,7 +274,6 @@ export const githubProfiles = [
     bio: "NEPSE Trading & Data Analysis focused account",
     url: "https://github.com/DayaSah",
     avatarUrl: "https://avatars.githubusercontent.com/u/262603635",
-    repoCount: 10,
     repos: [
       {
         name: "repo-name",

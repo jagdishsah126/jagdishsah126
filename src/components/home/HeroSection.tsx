@@ -179,9 +179,9 @@ export default function HeroSection() {
         {/* Stats */}
         <motion.div variants={itemVariants} className="grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto bg-white/60 dark:bg-gray-800/60 backdrop-blur-md p-4 sm:p-6 rounded-2xl border border-gray-200/60 dark:border-gray-700/60 shadow-sm">
           {[
-            { value: '25+', label: 'Repositories' },
             { value: '5', label: 'GitHub Profiles' },
-            { value: '12+', label: 'Featured Apps' },
+            { value: '8+', label: 'Featured Projects' },
+            { value: '3rd', label: 'BCT Semester' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-2xl sm:text-3xl font-extrabold text-blue-600 dark:text-blue-400 mb-0.5">

@@ -1,8 +1,8 @@
 # ReadForDev — Development Progress & Log
 
 ## 🎯 Project Overview
-Personal Portfolio & CV website for **Jagdish Sah** (Full Stack Developer with AI Assistance, BCT 2nd Sem, TU WRC College, Nepal).
-Built with **Next.js 14+ (App Router) + TypeScript + Tailwind CSS + Framer Motion + tsParticles + next-themes**.
+Personal Portfolio & CV website for **Jagdish Sah** (Full Stack Developer with AI Assistance, BCT 3rd Sem, TU WRC College, Nepal).
+Built with **Next.js 16 (App Router) + TypeScript + Tailwind CSS + Framer Motion + tsParticles + next-themes**.
 
 ---
 
@@ -22,12 +22,12 @@ Built with **Next.js 14+ (App Router) + TypeScript + Tailwind CSS + Framer Motio
   - **Location**: `Pokhara / Siraha, Nepal`
 
 - [x] **Education History**:
-  1. 🏫 **Tribhuvan University, WRC College, Pokhara**: Bachelor in Computer Engineering (BCT) — 2nd Semester (2024 - Present)
+  1. 🏫 **Tribhuvan University, WRC College, Pokhara**: Bachelor in Computer Engineering (BCT) — 3rd Semester (2025 - Present)
   2. 🏛️ **Prasadi Academy, Lalitpur**: +2 Science (Higher Secondary, 2022 - 2024)
   3. 🏫 **Sagarmatha Higher Secondary School, Mirchaiya-6, Siraha**: Class 10 / SEE (Graduated 2022)
 
 - [x] **Flagship Project**:
-  - **My NEPSE Diary** (`https://github.com/DayaSah/My_Nepse_Diary`) integrated across projects, GitHub showcase, CV, and Readme.
+  - **nepse-floorsheet-archive** (`https://github.com/Jagdishsah126/nepse-floorsheet-archive`) integrated across projects, GitHub showcase, CV, and Readme.
 
 - [x] **Cosmic Philosophy Quote**:
   - *"I am a traveller in this vast cosmos, travelling and exploring everything this universe can provide."*

@@ -17,8 +17,8 @@
 const jagdish = {
   name: "Jagdish Sah",
   role: "Full Stack Developer with AI Assistance",
-  education: "B.E. Computer Engineering (BCT - 2nd Sem) @ TU WRC College, Nepal",
-  coreTech: ["Next.js 14", "React", "TypeScript", "Python", "Tailwind CSS", "Node.js"],
+  education: "B.E. Computer Engineering (BCT - 3rd Sem) @ TU WRC College, Nepal",
+  coreTech: ["Next.js 16", "React", "TypeScript", "Python", "Tailwind CSS", "Node.js"],
   passions: ["NEPSE Stock Analysis", "Automated Scraping", "AI-Powered Web Apps", "Cosmic Exploration"],
   motto: "Building high-performance software by blending modern web engineering with AI.",
 };
@@ -30,10 +30,10 @@ const jagdish = {
 
 ## 📌 About Me
 
-- 🎓 **Engineering Student**: Currently in 2nd Semester of **BCT (Bachelor in Computer Engineering)** at **TU Western Regional Campus (WRC) College**, Pokhara, Nepal.
+- 🎓 **Engineering Student**: Currently in 3rd Semester of **BCT (Bachelor in Computer Engineering)** at **TU Western Regional Campus (WRC) College**, Pokhara, Nepal.
 - 🏫 **Academic Foundation**: Completed +2 Science at **Prasadi Academy**, Lalitpur and Schooling at **Sagarmatha Higher Secondary School**, Mirchaiya-6, Siraha.
-- 💻 **Full Stack Engineer**: Passionate about creating responsive, high-performance web applications using **Next.js 14**, **React**, **TypeScript**, and **Python**.
-- 📈 **NEPSE & Data Analyst**: Deeply interested in Nepal's stock market (**NEPSE**), developing automated data scrapers, pattern detection algorithms, and portfolio tracking systems like **[My NEPSE Diary](https://github.com/DayaSah/My_Nepse_Diary)**.
+- 💻 **Full Stack Engineer**: Passionate about creating responsive, high-performance web applications using **Next.js 16**, **React**, **TypeScript**, and **Python**.
+- 📈 **NEPSE & Data Analyst**: Deeply interested in Nepal's stock market (**NEPSE**), developing automated data pipelines, scraping tools, and market analysis utilities like **[nepse-floorsheet-archive](https://github.com/Jagdishsah126/nepse-floorsheet-archive)**.
 - 🤖 **AI-Assisted Development**: Leveraging cutting-edge AI tools to design, architect, and deliver robust software with maximum speed and precision.
 - 🌌 **Cosmic Mindset**: A curious mind exploring science, technology, financial markets, and the cosmos.
 
@@ -58,7 +58,7 @@ I distribute my repositories across dedicated GitHub accounts to keep projects o
 <div align="center">
 
 ### Frontend & UI
-![Next.js](https://img.shields.io/badge/Next.js_14-black?style=for-the-badge&logo=next.js&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js_16-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
@@ -95,13 +95,15 @@ I distribute my repositories across dedicated GitHub accounts to keep projects o
 
 | Project | Description | Tech Stack | GitHub Account |
 | :--- | :--- | :--- | :---: |
-| 📈 **[My NEPSE Diary](https://github.com/DayaSah/My_Nepse_Diary)** | Personal trading diary and quantitative analysis suite tracking daily Nepal Stock Exchange market sentiment and price action. | `Python`, `Pandas`, `Jupyter` | [@DayaSah](https://github.com/DayaSah/My_Nepse_Diary) |
-| 🌐 **[Interactive Portfolio Hub](https://github.com/jagdishsah126/jagdishsah126)** | Multi-page Next.js portfolio featuring 3D particle hero, dark/light theme, and interactive CV. | `Next.js 14`, `TypeScript`, `Tailwind`, `Framer Motion` | [@jagdishsah126](https://github.com/jagdishsah126) |
-| 🛍️ **E-Commerce Web Platform** | Modern e-commerce solution with cart state, checkout workflow, and admin management. | `React`, `Node.js`, `MongoDB`, `Express` | [@jagdishsah](https://github.com/jagdishsah) |
-| 🕷️ **NEPSE Live Market Scraper** | Automated scraper capturing live market depth, floorsheet, and company disclosures. | `Python`, `BeautifulSoup`, `PostgreSQL` | [@DayaSah](https://github.com/DayaSah) |
-| 🤖 **AI Chat Interface** | Streaming conversational AI app with markdown rendering and persistent sessions. | `Next.js`, `TypeScript`, `Tailwind CSS`, `OpenAI API` | [@jagdishsah](https://github.com/jagdishsah) |
-| 📋 **Task Management App** | Kanban-style responsive task manager with real-time sync and category tracking. | `React`, `Node.js`, `MongoDB`, `Socket.io` | [@jagdish-sah](https://github.com/jagdish-sah) |
-| 💼 **NEPSE Portfolio Tracker** | Personal financial dashboard for calculating real-time P/L and dividend yield. | `React`, `Python`, `Flask`, `MySQL` | [@DayaSah](https://github.com/DayaSah) |
+| 📈 **[nepse-floorsheet-archive](https://github.com/Jagdishsah126/nepse-floorsheet-archive)** | Autonomous pipeline collecting daily NEPSE floorsheet data into version-controlled CSVs. | `Python`, `Pandas` | [@Jagdishsah126](https://github.com/Jagdishsah126) |
+| 🌐 **[Interactive Portfolio Hub](https://github.com/jagdishsah126/jagdishsah126)** | Multi-page Next.js portfolio featuring 3D particle hero, dark/light theme, and interactive CV. | `Next.js 16`, `TypeScript`, `Tailwind`, `Framer Motion` | [@jagdishsah126](https://github.com/jagdishsah126) |
+| 📄 **[MD_File_Reader](https://github.com/Jagdishsah126/MD_File_Reader)** | Lightweight, memory-efficient Markdown previewer for Linux. | `Python` | [@Jagdishsah126](https://github.com/Jagdishsah126) |
+| 🍽️ **[Canteen](https://github.com/Jagdishsah126/Canteen)** | Client-side PWA for monthly canteen/bill management for WRC hostellers. | `JavaScript`, `PWA` | [@Jagdishsah126](https://github.com/Jagdishsah126) |
+| 📊 **[Insta_Analyzer_V1](https://github.com/Jagdishsah126/Insta_Analyzer_V1)** | Privacy-focused browser extension for Instagram follower/following analytics. | `JavaScript`, `Manifest V3` | [@Jagdishsah126](https://github.com/Jagdishsah126) |
+| 🗄️ **[Floorsheet_cockroachlabs](https://github.com/DayaSah/Floorsheet_cockroachlabs)** | Experimental NEPSE floorsheet pipeline storing data in CockroachDB. | `Python`, `CockroachDB` | [@DayaSah](https://github.com/DayaSah) |
+| ⚡ **[Fast_API](https://github.com/DayaSah/Fast_API)** | API backend supporting the HomePage project. | `Python`, `FastAPI` | [@DayaSah](https://github.com/DayaSah) |
+| 🏠 **[HomePage](https://github.com/Jagdishsah/HomePage)** | Personal browser homepage with NEPSE portfolio/life-summary via API. | `HTML`, `JavaScript` | [@Jagdishsah](https://github.com/Jagdishsah) |
+| 🏫 **[Nepal_Mobile_store](https://github.com/Jagdishsah/Nepal_Mobile_store)** | Academic CS project from Grade 12 at Prasadi Academy. | `C`, `C++` | [@Jagdishsah](https://github.com/Jagdishsah) |
 
 ---
 
@@ -110,7 +112,7 @@ I distribute my repositories across dedicated GitHub accounts to keep projects o
 ```
 1. 🏫 Tribhuvan University — Western Regional Campus (WRC), Pokhara, Nepal
    └── Degree: Bachelor in Computer Engineering (BCT)
-   └── Duration: 2024 – Present (Current: 2nd Semester)
+   └── Duration: 2025 – Present (Current: 3rd Semester)
 
 2. 🏛️ Prasadi Academy, Lalitpur, Nepal
    └── Degree: +2 Science (Higher Secondary)

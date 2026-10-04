@@ -7,10 +7,10 @@ import { Database, LineChart, Code2, Sparkles } from 'lucide-react';
 
 export default function AboutPage() {
   const interests = [
-    { title: 'NEPSE Trading', icon: LineChart, desc: 'Analyzing Nepal Stock Exchange trends, market depth, and quantitative metrics.' },
-    { title: 'Data Scraping & Analysis', icon: Database, desc: 'Automating pipelines with Python & Pandas to extract actionable market intelligence.' },
-    { title: 'AI-Assisted Engineering', icon: Code2, desc: 'Accelerating modern full-stack development with state-of-the-art AI pair programming.' },
-    { title: 'Cosmic Exploration', icon: Sparkles, desc: 'Exploring science, astronomy, and technology with an infinite mindset.' },
+    { title: 'NEPSE / Stock Market', icon: LineChart, desc: 'Tracking NEPSE floorsheets, market sentiment, and quantitative metrics without premium services.' },
+    { title: 'Data Scraping & Analysis', icon: Database, desc: 'Automating pipelines with Python & Pandas to extract actionable market data.' },
+    { title: 'AI-Assisted Engineering', icon: Code2, desc: 'Accelerating modern full-stack development with AI pair programming and agentic workflows.' },
+    { title: 'Automation & Cosmos', icon: Sparkles, desc: 'Exploring automation, technology, science, and the cosmos with an infinite mindset.' },
   ];
 
   return (
@@ -23,7 +23,7 @@ export default function AboutPage() {
       >
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">About Me</h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Full Stack Developer with AI Assistance & BCT Engineering Student at TU WRC College, Nepal
+          Full Stack Developer with AI Assistance & BCT Engineering Student at TU WRC College, Nepal. Expected graduation 2029.
         </p>
       </motion.div>
 
@@ -39,7 +39,7 @@ export default function AboutPage() {
           </blockquote>
 
           <p>
-            Hello! I am <strong>Jagdish Sah</strong>, currently pursuing my <strong>Bachelor in Computer Engineering (BCT)</strong> in the 2nd Semester at <strong>Tribhuvan University, Western Regional Campus (WRC)</strong> in Pokhara, Nepal.
+            Hello! I am <strong>Jagdish Sah</strong>, currently pursuing my <strong>Bachelor in Computer Engineering (BCT)</strong> in the 3rd Semester at <strong>Tribhuvan University, Western Regional Campus (WRC)</strong> in Pokhara, Nepal.
           </p>
 
           <p>
@@ -47,11 +47,11 @@ export default function AboutPage() {
           </p>
 
           <p>
-            As a developer, I specialize in crafting clean, scalable web applications with <strong>Next.js 14</strong>, <strong>React</strong>, <strong>TypeScript</strong>, <strong>Tailwind CSS</strong>, and <strong>Python</strong>. By adopting AI-assisted workflows, I bridge the gap between complex ideas and fast, robust code execution.
+            As a developer, I specialize in crafting clean, scalable web applications with <strong>Next.js</strong>, <strong>React</strong>, <strong>TypeScript</strong>, <strong>Tailwind CSS</strong>, and <strong>Python</strong>. By adopting AI-assisted workflows, I bridge the gap between complex ideas and fast, robust code execution.
           </p>
 
           <p>
-            Beyond traditional web development, I am an active participant in Nepal&apos;s financial markets. Through projects like <strong><a href="https://github.com/DayaSah/My_Nepse_Diary" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline">My NEPSE Diary</a></strong>, I combine Python scripting, web scraping, and data visualization to log trades and dissect market movements on the Nepal Stock Exchange.
+            Beyond traditional web development, I am an active participant in Nepal&apos;s financial markets. Through projects like <strong><a href="https://github.com/Jagdishsah126/nepse-floorsheet-archive" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 underline">nepse-floorsheet-archive</a></strong>, I combine Python scripting, web scraping, and data visualization to track and analyze the Nepal Stock Exchange.
           </p>
         </motion.div>
       </section>

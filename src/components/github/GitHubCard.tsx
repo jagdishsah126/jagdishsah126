@@ -16,7 +16,6 @@ interface GitHubCardProps {
     username: string;
     displayName: string;
     bio: string;
-    repoCount: number;
     url: string;
     avatarUrl: string;
     repos: Repo[];
@@ -49,9 +48,6 @@ export default function GitHubCard({ profile, index }: GitHubCardProps) {
             </div>
           </div>
           <div className="flex flex-col items-end">
-            <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mb-2">
-              {profile.repoCount} Repos
-            </span>
             <a
               href={profile.url}
               target="_blank"
