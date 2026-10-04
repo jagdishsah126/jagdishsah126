@@ -17,27 +17,26 @@ export default function SkillsGrid() {
           className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700"
         >
           <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">{cat.title}</h3>
-          <div className="space-y-4">
+          <div className="space-y-5">
             {cat.skills.map((skill: Skill) => {
               const Icon = Icons[skill.icon as keyof typeof Icons] as React.ElementType | undefined;
               return (
                 <div key={skill.name}>
-                  <div className="flex justify-between items-center mb-1">
-                    <div className="flex items-center gap-2">
-                      {Icon && <Icon className="w-5 h-5 text-blue-500" />}
-                      <span className="font-medium text-gray-700 dark:text-gray-300">{skill.name}</span>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    {Icon && <Icon className="w-5 h-5 text-blue-500" />}
+                    <span className="font-medium text-gray-700 dark:text-gray-300">{skill.name}</span>
+                  </div>
+                  {skill.usedIn.length > 0 ? (
+                    <div className="flex flex-wrap gap-1.5">
+                      {skill.usedIn.map((proj) => (
+                        <span key={proj} className="text-xs px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                          {proj}
+                        </span>
+                      ))}
                     </div>
-                    <span className="text-sm text-gray-500">{skill.proficiency}%</span>
-                  </div>
-                  <div className="h-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.proficiency}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: 0.2 }}
-                      className="h-full bg-blue-500 rounded-full"
-                    />
-                  </div>
+                  ) : (
+                    <span className="text-xs text-gray-400 dark:text-gray-500 italic">Not yet featured in a public repo</span>
+                  )}
                 </div>
               );
             })}

@@ -3,7 +3,7 @@ export type SkillCategoryName = 'Programming' | 'Web & Frameworks' | 'Databases'
 export interface Skill {
   name: string;
   icon: string;
-  proficiency: number;
+  usedIn: string[];
 }
 
 export interface SkillCategory {
@@ -15,43 +15,43 @@ export const skills: SkillCategory[] = [
   {
     title: 'Programming',
     skills: [
-      { name: 'Python', icon: 'FileTerminal', proficiency: 90 },
-      { name: 'TypeScript', icon: 'FileCode', proficiency: 80 },
-      { name: 'JavaScript', icon: 'FileJson', proficiency: 85 },
-      { name: 'C', icon: 'Code', proficiency: 75 },
-      { name: 'C++', icon: 'Code', proficiency: 75 },
+      { name: 'Python', icon: 'FileTerminal', usedIn: ['nepse-floorsheet-archive', 'MD_File_Reader', 'Floorsheet_cockroachlabs', 'Fast_API', 'Nepse_Data', 'My_Nepse_Diary', 'Google_Colab'] },
+      { name: 'TypeScript', icon: 'FileCode', usedIn: ['jagdishsah126', 'Canteen', 'Nepse-Diary-WebApp', 'Floorshet_Visual_By_retotal'] },
+      { name: 'JavaScript', icon: 'FileJson', usedIn: ['Insta_Analyzer_V1', 'Happy-Krishna-Janmashtami', 'Project-Zara', 'HomePage'] },
+      { name: 'C', icon: 'Code', usedIn: ['Nepal_Mobile_store'] },
+      { name: 'C++', icon: 'Code', usedIn: ['Nepal_Mobile_store', 'OOP'] },
     ]
   },
   {
     title: 'Web & Frameworks',
     skills: [
-      { name: 'React', icon: 'Globe', proficiency: 85 },
-      { name: 'Next.js', icon: 'Globe', proficiency: 80 },
-      { name: 'Node.js', icon: 'Server', proficiency: 75 },
-      { name: 'Express', icon: 'Cpu', proficiency: 70 },
-      { name: 'Flask', icon: 'Feather', proficiency: 70 },
-      { name: 'Tailwind CSS', icon: 'Wind', proficiency: 90 },
+      { name: 'React', icon: 'Globe', usedIn: ['Nepse-Diary-WebApp'] },
+      { name: 'Next.js', icon: 'Globe', usedIn: ['Nepse-Diary-WebApp', 'jagdishsah126'] },
+      { name: 'Node.js', icon: 'Server', usedIn: ['Nepse-Diary-WebApp', 'jagdishsah126'] },
+      { name: 'Express', icon: 'Cpu', usedIn: [] },
+      { name: 'Flask', icon: 'Feather', usedIn: [] },
+      { name: 'Tailwind CSS', icon: 'Wind', usedIn: ['Nepse-Diary-WebApp', 'jagdishsah126'] },
     ]
   },
   {
     title: 'Databases',
     skills: [
-      { name: 'MongoDB', icon: 'Database', proficiency: 75 },
-      { name: 'Supabase', icon: 'Database', proficiency: 70 },
-      { name: 'Neon DB', icon: 'Database', proficiency: 70 },
-      { name: 'Cockroach DB', icon: 'Database', proficiency: 65 },
-      { name: 'PostgreSQL', icon: 'Database', proficiency: 75 },
-      { name: 'MySQL', icon: 'Database', proficiency: 80 },
+      { name: 'MongoDB', icon: 'Database', usedIn: ['mongodb'] },
+      { name: 'Supabase', icon: 'Database', usedIn: ['My_Nepse_Diary'] },
+      { name: 'Neon DB', icon: 'Database', usedIn: ['Nepse-Diary-WebApp', 'Neon_Backend'] },
+      { name: 'Cockroach DB', icon: 'Database', usedIn: ['Floorsheet_cockroachlabs'] },
+      { name: 'PostgreSQL', icon: 'Database', usedIn: ['Nepse-Diary-WebApp'] },
+      { name: 'MySQL', icon: 'Database', usedIn: [] },
     ]
   },
   {
     title: 'Tools & Data',
     skills: [
-      { name: 'Git', icon: 'GitBranch', proficiency: 85 },
-      { name: 'GitHub', icon: 'Github', proficiency: 90 },
-      { name: 'Vercel', icon: 'Cloud', proficiency: 80 },
-      { name: 'Pandas', icon: 'Table', proficiency: 85 },
-      { name: 'BeautifulSoup', icon: 'Globe', proficiency: 85 },
+      { name: 'Git', icon: 'GitBranch', usedIn: ['All repositories'] },
+      { name: 'GitHub', icon: 'Github', usedIn: ['All 5 accounts'] },
+      { name: 'Vercel', icon: 'Cloud', usedIn: ['jagdishsah126', 'Canteen'] },
+      { name: 'Pandas', icon: 'Table', usedIn: ['nepse-floorsheet-archive', 'Nepse_Data', 'My_Nepse_Diary'] },
+      { name: 'BeautifulSoup', icon: 'Globe', usedIn: ['nepse-floorsheet-archive', 'Floorsheet_cockroachlabs'] },
     ]
   },
 ];
