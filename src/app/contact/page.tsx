@@ -70,7 +70,7 @@ export default function ContactPage() {
                 <div>
                   <h4 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Location</h4>
                   <p className="text-gray-900 dark:text-white font-medium">
-                    Pokhara / Siraha, Nepal
+                    Pokhara, Nepal (Home: Siraha, Nepal)
                   </p>
                 </div>
               </div>

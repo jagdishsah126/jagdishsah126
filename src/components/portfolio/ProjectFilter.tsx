@@ -1,12 +1,16 @@
 'use client';
 
+import { projects } from '@/data/projects';
+
 interface ProjectFilterProps {
   activeFilter: string;
   onFilterChange: (filter: string) => void;
 }
 
 export default function ProjectFilter({ activeFilter, onFilterChange }: ProjectFilterProps) {
-  const filters = ['All', 'React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'MongoDB'];
+  const techSet = new Set<string>();
+  projects.forEach((p) => p.techStack.forEach((t) => techSet.add(t)));
+  const filters = ['All', ...Array.from(techSet).sort()];
 
   return (
     <div className="flex gap-2 overflow-x-auto pb-4 mb-8 scrollbar-hide">
