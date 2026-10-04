@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { ExternalLink } from 'lucide-react';
 import { GithubIcon } from '@/components/icons/BrandIcons';
 
@@ -13,6 +14,7 @@ interface ProjectCardProps {
     githubAccount: string;
     liveUrl?: string;
     githubUrl: string;
+    image?: string;
   };
   index: number;
 }
@@ -25,9 +27,12 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group relative bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 dark:border-gray-700 overflow-hidden"
     >
-      <div className="h-48 bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/40 dark:to-indigo-900/40 relative">
-        <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-300" />
-        {/* Placeholder for actual image */}
+      <div className="h-48 bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/40 dark:to-indigo-900/40 relative overflow-hidden">
+        {project.image ? (
+          <Image src={project.image} alt={project.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" unoptimized />
+        ) : (
+          <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-300" />
+        )}
       </div>
       
       <div className="p-6">
