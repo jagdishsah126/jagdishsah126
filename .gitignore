@@ -41,3 +41,7 @@ next-env.d.ts
 # Local working notes (never published)
 ASSUME.md
 .eslintcache
+
+# pnpm
+.pnpm-store/
+.pnpm-debug.log*
