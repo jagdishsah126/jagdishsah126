@@ -23,14 +23,16 @@ const ROUTES = [
   { path: "/contact/", priority: "0.6", changefreq: "yearly" },
 ];
 
-const lastmod = new Date().toISOString().slice(0, 10);
+// No <lastmod> on purpose. A date stamped by the build would change on every
+// build and leave the working tree dirty without the content changing, and a
+// lastmod that is not consistently accurate is one Google learns to ignore.
+// If you want it back, derive it from the commit date, not from `new Date()`.
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${ROUTES.map(
   (r) => `  <url>
     <loc>${SITE}${r.path}</loc>
-    <lastmod>${lastmod}</lastmod>
     <changefreq>${r.changefreq}</changefreq>
     <priority>${r.priority}</priority>
   </url>`
@@ -41,4 +43,4 @@ ${ROUTES.map(
 const here = dirname(fileURLToPath(import.meta.url));
 const target = join(here, "..", "public", "sitemap.xml");
 writeFileSync(target, xml, "utf8");
-console.log(`sitemap: ${ROUTES.length} routes -> public/sitemap.xml (lastmod ${lastmod})`);
+console.log(`sitemap: ${ROUTES.length} routes -> public/sitemap.xml`);
