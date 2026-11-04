@@ -58,9 +58,9 @@ export default function ProjectsTab({ onSelectProject }: ProjectsTabProps) {
           <FolderGit2 className="w-3.5 h-3.5" />
           <span>The 8 Celestial Projects</span>
         </div>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-3">
-          Engineering & <span className="cosmic-gradient-text">Project Constellation</span>
-        </h2>
+        <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-3">
+          Engineering &amp; <span className="cosmic-gradient-text">Project Constellation</span>
+        </h1>
         <p className="text-sm md:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
           Every project is built to solve an authentic friction point—from autonomous NEPSE floorsheet
           archiving to offline hostel mess management and low-overhead Linux desktop utilities.

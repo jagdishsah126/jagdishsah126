@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { ProjectPlanet, TabType } from "../../types";
+import Link from "next/link";
+import { ProjectPlanet } from "../../types";
 import { PORTFOLIO_DATA } from "../../data/portfolioData";
 import CosmicCanvas from "../cosmic/CosmicCanvas";
 import { playClickSound } from "../../utils/audio";
@@ -21,10 +22,9 @@ import {
 
 interface HomeTabProps {
   onSelectProject: (project: ProjectPlanet) => void;
-  onSelectTab: (tab: TabType) => void;
 }
 
-export default function HomeTab({ onSelectProject, onSelectTab }: HomeTabProps) {
+export default function HomeTab({ onSelectProject }: HomeTabProps) {
   const { personal } = PORTFOLIO_DATA;
 
   return (
@@ -37,14 +37,18 @@ export default function HomeTab({ onSelectProject, onSelectTab }: HomeTabProps) 
           <span>Roots in Bishnupur, Siraha • Studying in Pokhara, Nepal</span>
         </div>
 
-        {/* Name Title */}
+        {/* Primary heading: name plus the role, so the h1 carries the search terms */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-4 leading-none">
           <span className="cosmic-gradient-text">Jagdish Sah</span>
+          <span className="block text-base sm:text-xl md:text-2xl font-bold text-slate-200 tracking-normal mt-5">
+            Computer Engineering Student &amp; NEPSE Market Analyst
+          </span>
         </h1>
 
         {/* Supporting Tagline */}
         <p className="text-base sm:text-lg md:text-xl text-slate-300 font-medium max-w-2xl mx-auto mb-6 leading-relaxed">
-          Computer Engineering Student, Imaginative Builder, and disciplined NEPSE Analyst & Trader.
+          Imaginative builder and disciplined NEPSE trader, studying at IOE WRC
+          Pokhara with roots in Bishnupur, Siraha, Nepal.
         </p>
 
         {/* Guiding Cosmic Motto */}
@@ -60,50 +64,42 @@ export default function HomeTab({ onSelectProject, onSelectTab }: HomeTabProps) 
 
         {/* Quick Action Teleports */}
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <button
-            onClick={() => {
-              playClickSound();
-              onSelectTab("projects");
-            }}
+          <Link
+            href="/projects/"
+            onClick={() => playClickSound()}
             className="py-2.5 px-5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-xs md:text-sm shadow-[0_4px_20px_rgba(56,189,248,0.35)] transition-all flex items-center gap-2 group"
           >
             <FolderGit2 className="w-4 h-4" />
             <span>Explore 8 Projects</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Link>
 
-          <button
-            onClick={() => {
-              playClickSound();
-              onSelectTab("journey");
-            }}
+          <Link
+            href="/about/"
+            onClick={() => playClickSound()}
             className="py-2.5 px-5 rounded-xl bg-space-card hover:bg-space-card-hover border border-white/10 text-slate-200 font-semibold text-xs md:text-sm backdrop-blur-md transition-all flex items-center gap-2"
           >
             <Compass className="w-4 h-4 text-violet-400" />
             <span>Read Journey</span>
-          </button>
+          </Link>
 
-          <button
-            onClick={() => {
-              playClickSound();
-              onSelectTab("cv");
-            }}
+          <Link
+            href="/cv/"
+            onClick={() => playClickSound()}
             className="py-2.5 px-5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-cyan-300 font-semibold text-xs md:text-sm backdrop-blur-md transition-all flex items-center gap-2"
           >
             <FileText className="w-4 h-4" />
             <span>Official CV</span>
-          </button>
+          </Link>
 
-          <button
-            onClick={() => {
-              playClickSound();
-              onSelectTab("nepse");
-            }}
+          <Link
+            href="/nepse/"
+            onClick={() => playClickSound()}
             className="py-2.5 px-5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 font-semibold text-xs md:text-sm backdrop-blur-md transition-all flex items-center gap-2"
           >
             <TrendingUp className="w-4 h-4" />
             <span>NEPSE Observatory</span>
-          </button>
+          </Link>
         </div>
       </section>
 
@@ -128,9 +124,9 @@ export default function HomeTab({ onSelectProject, onSelectTab }: HomeTabProps) 
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                 </span>
-                <h3 className="text-sm font-mono font-semibold tracking-wider text-slate-200 uppercase">
+                <h2 className="text-sm font-mono font-semibold tracking-wider text-slate-200 uppercase">
                   Living Status • Now
-                </h3>
+                </h2>
               </div>
               <span className="text-[11px] font-mono text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-2.5 py-0.5 rounded-full">
                 Active Transmission
@@ -177,9 +173,9 @@ export default function HomeTab({ onSelectProject, onSelectTab }: HomeTabProps) 
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <ShieldCheck className="w-4 h-4 text-cyan-400" />
-                <h3 className="text-sm font-mono font-semibold tracking-wider text-slate-200 uppercase">
+                <h2 className="text-sm font-mono font-semibold tracking-wider text-slate-200 uppercase">
                   Verified Academic & Technical Credentials
-                </h3>
+                </h2>
               </div>
 
               <div className="grid grid-cols-2 gap-3 mb-4">
@@ -211,16 +207,14 @@ export default function HomeTab({ onSelectProject, onSelectTab }: HomeTabProps) 
 
             <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400">
               <span>Domain: jagdishsah.com.np</span>
-              <button
-                onClick={() => {
-                  playClickSound();
-                  onSelectTab("cv");
-                }}
+              <Link
+                href="/cv/"
+                onClick={() => playClickSound()}
                 className="text-cyan-400 hover:text-cyan-300 hover:underline flex items-center gap-1"
               >
                 <span>View Full CV</span>
                 <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+              </Link>
             </div>
           </div>
         </div>

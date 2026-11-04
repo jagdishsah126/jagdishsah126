@@ -12,8 +12,8 @@ export const PORTFOLIO_DATA = {
     hometown: "Bishnupur, Siraha, Nepal",
     domain: "jagdishsah.com.np",
     githubMain: "https://github.com/jagdishsah126",
-    avatarImg: "/avatar.png",
-    formalPhoto: "/ProfilePicFormal.jpg",
+    avatarImg: "/avatar-256.webp",
+    formalPhoto: "/hero-portrait.webp",
     nowStatus: {
       academics: "3rd Semester • BCT @ IOE WRC Pokhara (No backlogs)",
       building: "Personal Hub & V2 Market Data Engine",

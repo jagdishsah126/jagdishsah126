@@ -24,9 +24,9 @@ export default function JourneyTab() {
           <Compass className="w-3.5 h-3.5" />
           <span>The Path Across Nepal</span>
         </div>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-3">
-          Roots, Curiosity & <span className="cosmic-gradient-text">Journey</span>
-        </h2>
+        <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-3">
+          Roots, Curiosity &amp; <span className="cosmic-gradient-text">Journey</span>
+        </h1>
         <p className="text-sm md:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
           From my family home in Bishnupur, Siraha and the forests of Bardiya to the academic corridors of
           Kathmandu and the engineering labs of Pokhara.

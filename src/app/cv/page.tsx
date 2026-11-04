@@ -1,21 +1,41 @@
 import React from "react";
 import type { Metadata } from "next";
 import CvTab from "../../components/tabs/CvTab";
+import JsonLd from "../../components/seo/JsonLd";
+import { breadcrumb, OG_IMAGE, profilePage } from "../../utils/schema";
 import Link from "next/link";
 import { ArrowLeft, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Official CV — Jagdish Sah | Computer Engineering & NEPSE Data Analyst",
+  title: "CV — Jagdish Sah | Computer Engineering & NEPSE",
   description:
-    "Official Curriculum Vitae of Jagdish Sah. Undergraduate Computer Engineering student at TU IOE WRC Pokhara, roots in Siraha. Education, technical capabilities, and project portfolio.",
+    "Curriculum Vitae of Jagdish Sah: Computer Engineering undergraduate at TU IOE WRC Pokhara, NEPSE data analyst, and builder of autonomous pipelines.",
   alternates: {
-    canonical: "https://jagdishsah.com.np/cv",
+    canonical: "https://jagdishsah.com.np/cv/",
+  },
+  openGraph: {
+    title: "CV — Jagdish Sah | Computer Engineering & NEPSE",
+    description:
+      "Computer Engineering undergraduate at TU IOE WRC Pokhara, NEPSE data analyst, and builder of autonomous pipelines.",
+    url: "https://jagdishsah.com.np/cv/",
+    siteName: "Jagdish Universe",
+    type: "profile",
+    images: [OG_IMAGE],
   },
 };
 
 export default function CvPage() {
   return (
     <div className="w-full flex flex-col items-center pt-4">
+      <JsonLd
+        data={profilePage(
+          "CV of Jagdish Sah",
+          "/cv/",
+          "Curriculum Vitae of Jagdish Sah, Computer Engineering student at TU IOE WRC Pokhara."
+        )}
+      />
+      <JsonLd data={breadcrumb([{ name: "Hub", path: "/" }, { name: "Official CV", path: "/cv/" }])} />
+
       {/* Return to Hub Banner */}
       <div className="no-print w-full max-w-4xl px-4 mb-4 flex items-center justify-between">
         <Link

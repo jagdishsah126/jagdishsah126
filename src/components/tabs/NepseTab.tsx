@@ -56,9 +56,9 @@ export default function NepseTab() {
           <TrendingUp className="w-3.5 h-3.5" />
           <span>Quantitative Market Intelligence</span>
         </div>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-3">
-          NEPSE Analysis & <span className="aurora-gradient-text">Trading Observatory</span>
-        </h2>
+        <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-3">
+          NEPSE Analysis &amp; <span className="aurora-gradient-text">Trading Observatory</span>
+        </h1>
         <p className="text-sm md:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
           {nepse.summary}
         </p>

@@ -37,3 +37,7 @@ next-env.d.ts
 *.md
 !README.md
 
+
+# Local working notes (never published)
+ASSUME.md
+.eslintcache

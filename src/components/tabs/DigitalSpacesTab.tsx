@@ -15,9 +15,9 @@ export default function DigitalSpacesTab() {
           <Boxes className="w-3.5 h-3.5" />
           <span>Intentional Architectural Separation</span>
         </div>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-3">
+        <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-3">
           The 5 Digital <span className="cosmic-gradient-text">GitHub Dimensions</span>
-        </h2>
+        </h1>
         <p className="text-sm md:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
           Rather than dumping every prototype, college assignment, financial experiment, and AI script
           into one confusing profile, my work is intentionally partitioned by purpose.

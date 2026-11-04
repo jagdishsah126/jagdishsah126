@@ -1,56 +1,64 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans, Fira_Code, Caveat } from "next/font/google";
 import "./globals.css";
 import Starfield from "../components/cosmic/Starfield";
 import AuroraGlow from "../components/cosmic/AuroraGlow";
+import GlassDock from "../components/navigation/GlassDock";
+import SiteFooter from "../components/navigation/SiteFooter";
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
+
+const fira = Fira_Code({
+  subsets: ["latin"],
+  variable: "--font-fira",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  display: "swap",
+});
+
+const SITE_URL = "https://jagdishsah.com.np";
+const OG_IMAGE = {
+  url: "/og-card.jpg",
+  width: 1200,
+  height: 630,
+  alt: "Jagdish Sah — Computer Engineering Student and NEPSE Market Analyst",
+};
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jagdishsah.com.np"),
-  title: "Jagdish Sah — Computer Engineering Student, Creative Builder & NEPSE Analyst | Bishnupur, Siraha, Nepal",
+  metadataBase: new URL(SITE_URL),
+  title: "Jagdish Sah — CSE Student & NEPSE Analyst, Nepal",
   description:
-    "Official personal hub of Jagdish Sah from Bishnupur, Siraha, Nepal. Computer Engineering student at TU IOE WRC Pokhara, creator of autonomous data pipelines, active NEPSE market analyst, and builder of modern digital experiences.",
-  keywords: [
-    "Jagdish Sah",
-    "Jagdish",
-    "Bishnupur",
-    "Siraha",
-    "Mirchaiya",
-    "Nepse Analyst",
-    "TU IOE WRC",
-    "IOE Pokhara",
-    "Computer Engineering Nepal",
-    "Stock Market Trader Nepal",
-    "Python Developer Nepal",
-    "Autonomous Data Pipelines",
-    "Canteen PWA",
-  ],
-  authors: [{ name: "Jagdish Sah", url: "https://jagdishsah.com.np" }],
+    "Computer Engineering student at IOE WRC Pokhara and NEPSE market analyst from Siraha, Nepal. Projects, market research and official CV.",
+  authors: [{ name: "Jagdish Sah", url: SITE_URL }],
   creator: "Jagdish Sah",
   publisher: "Jagdish Sah",
   alternates: {
-    canonical: "https://jagdishsah.com.np",
+    canonical: SITE_URL + "/",
   },
   openGraph: {
-    title: "Jagdish Sah — Computer Engineering Student & NEPSE Analyst | Bishnupur, Siraha, Nepal",
+    title: "Jagdish Sah — CSE Student & NEPSE Analyst, Nepal",
     description:
-      "Explore the digital universe of Jagdish Sah: autonomous data pipelines, 8 planetary projects, NEPSE market analysis, and professional CV.",
-    url: "https://jagdishsah.com.np",
+      "Projects, NEPSE market research and CV of Jagdish Sah, Computer Engineering student at IOE WRC Pokhara.",
+    url: SITE_URL + "/",
     siteName: "Jagdish Universe",
     locale: "en_US",
     type: "website",
-    images: [
-      {
-        url: "/ProfilePicFormal.jpg",
-        width: 1125,
-        height: 1395,
-        alt: "Jagdish Sah Formal Portrait",
-      },
-    ],
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jagdish Sah — Computer Engineering Student & NEPSE Analyst | Bishnupur, Siraha",
-    description: "Personal hub of Jagdish Sah from Bishnupur, Siraha, Nepal. Projects, NEPSE research, and official CV.",
-    images: ["/ProfilePicFormal.jpg"],
+    title: "Jagdish Sah — CSE Student & NEPSE Analyst, Nepal",
+    description:
+      "Projects, NEPSE market research and CV of Jagdish Sah, Computer Engineering student at IOE WRC Pokhara.",
+    images: [OG_IMAGE.url],
   },
   robots: {
     index: true,
@@ -66,12 +74,10 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/avatar.png", type: "image/png" },
       { url: "/icon.png", sizes: "192x192", type: "image/png" },
       { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
     apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: ["/avatar.png"],
   },
 };
 
@@ -80,42 +86,42 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://jagdishsah.com.np/#person",
-      "name": "Jagdish Sah",
-      "alternateName": ["Jagdish", "DayaSah", "jagdishsah126"],
-      "gender": "Male",
-      "nationality": "Nepalese",
-      "birthPlace": {
+      "@id": SITE_URL + "/#person",
+      name: "Jagdish Sah",
+      alternateName: ["Jagdish"],
+      gender: "Male",
+      nationality: "Nepalese",
+      birthPlace: {
         "@type": "Place",
-        "name": "Bishnupur, Siraha, Nepal",
+        name: "Bishnupur, Siraha, Nepal",
       },
-      "homeLocation": {
+      homeLocation: {
         "@type": "Place",
-        "name": "Bishnupur, Siraha, Nepal",
+        name: "Bishnupur, Siraha, Nepal",
       },
-      "workLocation": {
+      workLocation: {
         "@type": "Place",
-        "name": "Pokhara, Nepal",
+        name: "Pokhara, Nepal",
       },
-      "alumniOf": [
+      alumniOf: [
         {
           "@type": "EducationalOrganization",
-          "name": "Sagarmatha Higher Secondary School",
-          "location": "Mirchaiya, Siraha, Nepal",
+          name: "Sagarmatha Higher Secondary School",
+          location: "Mirchaiya, Siraha, Nepal",
         },
         {
           "@type": "EducationalOrganization",
-          "name": "Prasadi Academy",
-          "location": "Lalitpur, Nepal",
+          name: "Prasadi Academy",
+          location: "Lalitpur, Nepal",
         },
         {
           "@type": "EducationalOrganization",
-          "name": "Institute of Engineering (IOE), Western Regional Campus (WRC), Tribhuvan University",
-          "location": "Pokhara, Nepal",
+          name: "Institute of Engineering (IOE), Western Regional Campus (WRC), Tribhuvan University",
+          location: "Pokhara, Nepal",
         },
       ],
-      "jobTitle": "Computer Engineering Student & NEPSE Market Analyst",
-      "knowsAbout": [
+      jobTitle: "Computer Engineering Student & NEPSE Market Analyst",
+      knowsAbout: [
         "Computer Engineering",
         "Python",
         "Nepal Stock Exchange (NEPSE)",
@@ -124,23 +130,22 @@ const jsonLd = {
         "Full-Stack Web Development",
         "Agentic AI Development",
       ],
-      "url": "https://jagdishsah.com.np",
-      "sameAs": [
+      url: SITE_URL,
+      sameAs: [
         "https://github.com/jagdishsah126",
         "https://github.com/DayaSah",
         "https://github.com/Jagdishsah",
         "https://github.com/Jagdish-sah",
-        "https://github.com/YourZara",
       ],
     },
     {
       "@type": "WebSite",
-      "@id": "https://jagdishsah.com.np/#website",
-      "url": "https://jagdishsah.com.np",
-      "name": "Jagdish Sah — Personal Universe",
-      "description": "Personal Hub, Interactive Projects, and Official CV of Jagdish Sah",
-      "publisher": {
-        "@id": "https://jagdishsah.com.np/#person",
+      "@id": SITE_URL + "/#website",
+      url: SITE_URL + "/",
+      name: "Jagdish Sah — Personal Universe",
+      description: "Personal Hub, Interactive Projects, and Official CV of Jagdish Sah",
+      publisher: {
+        "@id": SITE_URL + "/#person",
       },
     },
   ],
@@ -152,26 +157,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
-          rel="stylesheet"
-        />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/avatar.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/apple-icon.png" />
+    <html
+      lang="en"
+      className={`${jakarta.variable} ${fira.variable} ${caveat.variable}`}
+    >
+      <body className="antialiased min-h-screen bg-space-void text-slate-100 relative selection:bg-cyan-500/30 selection:text-cyan-200">
+        <Starfield />
+        <AuroraGlow />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className="antialiased min-h-screen bg-space-void text-slate-100 relative selection:bg-cyan-500/30 selection:text-cyan-200">
-        <Starfield />
-        <AuroraGlow />
-        <main className="relative z-10 flex flex-col min-h-screen pb-28">{children}</main>
+        <main className="relative z-10 flex flex-col min-h-screen pb-28">
+          {children}
+          <SiteFooter />
+        </main>
+        <GlassDock />
       </body>
     </html>
   );

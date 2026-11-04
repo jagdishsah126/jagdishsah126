@@ -51,9 +51,9 @@ export default function ContactTab() {
           <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
           <span>Contact Us</span>
         </div>
-        <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-3">
-          Get in Touch & <span className="cosmic-gradient-text">Connect</span>
-        </h2>
+        <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-3">
+          Get in Touch &amp; <span className="cosmic-gradient-text">Connect</span>
+        </h1>
         <p className="text-sm md:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
           Open for engineering opportunities, quantitative market data collaborations, or human-agent AI projects.
         </p>
