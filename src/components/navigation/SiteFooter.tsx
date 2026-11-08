@@ -72,6 +72,14 @@ export default function SiteFooter() {
               </li>
               <li>
                 <a
+                  href="https://url.jagdishsah.com.np/"
+                  className="text-xs text-slate-400 hover:text-cyan-300 transition-colors"
+                >
+                  All live projects
+                </a>
+              </li>
+              <li>
+                <a
                   href={`mailto:${PORTFOLIO_DATA.personal.email}`}
                   className="text-xs text-slate-400 hover:text-cyan-300 transition-colors"
                 >
