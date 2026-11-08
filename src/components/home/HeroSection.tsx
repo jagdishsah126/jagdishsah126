@@ -106,22 +106,28 @@ export default function HeroSection() {
         />
       )}
 
+      {/*
+        The hero is the LCP element. It used to start at opacity 0
+        (`initial="hidden"`), so nothing was painted until the stagger finished
+        — that is what pushed mobile LCP into double digits. `initial={false}`
+        renders it visible on the first paint.
+      */}
       <motion.div
         className="text-center px-4 z-10 max-w-4xl mx-auto"
         variants={containerVariants}
-        initial="hidden"
+        initial={false}
         animate="visible"
       >
         {/* Profile Photo */}
         <motion.div variants={itemVariants} className="mb-8 flex justify-center">
           <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full border-4 border-blue-500 overflow-hidden shadow-[0_0_25px_rgba(59,130,246,0.6)] ring-4 ring-blue-500/30">
             <Image
-              src="/images/profile.jpg"
+              src="/images/profile.webp"
               alt="Jagdish Sah"
               fill
+              sizes="(max-width: 640px) 176px, 208px"
               className="object-cover"
               priority
-              unoptimized
             />
           </div>
         </motion.div>
