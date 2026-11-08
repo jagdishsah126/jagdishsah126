@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import CosmicCanvas from "@/components/CosmicCanvas";
 import RotationGuard from "@/components/system/RotationGuard";
+import { Analytics } from "@vercel/analytics/next";
 
 const siteUrl = "https://swarm.jagdishsah.com.np";
 
@@ -140,6 +141,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <CosmicCanvas />
         {children}
+        <Analytics />
       </body>
     </html>
   );
