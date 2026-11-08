@@ -46,6 +46,46 @@ export function profilePage(name: string, path: string, description: string) {
   };
 }
 
+/** Article schema for a post under /topics/. Author and publisher point at the Person node in the layout. */
+export function article(opts: {
+  title: string;
+  description: string;
+  path: string;
+  datePublished: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": SITE_URL + opts.path + "#article",
+    headline: opts.title,
+    description: opts.description,
+    datePublished: opts.datePublished,
+    dateModified: opts.datePublished,
+    url: SITE_URL + opts.path,
+    mainEntityOfPage: { "@id": SITE_URL + opts.path },
+    author: { "@id": PERSON_ID },
+    publisher: { "@id": PERSON_ID },
+    inLanguage: "en",
+  };
+}
+
+/** ItemList for the five writing sections on /topics/. */
+export function topicItemList(topics: { title: string; slug: string; description: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Topics by Jagdish Sah",
+    numberOfItems: topics.length,
+    itemListElement: topics.map((topic, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: topic.title,
+      description: topic.description,
+      url: SITE_URL + "/topics/" + topic.slug + "/",
+    })),
+  };
+}
+
 /** ItemList gives search engines an explicit list of the projects on /projects/. */
 export function projectItemList(projects: ProjectPlanet[]) {
   return {

@@ -20,8 +20,16 @@ const ROUTES = [
   { path: "/nepse/", priority: "0.9", changefreq: "weekly" },
   { path: "/cv/", priority: "0.9", changefreq: "monthly" },
   { path: "/about/", priority: "0.8", changefreq: "monthly" },
+  { path: "/topics/", priority: "0.8", changefreq: "weekly", file: "src/app/topics/page.tsx" },
   { path: "/spaces/", priority: "0.7", changefreq: "monthly" },
   { path: "/contact/", priority: "0.6", changefreq: "yearly" },
+  // Topic pages all render from the data file, so that is where their lastmod comes from.
+  ...["nepse-tools", "nepse-view", "nepse-strategy", "life", "career"].map((slug) => ({
+    path: `/topics/${slug}/`,
+    priority: "0.7",
+    changefreq: "weekly",
+    file: "src/data/topics.ts",
+  })),
 ];
 
 // <lastmod> comes from the commit date of the file that renders each route, not
@@ -31,9 +39,10 @@ const ROUTES = [
 //
 // Builds without git history (or without git at all) simply omit the tag rather
 // than invent a date.
-function lastmodFor(routePath) {
+function lastmodFor(route) {
   const file =
-    routePath === "/" ? "src/app/page.tsx" : `src/app${routePath}page.tsx`;
+    route.file ??
+    (route.path === "/" ? "src/app/page.tsx" : `src/app${route.path}page.tsx`);
   try {
     const out = execFileSync("git", ["log", "-1", "--format=%cs", "--", file], {
       encoding: "utf8",
@@ -48,7 +57,7 @@ function lastmodFor(routePath) {
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${ROUTES.map((r) => {
-  const lastmod = lastmodFor(r.path);
+  const lastmod = lastmodFor(r);
   return `  <url>
     <loc>${SITE}${r.path}</loc>${lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : ""}
     <changefreq>${r.changefreq}</changefreq>

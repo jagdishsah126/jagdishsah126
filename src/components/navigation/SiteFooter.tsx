@@ -15,6 +15,7 @@ const SECTIONS = [
   { href: "/about/", label: "About & Journey" },
   { href: "/projects/", label: "Projects" },
   { href: "/nepse/", label: "NEPSE Analysis" },
+  { href: "/topics/", label: "Topics" },
   { href: "/spaces/", label: "Digital Spaces" },
   { href: "/cv/", label: "Official CV" },
   { href: "/contact/", label: "Contact" },
