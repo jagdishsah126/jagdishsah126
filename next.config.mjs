@@ -4,7 +4,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  output: "export",
+  // `output: "export"` was removed so middleware can run: it decides between
+  // the desktop and legacy site on the first visit and shields crawlers from
+  // the rotation redirects.
   trailingSlash: true,
 };
 

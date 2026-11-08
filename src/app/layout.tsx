@@ -5,6 +5,7 @@ import Starfield from "../components/cosmic/Starfield";
 import AuroraGlow from "../components/cosmic/AuroraGlow";
 import GlassDock from "../components/navigation/GlassDock";
 import SiteFooter from "../components/navigation/SiteFooter";
+import RotationGuard from "../components/system/RotationGuard";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -161,6 +162,9 @@ export default function RootLayout({
       lang="en"
       className={`${jakarta.variable} ${fira.variable} ${caveat.variable}`}
     >
+      <head>
+        <RotationGuard />
+      </head>
       <body className="antialiased min-h-screen bg-space-void text-slate-100 relative selection:bg-cyan-500/30 selection:text-cyan-200">
         <Starfield />
         <AuroraGlow />
