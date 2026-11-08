@@ -35,6 +35,8 @@
 | 2026-11-07 | QA fix | `src/data/portfolio.ts` | Trim role label so it fits one line | ~+1 | ~-1 |
 | 2026-11-07 | QA fix | `src/app/layout.tsx` | Cap banna layers and wait, add reveal failsafe | ~+17 | ~-3 |
 | 2026-11-07 | Polish | `src/app/layout.tsx` | Slow the build to `data-speed="0.85"`, drop the UI credit pill, failsafe to 7s | ~+13 | ~-15 |
+| 2026-11-08 | Effect | `src/app/layout.tsx` | Layer cap 48 → 400 so every section is built; per-viewport stuck guard replaces the 7s global reveal | +40 | -9 |
+| 2026-11-08 | Effect | `src/app/globals.css` | Reveal is transform-only; banna owns opacity, removing the double-animation flicker | +4 | -3 |
 | 2026-11-07 | Docs | `README.md` | Stack, scripts, structure, content editing, effect tuning, deploy notes | ~+131 | ~-0 |
 | 2026-11-07 | Docs | `AgentDoc/Credit.md` | Section 10.1 records attribution as shipped and the single-file policy | ~+18 | ~-0 |
 

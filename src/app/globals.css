@@ -1232,14 +1232,15 @@ img {
    REVEAL
    ========================================================================== */
 
+/* Reveal is transform-only on purpose: the build effect already owns opacity
+   through its own .sb-wait class, and two observers both animating opacity on
+   the same element produces a flicker. */
 .reveal {
-  opacity: 0;
   transform: translateY(18px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition: transform 0.7s var(--ease);
 }
 
 .reveal[data-shown="true"] {
-  opacity: 1;
   transform: none;
 }
 

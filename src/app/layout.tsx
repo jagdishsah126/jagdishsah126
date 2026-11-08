@@ -77,28 +77,59 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         {/*
           Cursor build effect, vendored locally. Licence and attribution are
-          recorded in AgentDoc/Credit.md — the only place they live.
+          recorded in Credit.md — the only place they live.
           Blocking, not deferred, so the page never flashes in before the build
-          starts. Layers are capped low and the pace is slow on purpose.
+          starts. The layer cap covers the whole document, not just the hero, so
+          each section is built by the crew as it scrolls into view.
         */}
         <script
           src="/vendor/banna.js"
           data-once="session"
           data-speed="0.85"
           data-agents="6"
-          data-max-layers="48"
-          data-max-wait="3"
+          data-max-layers="400"
+          data-max-wait="2.5"
           data-credit="false"
         />
         {/*
-          Failsafe: the effect hides each element with .sb-wait until a cursor
-          places it. If the build stalls (throttled tab, slow device), reveal
-          anything still hidden after 7s rather than leaving the page half empty.
+          Stuck-element guard. The effect hides every element with .sb-wait until
+          a cursor places it, and only places what is on screen — so the page is
+          built as you scroll. If a build stalls (throttled tab, slow device) the
+          section you are looking at must not stay blank. This reveals only what
+          is currently in view and has been hidden for 2s; everything below the
+          fold keeps its turn.
         */}
         <script
           dangerouslySetInnerHTML={{
-            __html:
-              "setTimeout(function(){document.querySelectorAll('.sb-wait').forEach(function(el){el.classList.remove('sb-wait')})},7000)",
+            __html: `
+(function () {
+  var seen = new WeakMap();
+  var started = Date.now();
+  var timer = setInterval(function () {
+    var waiting = document.querySelectorAll(".sb-wait");
+    if (!waiting.length || Date.now() - started > 120000) {
+      clearInterval(timer);
+      return;
+    }
+    var now = Date.now();
+    for (var i = 0; i < waiting.length; i++) {
+      var el = waiting[i];
+      var r = el.getBoundingClientRect();
+      var onScreen = r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth;
+      if (!onScreen) {
+        seen.delete(el);
+        continue;
+      }
+      var since = seen.get(el) || now;
+      seen.set(el, since);
+      if (now - since > 2000) {
+        el.classList.remove("sb-wait");
+        seen.delete(el);
+      }
+    }
+  }, 500);
+})();
+`.trim(),
           }}
         />
       </head>
