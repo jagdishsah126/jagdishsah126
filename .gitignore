@@ -45,3 +45,7 @@ ASSUME.md
 # pnpm
 .pnpm-store/
 .pnpm-debug.log*
+
+# Local working notes - not published
+SEO.md
+Journal.md
