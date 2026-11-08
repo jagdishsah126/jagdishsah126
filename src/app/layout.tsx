@@ -3,6 +3,7 @@ import "./globals.css";
 import CosmicCanvas from "@/components/CosmicCanvas";
 import RotationGuard from "@/components/system/RotationGuard";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const siteUrl = "https://swarm.jagdishsah.com.np";
 
@@ -142,6 +143,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CosmicCanvas />
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
