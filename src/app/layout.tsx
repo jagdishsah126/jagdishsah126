@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import CosmicCanvas from "@/components/CosmicCanvas";
+import RotationGuard from "@/components/system/RotationGuard";
 
 const siteUrl = "https://swarm.jagdishsah.com.np";
 
@@ -36,7 +37,9 @@ export const metadata: Metadata = {
     description: "Data-driven web systems, autonomous pipelines, and market intelligence.",
     images: ["/media/hero-portrait.webp"],
   },
-  robots: { index: true, follow: true },
+  // Alternate design of the same portfolio: keep it out of the index so it
+  // does not compete with jagdishsah.com.np, but still follow its links.
+  robots: { index: false, follow: true },
 };
 
 export const viewport: Viewport = {
@@ -64,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        <RotationGuard />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
