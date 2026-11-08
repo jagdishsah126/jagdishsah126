@@ -94,10 +94,11 @@ export default function ProjectsTab({ onSelectProject }: ProjectsTabProps) {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
+            aria-label="Search projects"
             placeholder="Search tech or project..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 rounded-xl bg-space-card/70 border border-white/10 text-xs font-mono text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-400/50 backdrop-blur-md"
+            className="w-full pl-9 pr-3 py-2 rounded-xl bg-space-card/70 border border-white/10 text-xs font-mono text-slate-200 placeholder-slate-400 focus:outline-none focus:border-cyan-400/50 backdrop-blur-md"
           />
         </div>
       </div>
@@ -129,9 +130,9 @@ export default function ProjectsTab({ onSelectProject }: ProjectsTabProps) {
               </div>
 
               {/* Title & Tagline */}
-              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+              <h2 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
                 {planet.name}
-              </h3>
+              </h2>
               <p className="text-xs md:text-sm text-slate-300 leading-relaxed mb-4">
                 {planet.tagline}
               </p>

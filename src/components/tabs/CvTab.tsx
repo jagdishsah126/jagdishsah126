@@ -158,7 +158,7 @@ export default function CvTab() {
             {education.map((edu, idx) => (
               <div key={idx} className="cv-card p-4 rounded-xl border border-current/10 bg-current/5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
-                  <h3 className="text-base font-bold">{edu.degree}</h3>
+                  <h2 className="text-base font-bold">{edu.degree}</h2>
                   <span className="text-xs font-mono opacity-80">{edu.period}</span>
                 </div>
 
@@ -202,7 +202,7 @@ export default function CvTab() {
                 key={category.title}
                 className="cv-card p-3.5 rounded-xl border border-current/10 bg-current/5"
               >
-                <h4 className="font-mono font-bold mb-2 opacity-75">{category.title}</h4>
+                <h3 className="font-mono font-bold mb-2 opacity-75">{category.title}</h3>
                 <div className="flex flex-wrap gap-1.5">
                   {category.skills.map((skill) => (
                     <span
@@ -230,7 +230,7 @@ export default function CvTab() {
               <div key={p.id} className="cv-card p-4 rounded-xl border border-current/10 bg-current/5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
                   <div className="flex items-center gap-2">
-                    <h3 className="text-base font-bold">{p.name}</h3>
+                    <h2 className="text-base font-bold">{p.name}</h2>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-current/20">
                       {p.planetType}
                     </span>

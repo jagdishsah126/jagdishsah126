@@ -62,9 +62,9 @@ export default function ContactTab() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         {/* Direct Channels & Socials */}
         <div className="space-y-3.5">
-          <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">
+          <h2 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">
             Direct Communication Channels
-          </h3>
+          </h2>
 
           {/* Email */}
           <div className="cosmic-glass p-3.5 flex items-center justify-between gap-3">
@@ -180,9 +180,9 @@ export default function ContactTab() {
           </div>
 
           {/* Social Profiles Grid */}
-          <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400 pt-2 mb-1">
+          <h2 className="text-xs font-mono uppercase tracking-wider text-slate-400 pt-2 mb-1">
             Social & Developer Networks
-          </h3>
+          </h2>
 
           <div className="grid grid-cols-3 gap-2">
             {/* Facebook */}
@@ -234,50 +234,62 @@ export default function ContactTab() {
           <form onSubmit={handleSend} className="space-y-3.5">
             <div className="flex items-center gap-2 mb-1">
               <Sparkles className="w-4 h-4 text-cyan-400" />
-              <h3 className="text-sm font-mono font-bold uppercase tracking-wider text-white">
+              <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-white">
                 Send a Direct Message
-              </h3>
+              </h2>
             </div>
 
             <div>
-              <label className="text-[10px] font-mono uppercase text-slate-400 block mb-1">
+              <label
+                htmlFor="contact-name"
+                className="text-[10px] font-mono uppercase text-slate-400 block mb-1"
+              >
                 Your Name
               </label>
               <input
+                id="contact-name"
                 type="text"
                 required
                 value={senderName}
                 onChange={(e) => setSenderName(e.target.value)}
                 placeholder="e.g. Alex Mercer"
-                className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400/50"
+                className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400/50"
               />
             </div>
 
             <div>
-              <label className="text-[10px] font-mono uppercase text-slate-400 block mb-1">
+              <label
+                htmlFor="contact-email"
+                className="text-[10px] font-mono uppercase text-slate-400 block mb-1"
+              >
                 Your Email
               </label>
               <input
+                id="contact-email"
                 type="email"
                 required
                 value={senderEmail}
                 onChange={(e) => setSenderEmail(e.target.value)}
                 placeholder="name@domain.com"
-                className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400/50"
+                className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400/50"
               />
             </div>
 
             <div>
-              <label className="text-[10px] font-mono uppercase text-slate-400 block mb-1">
+              <label
+                htmlFor="contact-message"
+                className="text-[10px] font-mono uppercase text-slate-400 block mb-1"
+              >
                 Message Content
               </label>
               <textarea
+                id="contact-message"
                 required
                 rows={4}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Write your project inquiry, trading question, or note here..."
-                className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400/50 resize-none"
+                className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400/50 resize-none"
               />
             </div>
 
@@ -290,7 +302,7 @@ export default function ContactTab() {
             </button>
           </form>
 
-          <div className="pt-3 mt-3 border-t border-white/10 text-[10px] font-mono text-slate-500 text-center">
+          <div className="pt-3 mt-3 border-t border-white/10 text-[10px] font-mono text-slate-400 text-center">
             Zero Tracking • Direct Client Mail Relay
           </div>
         </div>

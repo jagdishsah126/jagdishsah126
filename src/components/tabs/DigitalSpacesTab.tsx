@@ -42,9 +42,9 @@ export default function DigitalSpacesTab() {
                 </span>
               </div>
 
-              <h3 className="text-xl font-bold text-white mb-1 font-mono">
+              <h2 className="text-xl font-bold text-white mb-1 font-mono">
                 @{space.account}
-              </h3>
+              </h2>
               <p className="text-xs font-mono text-slate-400 mb-3">{space.focus}</p>
 
               <p className="text-xs md:text-sm text-slate-300 leading-relaxed mb-4">

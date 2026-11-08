@@ -42,9 +42,9 @@ export default function JourneyTab() {
           <span>The Foundational Spark</span>
         </div>
 
-        <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+        <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
           {personal.fatherTribute.title}
-        </h3>
+        </h2>
 
         <p className="text-sm md:text-base text-slate-200 leading-relaxed font-sans mb-4">
           {personal.fatherTribute.description}
@@ -76,7 +76,7 @@ export default function JourneyTab() {
                 </span>
               </div>
 
-              <h4 className="text-xl font-bold text-white mb-1">{step.title}</h4>
+              <h3 className="text-xl font-bold text-white mb-1">{step.title}</h3>
 
               <div className="flex items-center gap-1.5 text-xs font-mono text-slate-400 mb-3">
                 <MapPin className="w-3.5 h-3.5 text-violet-400" />
@@ -113,9 +113,9 @@ export default function JourneyTab() {
         <div className="cosmic-glass p-6">
           <div className="flex items-center gap-2 mb-4">
             <Languages className="w-4 h-4 text-cyan-400" />
-            <h3 className="text-base font-bold text-white uppercase tracking-wider font-mono">
+            <h2 className="text-base font-bold text-white uppercase tracking-wider font-mono">
               Multilingual Spectrum
-            </h3>
+            </h2>
           </div>
 
           <div className="space-y-3 font-mono text-xs">
@@ -141,9 +141,9 @@ export default function JourneyTab() {
           <div>
             <div className="flex items-center gap-2 mb-3">
               <Bot className="w-4 h-4 text-violet-400" />
-              <h3 className="text-base font-bold text-white uppercase tracking-wider font-mono">
+              <h2 className="text-base font-bold text-white uppercase tracking-wider font-mono">
                 {personal.aiPhilosophy.title}
-              </h3>
+              </h2>
             </div>
             <p className="text-sm text-slate-300 leading-relaxed mb-4">
               {personal.aiPhilosophy.description}

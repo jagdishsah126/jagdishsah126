@@ -39,7 +39,7 @@ export default function SiteFooter() {
           </div>
 
           <nav aria-label="Site sections">
-            <p className="text-[11px] font-mono uppercase tracking-widest text-slate-500 mb-3">
+            <p className="text-[11px] font-mono uppercase tracking-widest text-slate-400 mb-3">
               Sections
             </p>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5">
@@ -57,7 +57,7 @@ export default function SiteFooter() {
           </nav>
 
           <div>
-            <p className="text-[11px] font-mono uppercase tracking-widest text-slate-500 mb-3">
+            <p className="text-[11px] font-mono uppercase tracking-widest text-slate-400 mb-3">
               Elsewhere
             </p>
             <ul className="space-y-1.5">
@@ -90,7 +90,7 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-8 pt-4 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] font-mono text-slate-500">
+        <div className="mt-8 pt-4 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] font-mono text-slate-400">
           <span>
             © {year} Jagdish Sah · {PORTFOLIO_DATA.personal.domain}
           </span>

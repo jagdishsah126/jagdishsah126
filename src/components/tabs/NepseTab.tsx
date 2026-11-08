@@ -71,7 +71,7 @@ export default function NepseTab() {
             <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest block mb-1">
               Active Strategy
             </span>
-            <h3 className="text-2xl font-bold text-white mb-2">{nepse.tradingStyle}</h3>
+            <h2 className="text-2xl font-bold text-white mb-2">{nepse.tradingStyle}</h2>
             <p className="text-xs md:text-sm text-slate-300 max-w-xl leading-relaxed">
               Disciplined swing entries guided by volume surges, broker accumulation concentration, and
               structural price breakouts rather than speculative social chatter.
@@ -94,10 +94,10 @@ export default function NepseTab() {
 
       {/* Four Core Pillars */}
       <div className="mb-12">
-        <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
+        <h2 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
           <LineChart className="w-4 h-4 text-emerald-400" />
           <span>Core Analytical Pillars</span>
-        </h3>
+        </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {nepse.philosophyPoints.map((pillar, i) => (
@@ -106,7 +106,7 @@ export default function NepseTab() {
                 <span className="text-xs font-mono text-emerald-400 block mb-1">
                   Pillar 0{i + 1}
                 </span>
-                <h4 className="text-lg font-bold text-white mb-2">{pillar.title}</h4>
+                <h3 className="text-lg font-bold text-white mb-2">{pillar.title}</h3>
                 <p className="text-xs md:text-sm text-slate-300 leading-relaxed">{pillar.desc}</p>
               </div>
             </div>
@@ -116,17 +116,17 @@ export default function NepseTab() {
 
       {/* Custom Tooling Suite */}
       <div className="mb-12">
-        <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
+        <h2 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
           <Database className="w-4 h-4 text-cyan-400" />
           <span>Proprietary Tooling & Data Pipelines</span>
-        </h3>
+        </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {nepseTools.map((tool, idx) => (
             <div key={idx} className="cosmic-glass p-5 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <h4 className="text-base font-bold text-white font-mono">{tool.name}</h4>
+                  <h3 className="text-base font-bold text-white font-mono">{tool.name}</h3>
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-emerald-300 border border-emerald-500/20">
                     {tool.status}
                   </span>
@@ -170,9 +170,9 @@ export default function NepseTab() {
           <ShieldAlert className="w-4 h-4 text-violet-400" />
           <span>V2 Architecture Roadmap</span>
         </div>
-        <h4 className="text-lg font-bold text-white mb-2">
+        <h3 className="text-lg font-bold text-white mb-2">
           Preparing for Intraday Trading & Short-Selling
-        </h4>
+        </h3>
         <p className="text-xs md:text-sm text-slate-300 leading-relaxed font-sans">
           {nepse.v2Vision}
         </p>

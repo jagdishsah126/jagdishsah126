@@ -100,7 +100,7 @@ export default function GlassDock() {
           className={`p-2 rounded-xl text-xs transition-all ${
             audioOn
               ? "text-cyan-300 hover:bg-cyan-500/10"
-              : "text-slate-500 hover:text-slate-300 hover:bg-white/5"
+              : "text-slate-400 hover:text-slate-300 hover:bg-white/5"
           }`}
         >
           {audioOn ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
