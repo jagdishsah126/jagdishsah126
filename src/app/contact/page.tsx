@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ContactTab from "../../components/tabs/ContactTab";
 import JsonLd from "../../components/seo/JsonLd";
-import { breadcrumb, OG_IMAGE } from "../../utils/schema";
+import { breadcrumb, ogImage } from "../../utils/schema";
 import { ArrowLeft, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description:
       "Open for engineering opportunities, NEPSE data collaborations and agentic AI projects.",
     url: "https://jagdishsah.com.np/contact/",
-    images: [OG_IMAGE],
+    images: [ogImage("contact", "Contact Jagdish Sah")],
   },
 };
 

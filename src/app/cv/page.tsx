@@ -2,7 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import CvTab from "../../components/tabs/CvTab";
 import JsonLd from "../../components/seo/JsonLd";
-import { breadcrumb, OG_IMAGE, profilePage } from "../../utils/schema";
+import { breadcrumb, ogImage, profilePage } from "../../utils/schema";
 import Link from "next/link";
 import { ArrowLeft, Sparkles } from "lucide-react";
 
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: "https://jagdishsah.com.np/cv/",
     siteName: "Jagdish Universe",
     type: "profile",
-    images: [OG_IMAGE],
+    images: [ogImage("cv", "Curriculum Vitae — Jagdish Sah, Computer Engineering at IOE WRC")],
   },
 };
 

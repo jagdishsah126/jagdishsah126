@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "../../../components/seo/JsonLd";
-import { breadcrumb, OG_IMAGE } from "../../../utils/schema";
+import { breadcrumb, ogImage } from "../../../utils/schema";
 import { TOPICS, getTopic } from "../../../data/topics";
 import { ArrowLeft, ArrowRight, Sparkles, ExternalLink } from "lucide-react";
 
@@ -32,7 +32,7 @@ export async function generateMetadata({
       title: `${topic.title} — Jagdish Sah`,
       description: topic.description,
       url,
-      images: [OG_IMAGE],
+      images: [ogImage(topic.slug, `${topic.title} — ${topic.tagline}`)],
     },
   };
 }
@@ -94,7 +94,7 @@ export default async function TopicPage({
         </div>
 
         <section className="mt-8 rounded-2xl bg-space-card/70 backdrop-blur-md border border-white/10 p-5">
-          <h2 className="text-[11px] font-mono uppercase tracking-widest text-slate-500 mb-3">
+          <h2 className="text-[11px] font-mono uppercase tracking-widest text-slate-400 mb-3">
             Start here
           </h2>
           <ul className="space-y-2">
@@ -128,7 +128,7 @@ export default async function TopicPage({
 
         {topic.posts.length > 0 && (
           <section className="mt-8">
-            <h2 className="text-[11px] font-mono uppercase tracking-widest text-slate-500 mb-3">
+            <h2 className="text-[11px] font-mono uppercase tracking-widest text-slate-400 mb-3">
               Posts
             </h2>
             <ul className="space-y-3">
@@ -142,7 +142,7 @@ export default async function TopicPage({
                     <p className="text-xs text-slate-300 leading-relaxed">{post.summary}</p>
                     <time
                       dateTime={post.date}
-                      className="mt-2 block text-[11px] font-mono text-slate-500"
+                      className="mt-2 block text-[11px] font-mono text-slate-400"
                     >
                       {post.date}
                     </time>

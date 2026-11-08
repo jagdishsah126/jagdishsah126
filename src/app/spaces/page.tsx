@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import DigitalSpacesTab from "../../components/tabs/DigitalSpacesTab";
 import JsonLd from "../../components/seo/JsonLd";
-import { breadcrumb, OG_IMAGE } from "../../utils/schema";
+import { breadcrumb, ogImage } from "../../utils/schema";
 import { ArrowLeft, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description:
       "Five purposeful GitHub spaces: profile, data pipelines, academic work, experiments and AI agents.",
     url: "https://jagdishsah.com.np/spaces/",
-    images: [OG_IMAGE],
+    images: [ogImage("spaces", "Digital Spaces — five GitHub spaces of Jagdish Sah")],
   },
 };
 

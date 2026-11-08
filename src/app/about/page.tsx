@@ -2,7 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import JourneyTab from "../../components/tabs/JourneyTab";
 import JsonLd from "../../components/seo/JsonLd";
-import { breadcrumb, OG_IMAGE, profilePage } from "../../utils/schema";
+import { breadcrumb, ogImage, profilePage } from "../../utils/schema";
 import Link from "next/link";
 import { ArrowLeft, Sparkles, FileText } from "lucide-react";
 
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: "https://jagdishsah.com.np/about/",
     siteName: "Jagdish Universe",
     type: "profile",
-    images: [OG_IMAGE],
+    images: [ogImage("about", "About Jagdish Sah — from Siraha to IOE WRC Pokhara")],
   },
 };
 

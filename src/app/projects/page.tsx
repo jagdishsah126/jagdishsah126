@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ProjectsView from "../../components/views/ProjectsView";
 import JsonLd from "../../components/seo/JsonLd";
-import { breadcrumb, OG_IMAGE, projectItemList } from "../../utils/schema";
+import { breadcrumb, ogImage, projectItemList } from "../../utils/schema";
 import { PORTFOLIO_DATA } from "../../data/portfolioData";
 import { ArrowLeft, Sparkles, ArrowUpRight } from "lucide-react";
 
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     description:
       "Autonomous NEPSE data pipelines, offline PWA tools, Linux utilities and agentic AI systems.",
     url: "https://jagdishsah.com.np/projects/",
-    images: [OG_IMAGE],
+    images: [ogImage("projects", "Projects — autonomous pipelines, PWA tools and agentic AI")],
   },
 };
 
@@ -48,7 +48,7 @@ export default function ProjectsPage() {
           className="group flex items-center justify-between gap-3 rounded-2xl bg-space-card/70 backdrop-blur-md border border-white/10 px-5 py-3 transition-colors hover:bg-space-card-hover"
         >
           <span className="text-xs text-slate-300">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-slate-500 block mb-0.5">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400 block mb-0.5">
               Full index
             </span>
             22 live projects across four accounts, one page

@@ -29,7 +29,7 @@ const caveat = Caveat({
 
 const SITE_URL = "https://jagdishsah.com.np";
 const OG_IMAGE = {
-  url: "/og-card.jpg",
+  url: "/og/home.jpg",
   width: 1200,
   height: 630,
   alt: "Jagdish Sah — Computer Engineering Student and NEPSE Market Analyst",
@@ -57,11 +57,9 @@ export const metadata: Metadata = {
     images: [OG_IMAGE],
   },
   twitter: {
+    // Card type only. Title, description and image fall through to the page's
+    // own og:* tags, so each route previews as itself instead of as the home card.
     card: "summary_large_image",
-    title: "Jagdish Sah — CSE Student & NEPSE Analyst, Nepal",
-    description:
-      "Projects, NEPSE market research and CV of Jagdish Sah, Computer Engineering student at IOE WRC Pokhara.",
-    images: [OG_IMAGE.url],
   },
   robots: {
     index: true,

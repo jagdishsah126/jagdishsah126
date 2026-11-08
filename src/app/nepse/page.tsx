@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import NepseTab from "../../components/tabs/NepseTab";
 import JsonLd from "../../components/seo/JsonLd";
-import { breadcrumb, OG_IMAGE } from "../../utils/schema";
+import { breadcrumb, ogImage } from "../../utils/schema";
 import { ArrowLeft, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description:
       "Floorsheet data pipelines, swing trading framework and quantitative tooling for Nepal's stock exchange.",
     url: "https://jagdishsah.com.np/nepse/",
-    images: [OG_IMAGE],
+    images: [ogImage("nepse", "NEPSE Analysis — floorsheet pipelines and broker tracking")],
   },
 };
 

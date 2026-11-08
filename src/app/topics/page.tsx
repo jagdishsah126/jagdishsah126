@@ -2,7 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "../../components/seo/JsonLd";
-import { breadcrumb, OG_IMAGE, topicItemList } from "../../utils/schema";
+import { breadcrumb, ogImage, topicItemList } from "../../utils/schema";
 import { TOPICS } from "../../data/topics";
 import { ArrowLeft, Sparkles, ArrowRight } from "lucide-react";
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description:
       "NEPSE tools, market views, trading strategy, life and career — written from Nepal.",
     url: "https://jagdishsah.com.np/topics/",
-    images: [OG_IMAGE],
+    images: [ogImage("topics", "Topics — NEPSE, code, life and career")],
   },
 };
 

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "../../../../components/seo/JsonLd";
-import { article, breadcrumb, OG_IMAGE } from "../../../../utils/schema";
+import { article, breadcrumb, ogImage } from "../../../../utils/schema";
 import { TOPICS, getPost, getTopic } from "../../../../data/topics";
 import { ArrowLeft } from "lucide-react";
 
@@ -36,7 +36,7 @@ export async function generateMetadata({
       url,
       type: "article",
       publishedTime: post.date,
-      images: [OG_IMAGE],
+      images: [ogImage(topic.slug, `${post.title} — ${topic.title}`)],
     },
   };
 }
@@ -86,7 +86,7 @@ export default async function TopicPostPage({
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3 tracking-tight">
           {post.title}
         </h1>
-        <time dateTime={post.date} className="block text-[11px] font-mono text-slate-500 mb-6">
+        <time dateTime={post.date} className="block text-[11px] font-mono text-slate-400 mb-6">
           {post.date}
         </time>
 
