@@ -32,3 +32,7 @@ yarn-error.log*
 
 # planning documents — kept local, never published
 /AgentDoc
+
+# Local working notes - not published
+SEO.md
+Journal.md
