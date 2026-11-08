@@ -132,11 +132,33 @@ const jsonLd = {
         "Agentic AI Development",
       ],
       url: SITE_URL,
+      image: {
+        "@type": "ImageObject",
+        url: SITE_URL + "/hero-portrait.webp",
+        width: 760,
+        height: 942,
+        caption: "Jagdish Sah",
+      },
+      hasOccupation: {
+        "@type": "Occupation",
+        name: "Computer Engineering Student and NEPSE Market Analyst",
+        occupationLocation: {
+          "@type": "City",
+          name: "Pokhara, Nepal",
+        },
+        skills:
+          "Computer Engineering, Python, NEPSE market analysis, autonomous data pipelines, full-stack web development",
+      },
+      // Every profile that represents the same person. Search engines use this
+      // to merge the entities into one; the root should list all of them, not
+      // just the GitHub ones.
       sameAs: [
         "https://github.com/jagdishsah126",
         "https://github.com/DayaSah",
         "https://github.com/Jagdishsah",
         "https://github.com/Jagdish-sah",
+        "https://www.linkedin.com/in/jagdish-sah6347482ba/",
+        "https://www.instagram.com/jagdish___sah/",
       ],
     },
     {
