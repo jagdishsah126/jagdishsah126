@@ -92,12 +92,14 @@ export default function Hero() {
 
         <div className="hero-portrait">
           <img
-            src="/media/github-avatar.png"
+            src="/media/github-avatar.webp"
             alt="Portrait of Jagdish Sah"
             className="portrait-img"
             width={460}
             height={460}
             loading="eager"
+            fetchPriority="high"
+            decoding="async"
           />
           <div className="portrait-badge">
             <i aria-hidden="true" />
