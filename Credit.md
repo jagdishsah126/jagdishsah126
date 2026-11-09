@@ -4,6 +4,9 @@ Attribution and licence record for this site. Everything not listed here is
 original work: the layout, styles, copy, project data, portrait and generated
 social card.
 
+The repository's own code and content are released under the MIT licence — see
+[LICENSE](LICENSE). Third-party items keep their own licences, listed below.
+
 ## Vendored code
 
 ### banna — cursor build effect
