@@ -33,7 +33,7 @@ export default function ContactPage() {
           className="lg:col-span-1 space-y-8"
         >
           <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Details</h3>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Details</h2>
             
             <div className="space-y-6">
               <div className="flex items-start gap-4">
@@ -41,7 +41,7 @@ export default function ContactPage() {
                   <Mail size={24} />
                 </div>
                 <div>
-                  <h4 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Email</h4>
+                  <h3 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Email</h3>
                   <a href="mailto:jagdishsah126@gmail.com" className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors break-all">
                     jagdishsah126@gmail.com
                   </a>
@@ -53,7 +53,7 @@ export default function ContactPage() {
                   <Phone size={24} />
                 </div>
                 <div>
-                  <h4 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Phone / WhatsApp</h4>
+                  <h3 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Phone / WhatsApp</h3>
                   <a href="tel:+9779702406668" className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">
                     +977 9702406668
                   </a>
@@ -68,7 +68,7 @@ export default function ContactPage() {
                   <MapPin size={24} />
                 </div>
                 <div>
-                  <h4 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Location</h4>
+                  <h3 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Location</h3>
                   <p className="text-gray-900 dark:text-white font-medium">
                     Pokhara, Nepal (Home: Siraha, Nepal)
                   </p>
@@ -80,7 +80,7 @@ export default function ContactPage() {
                   <Globe size={24} />
                 </div>
                 <div>
-                  <h4 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Website Domain</h4>
+                  <h3 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1">Website Domain</h3>
                   <a href="https://jagdishsah.com.np" target="_blank" rel="noopener noreferrer" className="text-gray-900 dark:text-white font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     jagdishsah.com.np
                   </a>
@@ -89,7 +89,7 @@ export default function ContactPage() {
             </div>
 
             <div className="mt-8 pt-8 border-t border-gray-100 dark:border-gray-700">
-              <h4 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-4">Connect on Socials</h4>
+              <h3 className="text-sm text-gray-500 dark:text-gray-400 font-medium mb-4">Connect on Socials</h3>
               <div className="flex flex-wrap gap-3">
                 <a
                   href="https://www.facebook.com/jagdish.sah.king"
@@ -148,7 +148,7 @@ export default function ContactPage() {
           className="lg:col-span-2"
         >
           <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 h-full">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send a Direct Message</h3>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send a Direct Message</h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

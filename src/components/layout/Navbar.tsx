@@ -52,6 +52,8 @@ export default function Navbar() {
           <ThemeToggle />
           <button
             onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isOpen}
             className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-500"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}

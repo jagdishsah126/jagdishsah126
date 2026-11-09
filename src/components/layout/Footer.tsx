@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">Jagdish Sah</h3>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Jagdish Sah</h2>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Full Stack Developer with AI Assistance & BCT Engineering Student at TU WRC College, Nepal.
             </p>
@@ -20,7 +20,7 @@ export default function Footer() {
           </div>
           
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Navigation</h4>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Navigation</h3>
             <ul className="space-y-2">
               <li><Link href="/" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">Home</Link></li>
               <li><Link href="/about" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">About</Link></li>
@@ -32,7 +32,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">GitHub Profiles</h4>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">GitHub Profiles</h3>
             <ul className="space-y-2">
               <li><a href="https://github.com/DayaSah" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">@DayaSah (NEPSE Analysis)</a></li>
               <li><a href="https://github.com/jagdishsah" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">@jagdishsah (Core Full Stack)</a></li>
@@ -43,7 +43,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Connect & Socials</h4>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Connect & Socials</h3>
             <div className="flex flex-wrap gap-3">
               <a href="https://www.facebook.com/jagdish.sah.king" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors" aria-label="Facebook"><FacebookIcon className="w-5 h-5" /></a>
               <a href="https://www.instagram.com/jagdish.sah.daya/" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-pink-600 transition-colors" aria-label="Instagram"><InstagramIcon className="w-5 h-5" /></a>

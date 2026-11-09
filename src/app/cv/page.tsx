@@ -41,7 +41,7 @@ export default function CVPage() {
           <div className="p-8 sm:p-10 space-y-8">
             {/* Summary */}
             <section>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-3 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Professional Summary</h3>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-3 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Professional Summary</h2>
               <p className="text-gray-700 dark:text-gray-300 print:text-black leading-relaxed text-sm sm:text-base">
                 {personalInfo.summary}
               </p>
@@ -49,12 +49,12 @@ export default function CVPage() {
 
             {/* Education */}
             <section>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-4 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Education History</h3>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-4 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Education History</h2>
               <div className="space-y-6">
                 {education.map((edu) => (
                   <div key={edu.id}>
                     <div className="flex flex-col sm:flex-row justify-between sm:items-baseline mb-1">
-                      <h4 className="font-bold text-base sm:text-lg text-gray-900 dark:text-white print:text-black">{edu.degree}</h4>
+                      <h3 className="font-bold text-base sm:text-lg text-gray-900 dark:text-white print:text-black">{edu.degree}</h3>
                       <span className="text-blue-600 dark:text-blue-400 print:text-gray-600 font-semibold text-sm">{edu.year}</span>
                     </div>
                     <div className="text-gray-600 dark:text-gray-400 print:text-gray-800 text-sm">{edu.institution}</div>
@@ -66,11 +66,11 @@ export default function CVPage() {
 
             {/* Technical Skills */}
             <section>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-4 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Technical Skills</h3>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-4 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Technical Skills</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 {skills.map((cat) => (
                   <div key={cat.category} className="bg-gray-50 dark:bg-gray-800/60 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
-                    <h4 className="font-bold text-gray-900 dark:text-white print:text-black mb-1">{cat.category}</h4>
+                    <h3 className="font-bold text-gray-900 dark:text-white print:text-black mb-1">{cat.category}</h3>
                     <p className="text-gray-700 dark:text-gray-300 print:text-black">{cat.items.join(', ')}</p>
                   </div>
                 ))}
@@ -79,12 +79,12 @@ export default function CVPage() {
 
             {/* Key Projects */}
             <section>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-4 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Featured Projects</h3>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-4 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Featured Projects</h2>
               <div className="space-y-4 text-sm">
                 {projects.map((proj) => (
                   <div key={proj.name}>
                     <div className="flex justify-between items-baseline mb-1">
-                      <h4 className="font-bold text-gray-900 dark:text-white print:text-black">{proj.name}</h4>
+                      <h3 className="font-bold text-gray-900 dark:text-white print:text-black">{proj.name}</h3>
                       <span className="text-blue-600 dark:text-blue-400 font-medium">{proj.tech}</span>
                     </div>
                     <p className="text-gray-700 dark:text-gray-300 print:text-black">
@@ -98,7 +98,7 @@ export default function CVPage() {
 
             {/* Interests */}
             <section>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-3 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Interests & Philosophy</h3>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-3 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Interests & Philosophy</h2>
               <p className="text-gray-700 dark:text-gray-300 print:text-black text-sm leading-relaxed">
                 {interests.join(', ')}.
               </p>
@@ -106,7 +106,7 @@ export default function CVPage() {
 
             {/* AI Usage */}
             <section>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-3 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">AI Usage</h3>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-3 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">AI Usage</h2>
               <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 print:text-black text-sm space-y-1">
                 {aiUsage.map((item) => <li key={item}>{item}</li>)}
               </ul>
@@ -114,7 +114,7 @@ export default function CVPage() {
 
             {/* Career Direction */}
             <section>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-3 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Career Direction</h3>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white print:text-black mb-3 pb-2 border-b-2 border-gray-200 dark:border-gray-700 print:border-gray-300 uppercase tracking-wider text-xs sm:text-sm">Career Direction</h2>
               <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 print:text-black text-sm space-y-1">
                 {careerDirection.map((item) => <li key={item}>{item}</li>)}
               </ul>

@@ -36,12 +36,12 @@ export default function GitHubCard({ profile, index }: GitHubCardProps) {
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
               {/* Avatar placeholder */}
-              <div className="w-full h-full flex items-center justify-center text-gray-400">
+              <div className="w-full h-full flex items-center justify-center text-gray-400" aria-hidden="true">
                 <GithubIcon className="w-8 h-8" />
               </div>
             </div>
             <div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white">{profile.displayName}</h3>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">{profile.displayName}</h2>
               <a href={profile.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 text-sm hover:underline">
                 @{profile.username}
               </a>
@@ -62,9 +62,9 @@ export default function GitHubCard({ profile, index }: GitHubCardProps) {
       </div>
 
       <div className="p-6 flex-grow bg-gray-50/50 dark:bg-gray-800/50">
-        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+        <h2 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
           <BookOpen size={16} /> Notable Repositories
-        </h4>
+        </h2>
         <div className="space-y-3">
           {profile.repos.map((repo) => (
             <a
@@ -76,9 +76,9 @@ export default function GitHubCard({ profile, index }: GitHubCardProps) {
             >
               <div className="flex items-start justify-between">
                 <div>
-                  <h5 className="text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:underline">
+                  <h3 className="text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:underline">
                     {repo.name}
-                  </h5>
+                  </h3>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-1">
                     {repo.description}
                   </p>
@@ -86,7 +86,7 @@ export default function GitHubCard({ profile, index }: GitHubCardProps) {
               </div>
               <div className="flex items-center gap-1 mt-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
-                <span className="text-xs text-gray-500">{repo.language}</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{repo.language}</span>
               </div>
             </a>
           ))}

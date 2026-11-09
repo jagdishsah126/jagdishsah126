@@ -83,7 +83,7 @@ export default function AboutPage() {
                 <div className="w-12 h-12 mx-auto bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{interest.title}</h3>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{interest.title}</h2>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">{interest.desc}</p>
               </motion.div>
             );

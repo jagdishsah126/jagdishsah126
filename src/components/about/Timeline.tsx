@@ -48,8 +48,8 @@ export default function Timeline() {
               <span className="inline-block py-1 px-3 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-semibold mb-3">
                 {item.year}
               </span>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{item.title}</h3>
-              <h4 className="text-md font-medium text-gray-600 dark:text-gray-400 mb-3">{item.institution}</h4>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{item.title}</h2>
+              <h3 className="text-md font-medium text-gray-600 dark:text-gray-400 mb-3">{item.institution}</h3>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
                 {item.description}
               </p>

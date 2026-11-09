@@ -16,7 +16,7 @@ export default function SkillsGrid() {
           transition={{ duration: 0.5, delay: idx * 0.1 }}
           className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700"
         >
-          <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">{cat.title}</h3>
+          <h2 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">{cat.title}</h2>
           <div className="space-y-5">
             {cat.skills.map((skill: Skill) => {
               const Icon = Icons[skill.icon as keyof typeof Icons] as React.ElementType | undefined;
@@ -35,7 +35,7 @@ export default function SkillsGrid() {
                       ))}
                     </div>
                   ) : (
-                    <span className="text-xs text-gray-400 dark:text-gray-500 italic">Not yet featured in a public repo</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 italic">Not yet featured in a public repo</span>
                   )}
                 </div>
               );

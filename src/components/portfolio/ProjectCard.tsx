@@ -37,7 +37,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       
       <div className="p-6">
         <div className="flex justify-between items-start mb-4">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white line-clamp-1">{project.title}</h3>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white line-clamp-1">{project.title}</h2>
           <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded">
             {project.githubAccount}
           </span>
