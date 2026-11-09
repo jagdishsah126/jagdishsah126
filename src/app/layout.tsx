@@ -31,13 +31,13 @@ export const metadata: Metadata = {
     description:
       "Data-driven web systems, autonomous pipelines, and market intelligence from Pokhara, Nepal.",
     url: siteUrl,
-    images: [{ url: "/media/hero-portrait.webp", width: 760, height: 942, alt: "Jagdish Sah" }],
+    images: [{ url: "/media/og-swarm.jpg", width: 1200, height: 630, alt: "Jagdish Sah — Computer Engineer and NEPSE Analyst" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Jagdish Sah — Computer Engineer & NEPSE Analyst",
     description: "Data-driven web systems, autonomous pipelines, and market intelligence.",
-    images: ["/media/hero-portrait.webp"],
+    images: ["/media/og-swarm.jpg"],
   },
   // Alternate design of the same portfolio: keep it out of the index so it
   // does not compete with jagdishsah.com.np, but still follow its links.

@@ -113,7 +113,7 @@ export default function Hero() {
                   <b>{item.index}.</b>
                   <span>{item.tag}</span>
                 </div>
-                <h3 className="hud-title">{item.title}</h3>
+                <h2 className="hud-title">{item.title}</h2>
                 <p className="hud-desc">{item.desc}</p>
               </article>
             ))}

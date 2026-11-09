@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Alternate design of the canonical portfolio. Every page carries
+# noindex, follow. Crawling stays allowed so that tag is actually read;
+# blocking the crawler here would hide it.
