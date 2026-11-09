@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Jagdish Sah | Full Stack Developer & NEPSE Analyst',
   description: 'Portfolio & CV of Jagdish Sah - Full Stack Developer with AI Assistance, BCT Student at TU WRC College, Nepal. Specialized in Next.js, Python, and NEPSE trading analytics.',
-  metadataBase: new URL('https://jagdishsah.com.np'),
+  metadataBase: new URL('https://legacy.jagdishsah.com.np'),
   alternates: {
     canonical: 'https://legacy.jagdishsah.com.np/',
   },
@@ -27,10 +27,24 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Jagdish Sah | Full Stack Developer & NEPSE Analyst',
     description: 'Portfolio & CV of Jagdish Sah - Full Stack Developer with AI Assistance, BCT Student at TU WRC College, Nepal.',
-    url: 'https://jagdishsah.com.np',
+    url: 'https://legacy.jagdishsah.com.np/',
     siteName: 'Jagdish Sah Portfolio',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: '/images/og-legacy.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Jagdish Sah — Full Stack Developer and NEPSE Analyst',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Jagdish Sah | Full Stack Developer & NEPSE Analyst',
+    description: 'Portfolio & CV of Jagdish Sah - Full Stack Developer with AI Assistance, BCT Student at TU WRC College, Nepal.',
+    images: ['/images/og-legacy.jpg'],
   },
 }
 
