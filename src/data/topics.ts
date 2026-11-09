@@ -17,7 +17,11 @@ export type TopicPost = {
   date: string;
   /** One sentence, used on the topic page and as the meta description. */
   summary: string;
-  /** One string per paragraph. Plain text; no markdown, no HTML. */
+  /**
+   * One string per paragraph. Plain text with two inline conventions:
+   * `**bold**` and bare `https://` URLs (rendered as links).
+   * No HTML and no other markdown.
+   */
   body: string[];
 };
 
@@ -59,7 +63,22 @@ export const TOPICS: Topic[] = [
         external: true,
       },
     ],
-    posts: [],
+    posts: [
+      {
+        slug: "my-tools",
+        title: "How I use Tools For My Nepse",
+        date: "2026-11-09",
+        summary: "What Tools do I use and How.",
+        body: [
+          "I mostly use https://jagdishsah126.github.io/nepse-floorsheet-archive-Visual/ For **My Broker Analysis** and https://nepsealpha.com/trading/chart for **Charts**.",
+          "The first thing I check is **Top Turnover Stocks** and The script that came in **Top Gainer** and **Top Loser** Via Nepsealpha Chart.",
+          "The second is I check If it is at **Good Demand Zone** or **Supply Zone**.",
+          "If it is at **Demand Zone** I use https://jagdishsah126.github.io/nepse-floorsheet-archive-Visual/ which is my Custom made tool to analyze that script and If any **Broker Graph is Unusually High**.",
+          "If It Looks Suspicious that anyone has accumulated huge then **Buy It** with **risk Control** and **Tight SL** with **Averaging Once** and If Setup Failed Then Loss",
+          "If Success then Have A **Good Profit**",
+          "Please This Is My own Opinion and **Not Fully Guaranted** and Dont Invest Without Your Own Analysis.",
+        ],
+      },],
   },
   {
     slug: "nepse-view",
