@@ -87,10 +87,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Blocking, not deferred, so the page never flashes in before the build
           starts. The layer cap covers the whole document, not just the hero, so
           each section is built by the crew as it scrolls into view.
+          No data-once: every load rebuilds, including a refresh and a return
+          visit from the per-tab rotation, where a shared sessionStorage flag
+          would otherwise suppress the effect entirely.
         */}
         <script
           src="/vendor/banna.js"
-          data-once="session"
           data-speed="0.85"
           data-agents="6"
           data-max-layers="400"
