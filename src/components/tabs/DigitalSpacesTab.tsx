@@ -7,6 +7,13 @@ import { Boxes, ExternalLink, Github, Sparkles, FolderGit2 } from "lucide-react"
 export default function DigitalSpacesTab() {
   const { spaces } = PORTFOLIO_DATA;
 
+  /** Non-GitHub profiles, listed so crawlers can associate every public identity with the name. */
+  const socialProfiles = [
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/jagdishsah/", handle: "in/jagdishsah" },
+    { name: "Instagram", url: "https://www.instagram.com/jagdish___sah/", handle: "@jagdish___sah" },
+    { name: "Facebook", url: "https://www.facebook.com/kingdaya.happy", handle: "@kingdaya" },
+  ];
+
   return (
     <div className="w-full max-w-5xl mx-auto px-4 py-8">
       {/* Header */}
@@ -85,6 +92,36 @@ export default function DigitalSpacesTab() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Social Profiles */}
+      <div>
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono text-cyan-300 mb-3">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Same Builder, Other Networks</span>
+        </div>
+        <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-4">
+          Social <span className="cosmic-gradient-text">Profiles</span>
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {socialProfiles.map((profile) => (
+            <a
+              key={profile.name}
+              href={profile.url}
+              target="_blank"
+              rel="noreferrer"
+              className="cosmic-glass p-4 flex items-center justify-between hover:border-cyan-400/40 transition-all hover:-translate-y-1 group"
+            >
+              <div>
+                <span className="text-sm font-bold text-white block group-hover:text-cyan-300 transition-colors">
+                  {profile.name}
+                </span>
+                <span className="text-[10px] font-mono text-slate-400">{profile.handle}</span>
+              </div>
+              <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-cyan-300 shrink-0" />
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );

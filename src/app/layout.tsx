@@ -158,8 +158,10 @@ const jsonLd = {
         "https://github.com/Jagdishsah",
         "https://github.com/Jagdish-sah",
         "https://github.com/YourZara",
-        "https://www.linkedin.com/in/jagdish-sah6347482ba/",
+        "https://www.linkedin.com/in/jagdishsah/",
         "https://www.instagram.com/jagdish___sah/",
+        "https://www.facebook.com/kingdaya.happy",
+        "https://url.jagdishsah.com.np/",
       ],
     },
     {

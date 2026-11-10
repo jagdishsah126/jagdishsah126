@@ -36,6 +36,29 @@ export default function SiteFooter() {
               Computer Engineering student at IOE WRC Pokhara and NEPSE market
               analyst, from Bishnupur, Siraha, Nepal.
             </p>
+            <div className="flex gap-3 mt-3">
+              <a
+                href="https://www.linkedin.com/in/jagdishsah/"
+                rel="me noopener"
+                className="text-xs font-mono text-slate-400 hover:text-cyan-300 transition-colors"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://www.instagram.com/jagdish___sah/"
+                rel="me noopener"
+                className="text-xs font-mono text-slate-400 hover:text-cyan-300 transition-colors"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://www.facebook.com/kingdaya.happy"
+                rel="me noopener"
+                className="text-xs font-mono text-slate-400 hover:text-cyan-300 transition-colors"
+              >
+                Facebook
+              </a>
+            </div>
           </div>
 
           <nav aria-label="Site sections">
